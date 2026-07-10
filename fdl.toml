@@ -21,7 +21,7 @@ description = """国土交通省「国土数値情報ダウンロードサイト
 cover = "🗾"
 tags = ['GIS', '国土数値情報', '境界', '行政区域', '人口', '将来推計人口', '鉄道', '駅', '医療機関', '学校', '施設']
 source_url = "https://nlftp.mlit.go.jp/"
-repository_url = "https://github.com/flo8s/dataset-nlftp"
+repository_url = "https://github.com/queria-io/dataset-nlftp"
 
 [meta.schemas]
 boundary.title = "行政区域境界データ"
