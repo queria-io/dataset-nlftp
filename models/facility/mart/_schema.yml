@@ -109,3 +109,79 @@ models:
         meta:
           title: 学校ポイント
           description: "CRS: EPSG:6668 (JGD2011)"
+
+  - name: welfare
+    description: |
+      福祉施設の位置（ポイント）。保護施設・老人福祉施設・障害者支援施設・
+      身体障害者社会参加支援施設・児童福祉施設・母子父子福祉施設等の名称・所在地・
+      分類（大／中／小）・管理者を持つ。国土数値情報 P14（第2.1版・令和3年度）。
+      一部の都道府県・市区町村は利用規約と異なる利用条件が付されているため、
+      商用等で利用する際は提供元の利用制限を確認すること。
+    access: public
+    config:
+      meta:
+        <<: *meta
+        source_url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-v2_1.html"
+        tags: ["国土数値情報", "福祉施設", "施設", "GIS"]
+        title: "福祉施設"
+    columns:
+      - name: prefecture
+        meta:
+          title: 都道府県名
+          description: P14_001。当該施設が所在する都道府県名
+      - name: city
+        meta:
+          title: 市区町村名
+          description: P14_002。当該施設が所在する市区町村名
+      - name: admin_code
+        meta:
+          title: 行政区域コード
+          description: P14_003。当該施設が所在する行政区域コード
+      - name: address
+        meta:
+          title: 所在地
+          description: P14_004。市区町村名を省いた所在地
+      - name: major_class_code
+        meta:
+          title: 福祉施設大分類コード
+          description: P14_005（保護施設=01、老人福祉施設=02、障害者支援施設等=03、身体障害者社会参加支援施設=04、児童福祉施設等=05、母子・父子福祉施設=06、その他の社会福祉施設等=99）
+      - name: major_class
+        meta:
+          title: 福祉施設大分類
+      - name: middle_class_code
+        meta:
+          title: 福祉施設中分類コード
+          description: P14_006。施設の用途による中分類
+      - name: middle_class
+        meta:
+          title: 福祉施設中分類
+      - name: minor_class_code
+        meta:
+          title: 福祉施設小分類コード
+          description: P14_007。施設の用途による小分類
+      - name: minor_class
+        meta:
+          title: 福祉施設小分類
+          description: 公式コードリストで名称が定義されない中間ノードは NULL
+      - name: institution_name
+        meta:
+          title: 名称
+          description: 当該施設の正式名称
+      - name: administrator_code
+        meta:
+          title: 管理者コード
+          description: P14_009（その他=0、国=1、都道府県=2、市区町村=3、民間=4、法人=5、不明=9）。製品仕様書 第2.1版の定義に従う
+      - name: administrator
+        meta:
+          title: 管理者
+      - name: position_accuracy_code
+        meta:
+          title: 位置正確度コード
+          description: P14_010（位置特定=1、小字・街区レベル=2、大字・町丁目レベル=3、市区町村レベル=4、都道府県レベル=5。2〜5 は代表点）
+      - name: position_accuracy
+        meta:
+          title: 位置正確度
+      - name: geometry
+        meta:
+          title: 福祉施設ポイント
+          description: "CRS: EPSG:6668 (JGD2011)"

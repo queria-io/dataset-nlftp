@@ -19,7 +19,7 @@ title = "国土数値情報"
 description = """国土交通省「国土数値情報ダウンロードサイト」(nlftp.mlit.go.jp) から取得した GIS データ。
 地形、土地利用、公共施設などの国土に関する基礎的な情報を提供。"""
 cover = "🗾"
-tags = ['GIS', '国土数値情報', '境界', '行政区域', '人口', '将来推計人口', '鉄道', '駅', '医療機関', '学校', '施設']
+tags = ['GIS', '国土数値情報', '境界', '行政区域', '人口', '将来推計人口', '鉄道', '駅', '医療機関', '学校', '福祉施設', '施設']
 source_url = "https://nlftp.mlit.go.jp/"
 repository_url = "https://github.com/queria-io/dataset-nlftp"
 

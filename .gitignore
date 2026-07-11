@@ -24,4 +24,5 @@ data/future_population/
 data/railway/
 data/medical/
 data/school/
+data/welfare/
 *.duckdb
