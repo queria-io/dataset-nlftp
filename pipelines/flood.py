@@ -27,6 +27,9 @@ from urllib.request import Request, urlopen
 
 import duckdb
 
+# 巨大フィーチャ(利根川等)で GDAL の GeoJSON サイズ上限に当たるため無制限にする
+os.environ.setdefault("OGR_GEOJSON_MAX_OBJ_SIZE", "0")
+
 logger = logging.getLogger("pipelines")
 
 URL_TEMPLATE = (
