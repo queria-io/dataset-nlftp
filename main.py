@@ -6,7 +6,8 @@
 4. railway:                 鉄道データ取得 (N02 駅・路線)
 5. medical:                 医療機関データ取得 (P04)
 6. school:                  学校データ取得 (P29)
-7. dbt:                     dbt ビルド
+7. flood:                   洪水浸水想定区域データ取得 (A31a)
+8. dbt:                     dbt ビルド
 """
 
 import logging
@@ -14,6 +15,7 @@ import logging
 from dbt.cli.main import dbtRunner
 
 from pipelines.administrative_boundary import download_administrative_boundary
+from pipelines.flood import download_flood, flood_skipped
 from pipelines.future_population import download_future_population
 from pipelines.medical import download_medical
 from pipelines.mt_city import extract_mt_city
@@ -30,7 +32,13 @@ def dbt_build():
     if not result.success:
         raise SystemExit("dbt deps failed")
 
-    result = dbt.invoke(["build"])
+    # 洪水データスキップ時は flood タグのモデルを除外してビルドする
+    # （カタログ上の既存テーブルはそのまま維持される）
+    build_args = ["build"]
+    if flood_skipped():
+        build_args += ["--exclude", "tag:flood"]
+
+    result = dbt.invoke(build_args)
     if not result.success:
         raise SystemExit("dbt build failed")
 
@@ -41,31 +49,35 @@ def dbt_build():
 
 def main():
     # 1. 行政区域データ (国土数値情報 N03)
-    logger.info("1/7: administrative_boundary (行政区域データ)")
+    logger.info("1/8: administrative_boundary (行政区域データ)")
     download_administrative_boundary("data/administrative_boundary")
 
     # 2. 市区町村マスタ (アドレス・ベース・レジストリ)
-    logger.info("2/7: mt_city (市区町村マスタ)")
+    logger.info("2/8: mt_city (市区町村マスタ)")
     extract_mt_city("data/mt_city")
 
     # 3. 将来推計人口メッシュ (国土数値情報 1kmメッシュ R6推計)
-    logger.info("3/7: future_population (将来推計人口メッシュ)")
+    logger.info("3/8: future_population (将来推計人口メッシュ)")
     download_future_population("data/future_population")
 
     # 4. 鉄道データ (国土数値情報 N02 駅・路線)
-    logger.info("4/7: railway (鉄道データ)")
+    logger.info("4/8: railway (鉄道データ)")
     download_railway("data/railway")
 
     # 5. 医療機関データ (国土数値情報 P04)
-    logger.info("5/7: medical (医療機関データ)")
+    logger.info("5/8: medical (医療機関データ)")
     download_medical("data/medical")
 
     # 6. 学校データ (国土数値情報 P29)
-    logger.info("6/7: school (学校データ)")
+    logger.info("6/8: school (学校データ)")
     download_school("data/school")
 
-    # 7. dbt ビルド
-    logger.info("7/7: dbt build")
+    # 7. 洪水浸水想定区域データ (国土数値情報 A31a)
+    logger.info("7/8: flood (洪水浸水想定区域データ)")
+    download_flood("data/flood")
+
+    # 8. dbt ビルド
+    logger.info("8/8: dbt build")
     dbt_build()
 
 
