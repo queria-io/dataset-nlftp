@@ -114,21 +114,49 @@ def _convert_geojson(
     Parquet が変換済みとして残らないようにする。
     """
     tmp_path = parquet_path.with_suffix(".parquet.tmp")
-    con.execute(
-        f"""
-        COPY (
-            SELECT
-                '{region}' AS region_code,
-                A31a_201 AS river_code,
-                A31a_202 AS river_name,
-                A31a_203 AS admin_code,
-                A31a_204 AS admin_name,
-                A31a_205 AS depth_rank,
-                ST_AsWKB(geom) AS geom
-            FROM ST_Read('{geojson_path.as_posix()}')
-        ) TO '{tmp_path.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)
-        """
-    )
+    try:
+        con.execute(
+            f"""
+            COPY (
+                SELECT
+                    '{region}' AS region_code,
+                    A31a_201 AS river_code,
+                    A31a_202 AS river_name,
+                    A31a_203 AS admin_code,
+                    A31a_204 AS admin_name,
+                    A31a_205 AS depth_rank,
+                    ST_AsWKB(geom) AS geom
+                FROM ST_Read('{geojson_path.as_posix()}')
+            ) TO '{tmp_path.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)
+            """
+        )
+    except duckdb.IOException as exc:
+        if "too complex/large" not in str(exc):
+            raise
+        # GDAL の GeoJSON フィーチャサイズ上限(約30MB)を超える巨大ポリゴンは
+        # JSON リーダー経由で変換する(遅いが上限がない)
+        logger.info(f"    fallback to read_json: {geojson_path.name}")
+        con.execute(
+            f"""
+            COPY (
+                SELECT
+                    '{region}' AS region_code,
+                    f.properties.A31a_201 AS river_code,
+                    f.properties.A31a_202 AS river_name,
+                    f.properties.A31a_203 AS admin_code,
+                    f.properties.A31a_204 AS admin_name,
+                    f.properties.A31a_205 AS depth_rank,
+                    ST_AsWKB(ST_GeomFromGeoJSON(to_json(f.geometry))) AS geom
+                FROM (
+                    SELECT UNNEST(features) AS f
+                    FROM read_json(
+                        '{geojson_path.as_posix()}',
+                        maximum_object_size = 2147483647
+                    )
+                )
+            ) TO '{tmp_path.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)
+            """
+        )
     tmp_path.rename(parquet_path)
 
 
