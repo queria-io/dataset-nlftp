@@ -1,0 +1,44 @@
+schema: facility
+name: medical_institution
+title: 医療機関
+description: '医療機関の位置（ポイント）。病院・診療所・歯科診療所の名称・所在地・診療科目・病床数・
+
+  開設者分類を持つ。国土数値情報 P04（第3.0版・令和2年）。'
+keywords:
+  - 国土数値情報
+  - 医療機関
+  - 施設
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-v3_0.html
+fields:
+  - name: medical_class_code
+    title: 医療機関分類コード
+    description: P04_001（病院=1、診療所=2、歯科診療所=3）
+  - name: medical_class
+    title: 医療機関分類
+  - name: institution_name
+    title: 施設名称
+  - name: address
+    title: 所在地
+  - name: departments
+    title: 診療科目
+    description: 当該施設が有する診療科目（全角空白区切り）
+  - name: establisher_type_code
+    title: 開設者分類コード
+    description: P04_007（国=1、公的医療機関=2、社会保険関係団体=3、医療法人=4、個人=5、その他=6、分類対象外=9）。病院のみ分類対象
+  - name: establisher_type
+    title: 開設者分類
+  - name: bed_count
+    title: 病床数
+    description: P04_008。当該施設が有する病床総数
+  - name: emergency_hospital
+    title: 救急告示病院
+    description: P04_009（指定あり／指定なし）
+  - name: disaster_base_hospital
+    title: 災害拠点病院
+    description: P04_010（基幹災害拠点病院／地域災害拠点病院／指定なし）
+  - name: geometry
+    title: 医療機関ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)'

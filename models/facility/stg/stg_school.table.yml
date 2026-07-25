@@ -1,0 +1,6 @@
+schema: facility
+name: stg_school
+description: '学校のステージング。学校分類・管理者・休校区分の各コードを名称に変換し、
+
+  ジオメトリを修正。'
+published: false

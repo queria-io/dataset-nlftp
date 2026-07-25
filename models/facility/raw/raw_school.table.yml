@@ -1,0 +1,4 @@
+schema: facility
+name: raw_school
+description: 国土数値情報 P29（第2.0版・令和3年）の学校データ。小学校・中学校・高等学校・大学・幼稚園等の位置（ポイント）。
+published: false

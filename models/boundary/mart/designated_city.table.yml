@@ -1,0 +1,33 @@
+schema: boundary
+name: designated_city
+title: 市区町村境界（政令市統合）
+description: '市区町村境界（政令指定都市の区を市レベルに統合）。
+
+  municipality モデルから政令指定都市の区を ST_Union_Agg で結合。
+
+  区コードから市コードへのマッピングは「アドレス・ベース・レジストリ（市区町村マスタデータ）」（デジタル庁）（https://dataset.address-br.digital.go.jp/）を加工して作成。
+
+  東京23区（特別区）は独立した地方公共団体のため統合しない。'
+keywords:
+  - 国土数値情報
+  - 行政区域
+  - GIS
+  - 境界
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html
+fields:
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（政令指定都市は市レベルのコード）
+  - name: prefecture_code
+    title: 都道府県コード
+  - name: prefecture_name
+    title: 都道府県名
+  - name: county_name
+    title: 郡名
+  - name: city_name
+    title: 市区町村名
+  - name: geometry
+    title: 境界ポリゴン
+    description: 'CRS: EPSG:4612 (JGD2011)'

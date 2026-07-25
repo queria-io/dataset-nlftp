@@ -1,0 +1,4 @@
+schema: facility
+name: raw_medical_institution
+description: 国土数値情報 P04（第3.0版・令和2年）の医療機関データ。病院・診療所・歯科診療所の位置（ポイント）。
+published: false

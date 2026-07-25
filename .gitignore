@@ -26,3 +26,4 @@ data/medical/
 data/school/
 data/flood/
 *.duckdb
+dist/
