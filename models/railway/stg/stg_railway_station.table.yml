@@ -1,0 +1,6 @@
+schema: railway
+name: stg_railway_station
+description: '駅のステージング。鉄道区分コード・事業者種別コードを名称に変換し、ジオメトリを修正。
+
+  ジオメトリは当該駅の軌道区間を表すライン。'
+published: false

@@ -1,0 +1,31 @@
+schema: railway
+name: railway_line
+title: 鉄道路線
+description: '鉄道路線（路線名・運営会社・鉄道区分単位）のラインジオメトリ。
+
+  国土数値情報 N02（令和6年）の路線区間を路線単位に ST_Union_Agg で集約。'
+keywords:
+  - 国土数値情報
+  - 鉄道
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html
+fields:
+  - name: railway_class_code
+    title: 鉄道区分コード
+    description: N02_001（普通鉄道JR=11、普通鉄道=12、軌道=21 など）
+  - name: railway_class
+    title: 鉄道区分
+  - name: operator_type_code
+    title: 事業者種別コード
+    description: N02_002（JRの新幹線=1、JR在来線=2、公営鉄道=3、民営鉄道=4、第三セクター=5）
+  - name: operator_type
+    title: 事業者種別
+  - name: line_name
+    title: 路線名
+  - name: operator
+    title: 運営会社
+  - name: geometry
+    title: 路線ライン
+    description: 'CRS: EPSG:6668 (JGD2011)'

@@ -1,0 +1,41 @@
+schema: railway
+name: station
+title: 駅
+description: '駅の代表点（ポイント）。
+
+  国土数値情報 N02（令和6年）の駅データ。駅は元データでは軌道区間のラインで表現されるため、
+
+  その重心を代表点とした。同一駅が複数路線に属する場合は路線ごとに行が分かれる。'
+keywords:
+  - 国土数値情報
+  - 鉄道
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html
+fields:
+  - name: railway_class_code
+    title: 鉄道区分コード
+    description: N02_001
+  - name: railway_class
+    title: 鉄道区分
+  - name: operator_type_code
+    title: 事業者種別コード
+    description: N02_002
+  - name: operator_type
+    title: 事業者種別
+  - name: line_name
+    title: 路線名
+  - name: operator
+    title: 運営会社
+  - name: station_name
+    title: 駅名
+  - name: station_code
+    title: 駅コード
+    description: N02_005c。駅を一意に識別する番号
+  - name: station_group_code
+    title: 駅グループコード
+    description: N02_005g。乗換可能な同一駅グループを束ねるコード
+  - name: geometry
+    title: 駅ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)。軌道区間ラインの重心'

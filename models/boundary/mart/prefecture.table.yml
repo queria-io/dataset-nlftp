@@ -1,0 +1,23 @@
+schema: boundary
+name: prefecture
+title: 都道府県境界
+description: '都道府県の行政区域境界ポリゴン。
+
+  国土数値情報 N03（令和7年）の行政区域データを都道府県単位で集約。'
+keywords:
+  - 国土数値情報
+  - 行政区域
+  - GIS
+  - 境界
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html
+fields:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: geometry
+    title: 境界ポリゴン
+    description: 'CRS: EPSG:4612 (JGD2011)'

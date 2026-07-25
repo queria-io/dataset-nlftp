@@ -1,0 +1,35 @@
+schema: boundary
+name: municipality
+title: 市区町村境界
+description: '市区町村の行政区域境界ポリゴン。
+
+  国土数値情報 N03（令和7年）の行政区域データを市区町村単位で集約。
+
+  同一自治体の飛び地等は ST_Union_Agg で統合済み。'
+keywords:
+  - 国土数値情報
+  - 行政区域
+  - GIS
+  - 境界
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html
+fields:
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（都道府県2桁 + 市区町村3桁）
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: county_name
+    title: 郡名
+  - name: city_name
+    title: 市区町村名
+  - name: ward_name
+    title: 行政区名
+    description: 政令指定都市のみ（他は NULL）
+  - name: geometry
+    title: 境界ポリゴン
+    description: 'CRS: EPSG:4612 (JGD2011)'
