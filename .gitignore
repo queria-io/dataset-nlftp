@@ -25,5 +25,6 @@ data/railway/
 data/medical/
 data/school/
 data/flood/
+data/zoning/
 *.duckdb
 dist/

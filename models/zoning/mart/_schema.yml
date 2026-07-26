@@ -1,0 +1,66 @@
+version: 2
+
+_meta: &meta
+  source_url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A29-v2_1.html"
+  published: true
+  tags: ["国土数値情報", "用途地域", "都市計画", "建ぺい率", "容積率", "GIS"]
+
+models:
+  - name: use_district
+    description: |
+      都市計画法に基づく用途地域のポリゴン。用途地域の種類（13種類）と、
+      その地域に指定された建ぺい率・容積率を持つ。
+      国土数値情報 A29（第2.1版・令和元年度）が元データ。
+
+      収録範囲: 用途地域データは原典資料を作成した市区町村ごとに公開条件が
+      異なるため、提供元の「公開に関する利用条件」でオープンデータ公開可と
+      された市区町村のみを収録する。条件付き公開（有償利用不可・再配信不可）・
+      公開不可・回答なしの市区町村は含まない。用途地域を定める全市区町村を
+      網羅したデータではない点に注意。
+
+      建ぺい率・容積率は用途地域および指定地域別の指定値（%）で、
+      原典で不明（9999）とされているものと、指定値としてありえない 0 は NULL。
+
+      出典: 「国土数値情報（用途地域データ）」（国土交通省）。
+    access: public
+    config:
+      meta:
+        <<: *meta
+        title: "用途地域"
+    columns:
+      - name: admin_code
+        meta:
+          title: 行政区域コード
+          description: A29_001。用途地域がある市区町村の行政区域コード（5桁）
+      - name: prefecture_code
+        meta:
+          title: 都道府県コード
+          description: 行政区域コードの上2桁
+      - name: prefecture_name
+        meta:
+          title: 都道府県名
+          description: 都道府県コードから引いた名称（原典の A29_002 は表記揺れがあるため使わない）
+      - name: municipality_name
+        meta:
+          title: 市区町村名
+          description: A29_003
+      - name: zoning_code
+        meta:
+          title: 用途地域分類コード
+          description: A29_004（1〜12、21=田園住居地域、99=不明）
+      - name: zoning_name
+        meta:
+          title: 用途地域名
+          description: 用途地域分類コードの名称
+      - name: building_coverage_ratio
+        meta:
+          title: 建ぺい率
+          description: A29_006。指定建ぺい率（%）。原典で不明（9999）または 0 のときは NULL
+      - name: floor_area_ratio
+        meta:
+          title: 容積率
+          description: A29_007。指定容積率（%）。原典で不明（9999）または 0 のときは NULL
+      - name: geometry
+        meta:
+          title: 用途地域ポリゴン
+          description: "CRS: EPSG:6668 (JGD2011)"
