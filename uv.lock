@@ -367,27 +367,29 @@ dependencies = [
     { name = "dbt-core" },
     { name = "dbt-duckdb" },
     { name = "frozen-ducklake" },
+    { name = "pypdf" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dbt-core", specifier = ">=1.10.0" },
     { name = "dbt-duckdb", specifier = ">=1.10.0" },
-    { name = "frozen-ducklake", specifier = ">=0.10.2,<0.11" },
+    { name = "frozen-ducklake", specifier = ">=0.11.0" },
+    { name = "pypdf", specifier = ">=5.0.0" },
 ]
 
 [[package]]
 name = "frozen-ducklake"
-version = "0.10.3"
+version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "boto3" },
     { name = "duckdb" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/93/62/19320b3f9bc1834dba58edf0e5c26669a93ad8bd0c585e6559cc31fa43ad/frozen_ducklake-0.10.3.tar.gz", hash = "sha256:87db6a1cb370ac574e2ec2f096e650f46604a8af6feb4075419774db9dd87e54", size = 108238, upload-time = "2026-06-10T00:36:04.053Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/0b/35c8ee37d29095ea8b2fb62036758c7967693770ff27a9703546ae23acd1/frozen_ducklake-0.11.0.tar.gz", hash = "sha256:cc429da583ed0b522c4883da333fa126df2927f4b34249506330b24f30fd41fd", size = 117099, upload-time = "2026-07-11T05:14:44.229Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b9/29/94d8a3ebda7a200f4a0b3472cfa18906f559c7910b50f0513d959a0a58a6/frozen_ducklake-0.10.3-py3-none-any.whl", hash = "sha256:c5b217f2fbcf063b50aca7314cbc3780793629cda63181d2724b3d1096ca866e", size = 26722, upload-time = "2026-06-10T00:36:02.853Z" },
+    { url = "https://files.pythonhosted.org/packages/83/82/24878751a2ec55f4aab23363c9ba985fd50e916105c4115911f5067fdd51/frozen_ducklake-0.11.0-py3-none-any.whl", hash = "sha256:647d12a44c3e688436185d2df3eb5363708ef01a384768ff16274e237e4062ba", size = 31662, upload-time = "2026-07-11T05:14:42.965Z" },
 ]
 
 [[package]]
@@ -755,6 +757,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/c3/b2/bc9c9196916376152d655522fdcebac55e66de6603a76a02bca1b6414f6c/pygments-2.20.0.tar.gz", hash = "sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f", size = 4955991, upload-time = "2026-03-29T13:29:33.898Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f4/7e/a72dd26f3b0f4f2bf1dd8923c85f7ceb43172af56d63c7383eb62b332364/pygments-2.20.0-py3-none-any.whl", hash = "sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176", size = 1231151, upload-time = "2026-03-29T13:29:30.038Z" },
+]
+
+[[package]]
+name = "pypdf"
+version = "6.14.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/03/72/7dfd5ff1c9c37de97a731701f51af091325f123d9d4270361c9c69e4431f/pypdf-6.14.2.tar.gz", hash = "sha256:7873f502fe4385e79539b21d872392dc0c4e3714327c15881cbc7fbfd1f95b25", size = 6491182, upload-time = "2026-06-23T14:18:30.859Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/49/e6/136aa8993a2ae7214e0b0ef2edaa0d2e08d1d4e4982635b08a835ff31ec8/pypdf-6.14.2-py3-none-any.whl", hash = "sha256:3f07891af76dc002657e04993ab9b4de81de29f9013b9761d0b7968bff12e946", size = 349514, upload-time = "2026-06-23T14:18:28.867Z" },
 ]
 
 [[package]]

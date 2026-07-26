@@ -7,4 +7,5 @@ dependencies = [
     "frozen-ducklake>=0.11.0",
     "dbt-core>=1.10.0",
     "dbt-duckdb>=1.10.0",
+    "pypdf>=5.0.0",
 ]

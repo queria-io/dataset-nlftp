@@ -36,3 +36,7 @@ models:
       # 消費しないようにする（全国で数百万ポリゴンあるため）
       raw:
         +materialized: table
+    zoning:
+      # hazard と同様、ポリゴンが大きいので raw のみ実体化する
+      raw:
+        +materialized: table
