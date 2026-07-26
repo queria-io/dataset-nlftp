@@ -1,5 +1,5 @@
 [project]
-name = "fdl-nlftp"
+name = "dataset-nlftp"
 version = "0.1.0"
 description = "国土数値情報 dataset for Queria"
 requires-python = ">=3.13"
