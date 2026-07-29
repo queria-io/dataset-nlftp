@@ -169,12 +169,12 @@
 5. 医療機関データ（P04）はパイプライン実行時に全国版 GeoJSON を自動ダウンロードする。
 6. 学校データ（P29）はパイプライン実行時に全国版 GeoJSON を自動ダウンロードする。
 7. 洪水浸水想定区域データ（A31a）はパイプライン実行時に地域単位の zip を自動ダウンロードし、想定最大規模の GeoJSON を Parquet に変換する。
-8. `bash scripts/build.sh local` でビルドする。
+8. `bash scripts/build.sh` でビルドする。
 
 洪水浸水想定区域データ（A31a）の更新運用:
 
 - 全国分のダウンロードは zip 合計 10GB 超と重いため、CI（GitHub Actions）ではスキップされる（`GITHUB_ACTIONS` 環境変数を検出して自動スキップ。`NLFTP_SKIP_FLOOD=1` で明示的にスキップ、`=0` で強制実行も可能）。CI のビルドでは flood タグのモデルが `--exclude` され、カタログ上の既存テーブルはそのまま維持される。
-- 初回フルビルドと年次更新はローカルで `bash scripts/build.sh local`（本番は `default`）を実行する。
+- 初回フルビルドと年次更新は手元で `bash scripts/build.sh` を実行する（`QUERIA_TOKEN` が要る。公開先は選ばない）。
 - 変換済み Parquet（`data/flood/parquet/`）と処理済みマーカー（`data/flood/.done/`）が残っていれば該当分はスキップされるため、中断しても再実行で続きから処理できる。年次更新時はパイプラインの URL の版（A31a-25 等）を更新し、`data/flood/` を削除してから再実行する。
 - 対象地域を絞る場合は `NLFTP_FLOOD_REGIONS`（カンマ区切り、例: `NLFTP_FLOOD_REGIONS=13,83`）を指定する。
 
