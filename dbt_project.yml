@@ -31,6 +31,11 @@ models:
         +materialized: table
       stg:
         +materialized: table
+    transit:
+      raw:
+        +materialized: table
+      stg:
+        +materialized: table
     hazard:
       # raw のみ実体化し、stg / mart は view として二重にストレージを
       # 消費しないようにする（全国で数百万ポリゴンあるため）

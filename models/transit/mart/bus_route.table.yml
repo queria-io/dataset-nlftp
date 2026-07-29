@@ -1,0 +1,25 @@
+schema: transit
+name: bus_route
+title: バスルート
+description: 'バス路線の経路（ライン）。
+
+  国土数値情報 N07（令和4年度）。原典が経路を細かい区間に分けて持つため 1 行 = 1 区間で、
+
+  事業者ごとにまとめるには ST_Union_Agg で集約する。
+
+  令和4年度版の属性は事業者名のみで、系統名・運行頻度は含まれない。'
+keywords:
+  - 国土数値情報
+  - バス
+  - 公共交通
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N07-2022.html
+fields:
+  - name: operator
+    title: 事業者名
+    description: N07_001。コミュニティバスは自治体名
+  - name: geometry
+    title: 経路ライン
+    description: 'CRS: EPSG:6668 (JGD2011)'

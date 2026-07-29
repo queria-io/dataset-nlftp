@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: raw_bus_stop
+    description: 国土数値情報 P11（第3.0版・令和4年度）のバス停留所データ（ポイント）。都道府県別 GeoJSON を結合したもの。
+  - name: raw_bus_route
+    description: 国土数値情報 N07（令和4年度）のバスルートデータ（ライン）。
