@@ -24,6 +24,7 @@ data/future_population/
 data/railway/
 data/medical/
 data/school/
+data/transit/
 data/flood/
 *.duckdb
 dist/
