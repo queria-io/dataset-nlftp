@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_bus_stop
+    description: |
+      バス停留所のステージング。35 組に分けて格納された系統名・バス区分コードを
+      連結して 1 つのリストに戻し、区分コードを名称に変換。ジオメトリを修正。
+  - name: stg_bus_route
+    description: |
+      バスルートのステージング。事業者名を取り出しジオメトリを修正。
