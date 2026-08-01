@@ -26,5 +26,6 @@ data/medical/
 data/school/
 data/transit/
 data/flood/
+data/landuse/
 *.duckdb
 dist/

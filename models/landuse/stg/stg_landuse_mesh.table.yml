@@ -1,0 +1,5 @@
+schema: landuse
+name: stg_landuse_mesh
+description: 都市地域土地利用細分メッシュのステージング。列名を付け替え、土地利用種別コードを名称に変換し、細分メッシュコードから
+  1km メッシュのコードを取り出して、WKB からジオメトリを復元する。
+published: false
