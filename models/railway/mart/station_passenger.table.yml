@@ -1,0 +1,66 @@
+schema: railway
+name: station_passenger
+title: 駅別乗降客数
+description: '駅ごとの1日あたり乗降客数（2011〜2024年度）。
+
+  国土数値情報 S12（2024年度版）を年度の縦持ちに正規化し、駅の代表点（ポイント）を持たせた。
+
+  乗降客数は各鉄道事業者が独自に算出した値で、統一的な基準に基づくものではない。
+
+  複数路線が乗り入れる駅は路線ごとに行が分かれ、乗降客数はそのうち1行にだけ記載される。
+
+  データが無い年度・非公開の年度・まだ駅が無かった年度は乗降客数が NULL になる。'
+keywords:
+  - 国土数値情報
+  - 鉄道
+  - 駅
+  - 乗降客数
+  - 統計
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html
+fields:
+  - name: station_code
+    title: 駅コード
+    description: S12_001c。station テーブルの station_code と同じ体系
+  - name: station_group_code
+    title: 駅グループコード
+    description: S12_001g。300m以内かつ同名の駅を束ねるコード
+  - name: station_name
+    title: 駅名
+  - name: operator
+    title: 運営会社
+  - name: line_name
+    title: 路線名
+  - name: railway_class_code
+    title: 鉄道区分コード
+    description: S12_004
+  - name: railway_class
+    title: 鉄道区分
+  - name: operator_type_code
+    title: 事業者種別コード
+    description: S12_005
+  - name: operator_type
+    title: 事業者種別
+  - name: year
+    title: 年度
+    description: 2011〜2024
+  - name: passenger_count
+    title: 乗降客数
+    description: 人/日。記載の無い年度は NULL
+  - name: data_availability_code
+    title: データ有無コード
+    description: 1=データ有、2=データなし、3=非公開、4=駅なし
+  - name: data_availability
+    title: データ有無
+  - name: duplicate_code
+    title: 重複コード
+    description: 1=当該路線駅に記載、2=他路線駅に記載、3=駅なし
+  - name: duplicate_status
+    title: 重複区分
+  - name: note
+    title: 備考
+    description: 原典資料の名称や注記
+  - name: geometry
+    title: 駅ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)。軌道区間ラインの重心'

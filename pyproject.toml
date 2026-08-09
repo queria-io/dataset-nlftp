@@ -1,10 +1,10 @@
 [project]
-name = "fdl-nlftp"
+name = "dataset-nlftp"
 version = "0.1.0"
-description = "国土数値情報 dataset for fdl"
+description = "国土数値情報 dataset for Queria"
 requires-python = ">=3.13"
 dependencies = [
-    "frozen-ducklake>=0.11.0",
+    "queria>=0.13.0",
     "dbt-core>=1.10.0",
     "dbt-duckdb>=1.10.0",
     "pypdf>=5.0.0",

@@ -1,14 +1,5 @@
 version: 2
 
-_meta: &meta
-  source_url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html"
-  published: true
-  tags: ["国土数値情報", "将来推計人口", "人口", "統計"]
-
-_geo: &geo
-  title: メッシュポリゴン
-  description: "CRS: EPSG:6668 (JGD2011)。1km四方の地域メッシュ"
-
 models:
   - name: future_population_municipality
     description: |
@@ -18,64 +9,21 @@ models:
       複数市区町村にまたがるメッシュの人口は該当市区町村へ均等按分して集計。
       政令指定都市は区単位のコードで集計される。
     access: public
-    config:
-      meta:
-        <<: *meta
-        title: "将来推計人口（市区町村別）"
     columns:
       - name: city_code
-        meta:
-          title: 市区町村コード
-          description: 5桁（政令指定都市は区単位）
       - name: prefecture_code
-        meta:
-          title: 都道府県コード
-          description: 2桁
       - name: prefecture_name
-        meta:
-          title: 都道府県名
       - name: county_name
-        meta:
-          title: 郡名
       - name: city_name
-        meta:
-          title: 市区町村名
       - name: ward_name
-        meta:
-          title: 行政区名
-          description: 政令指定都市のみ（他は NULL）
       - name: population_2025
-        meta:
-          title: 2025年推計人口
-          description: 人
       - name: population_2035
-        meta:
-          title: 2035年推計人口
-          description: 人
       - name: population_2050
-        meta:
-          title: 2050年推計人口
-          description: 人
       - name: population_2070
-        meta:
-          title: 2070年推計人口
-          description: 人
       - name: growth_rate_2025_2035
-        meta:
-          title: 人口増減率（2025→2035）
-          description: "%。10年後の人口増減率"
       - name: growth_rate_2025_2050
-        meta:
-          title: 人口増減率（2025→2050）
-          description: "%"
       - name: elderly_ratio_2025
-        meta:
-          title: 高齢化率（2025）
-          description: "%。65歳以上人口の割合"
       - name: elderly_ratio_2050
-        meta:
-          title: 高齢化率（2050）
-          description: "%"
 
   - name: future_population_mesh
     description: |
@@ -83,43 +31,13 @@ models:
       国土数値情報「1kmメッシュ別将来推計人口（R6国政局推計）」。
       推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
     access: public
-    config:
-      meta:
-        <<: *meta
-        title: "将来推計人口（1kmメッシュ）"
     columns:
       - name: mesh_id
-        meta:
-          title: メッシュコード
-          description: 基準地域メッシュ（1km四方）
       - name: city_code
-        meta:
-          title: 市区町村コード
-          description: 複数市区町村にまたがるメッシュは "_" 連結
       - name: population_2025
-        meta:
-          title: 2025年推計人口
-          description: 人
       - name: population_2035
-        meta:
-          title: 2035年推計人口
-          description: 人
       - name: population_2050
-        meta:
-          title: 2050年推計人口
-          description: 人
       - name: growth_rate_2025_2050
-        meta:
-          title: 人口増減率（2025→2050）
-          description: "%"
       - name: elderly_ratio_2025
-        meta:
-          title: 高齢化率（2025）
-          description: "%"
       - name: elderly_ratio_2050
-        meta:
-          title: 高齢化率（2050）
-          description: "%"
       - name: geometry
-        meta:
-          <<: *geo

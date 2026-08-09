@@ -1,0 +1,4 @@
+schema: transit
+name: stg_bus_route
+description: バスルートのステージング。事業者名を取り出しジオメトリを修正。
+published: false

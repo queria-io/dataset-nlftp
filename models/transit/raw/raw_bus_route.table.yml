@@ -1,0 +1,4 @@
+schema: transit
+name: raw_bus_route
+description: 国土数値情報 N07（令和4年度）のバスルートデータ（ライン）。
+published: false

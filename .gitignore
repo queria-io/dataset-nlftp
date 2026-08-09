@@ -12,7 +12,7 @@ logs/
 package-lock.yml
 
 # DuckLake
-.fdl/
+.queria/
 
 # Environment
 .env
@@ -24,7 +24,10 @@ data/future_population/
 data/railway/
 data/medical/
 data/school/
+data/transit/
 data/flood/
+data/landuse/
+data/station_passenger/
 data/zoning/
 *.duckdb
 dist/

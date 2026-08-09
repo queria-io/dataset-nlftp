@@ -31,9 +31,18 @@ models:
         +materialized: table
       stg:
         +materialized: table
+    transit:
+      raw:
+        +materialized: table
+      stg:
+        +materialized: table
     hazard:
       # raw のみ実体化し、stg / mart は view として二重にストレージを
       # 消費しないようにする（全国で数百万ポリゴンあるため）
+      raw:
+        +materialized: table
+    landuse:
+      # hazard と同じ理由で raw のみ実体化する（100mメッシュが数百万ポリゴン）
       raw:
         +materialized: table
     zoning:
