@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: use_district
+    description: |
+      都市計画法に基づく用途地域のポリゴン。用途地域の種類（13種類）と、
+      その地域に指定された建ぺい率・容積率を持つ。
+      国土数値情報 A29（第2.1版・令和元年度）が元データ。
+
+      収録範囲: 用途地域データは原典資料を作成した市区町村ごとに公開条件が
+      異なるため、提供元の「公開に関する利用条件」でオープンデータ公開可と
+      された市区町村のみを収録する。条件付き公開（有償利用不可・再配信不可）・
+      公開不可・回答なしの市区町村は含まない。用途地域を定める全市区町村を
+      網羅したデータではない点に注意。
+
+      建ぺい率・容積率は用途地域および指定地域別の指定値（%）で、
+      原典で不明（9999）とされているものと、指定値としてありえない 0 は NULL。
+
+      出典: 「国土数値情報（用途地域データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: admin_code
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: municipality_name
+      - name: zoning_code
+      - name: zoning_name
+      - name: building_coverage_ratio
+      - name: floor_area_ratio
+      - name: geometry

@@ -1,0 +1,4 @@
+schema: zoning
+name: raw_zoning
+description: 国土数値情報 A29（第2.1版・令和元年度）の用途地域データ。 パイプラインで GeoJSON から変換した都道府県ごとの Parquet を結合したもの。 オープンデータ公開可の市区町村のみを含み、ジオメトリは WKB (BLOB) で保持する。
+published: false
