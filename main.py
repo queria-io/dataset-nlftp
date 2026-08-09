@@ -9,7 +9,8 @@
 7. transit:                 バス停留所・バスルート取得 (P11 / N07)
 8. flood:                   洪水浸水想定区域データ取得 (A31a)
 9. landuse:                 土地利用細分メッシュ取得 (L03-b-u)
-10. dbt:                    dbt ビルド
+10. station_passenger:      駅別乗降客数取得 (S12)
+11. dbt:                    dbt ビルド
 """
 
 import logging
@@ -24,6 +25,7 @@ from pipelines.medical import download_medical
 from pipelines.mt_city import extract_mt_city
 from pipelines.railway import download_railway
 from pipelines.school import download_school
+from pipelines.station_passenger import download_station_passenger
 from pipelines.transit import download_transit
 
 logger = logging.getLogger("pipelines")
@@ -53,43 +55,47 @@ def dbt_build():
 
 def main():
     # 1. 行政区域データ (国土数値情報 N03)
-    logger.info("1/10: administrative_boundary (行政区域データ)")
+    logger.info("1/11: administrative_boundary (行政区域データ)")
     download_administrative_boundary("data/administrative_boundary")
 
     # 2. 市区町村マスタ (アドレス・ベース・レジストリ)
-    logger.info("2/10: mt_city (市区町村マスタ)")
+    logger.info("2/11: mt_city (市区町村マスタ)")
     extract_mt_city("data/mt_city")
 
     # 3. 将来推計人口メッシュ (国土数値情報 1kmメッシュ R6推計)
-    logger.info("3/10: future_population (将来推計人口メッシュ)")
+    logger.info("3/11: future_population (将来推計人口メッシュ)")
     download_future_population("data/future_population")
 
     # 4. 鉄道データ (国土数値情報 N02 駅・路線)
-    logger.info("4/10: railway (鉄道データ)")
+    logger.info("4/11: railway (鉄道データ)")
     download_railway("data/railway")
 
     # 5. 医療機関データ (国土数値情報 P04)
-    logger.info("5/10: medical (医療機関データ)")
+    logger.info("5/11: medical (医療機関データ)")
     download_medical("data/medical")
 
     # 6. 学校データ (国土数値情報 P29)
-    logger.info("6/10: school (学校データ)")
+    logger.info("6/11: school (学校データ)")
     download_school("data/school")
 
     # 7. バス停留所・バスルート (国土数値情報 P11 / N07)
-    logger.info("7/10: transit (バス停留所・バスルート)")
+    logger.info("7/11: transit (バス停留所・バスルート)")
     download_transit("data/transit")
 
     # 8. 洪水浸水想定区域データ (国土数値情報 A31a)
-    logger.info("8/10: flood (洪水浸水想定区域データ)")
+    logger.info("8/11: flood (洪水浸水想定区域データ)")
     download_flood("data/flood")
 
     # 9. 都市地域土地利用細分メッシュ (国土数値情報 L03-b-u)
-    logger.info("9/10: landuse (土地利用細分メッシュ)")
+    logger.info("9/11: landuse (土地利用細分メッシュ)")
     download_landuse("data/landuse")
 
-    # 10. dbt ビルド
-    logger.info("10/10: dbt build")
+    # 10. 駅別乗降客数 (国土数値情報 S12)
+    logger.info("10/11: station_passenger (駅別乗降客数)")
+    download_station_passenger("data/station_passenger")
+
+    # 11. dbt ビルド
+    logger.info("11/11: dbt build")
     dbt_build()
 
 

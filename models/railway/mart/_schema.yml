@@ -32,3 +32,28 @@ models:
       - name: station_code
       - name: station_group_code
       - name: geometry
+
+  - name: station_passenger
+    description: |
+      駅ごとの1日あたり乗降客数（2011〜2024年度）。
+      国土数値情報 S12（2024年度版）を年度の縦持ちに正規化し、駅の代表点（ポイント）を持たせた。
+      乗降客数は当該路線駅に記載があり、かつ事業者がデータを公表している年度のみ値が入る。
+    access: public
+    columns:
+      - name: station_code
+      - name: station_group_code
+      - name: station_name
+      - name: operator
+      - name: line_name
+      - name: railway_class_code
+      - name: railway_class
+      - name: operator_type_code
+      - name: operator_type
+      - name: year
+      - name: passenger_count
+      - name: data_availability_code
+      - name: data_availability
+      - name: duplicate_code
+      - name: duplicate_status
+      - name: note
+      - name: geometry

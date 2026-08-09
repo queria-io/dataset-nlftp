@@ -1,9 +1,11 @@
 {#
-  鉄道データ（N02）のコード値を名称に変換するマクロ。
+  鉄道データ（N02）・駅別乗降客数データ（S12）のコード値を名称に変換するマクロ。
 
-  駅・路線の両モデルで同じ区分コードを使うため、CASE 式を共通化する。
-    - 鉄道区分コード（N02_001）: RailwayClassCd
-    - 事業者種別コード（N02_002）: InstitutionTypeCd
+  駅・路線・乗降客数のモデルで同じ区分コードを使うため、CASE 式を共通化する。
+    - 鉄道区分コード（N02_001 / S12_004）: RailwayClassCd
+    - 事業者種別コード（N02_002 / S12_005）: InstitutionTypeCd
+    - 重複コード（S12 の年度ごと）: RailwayDuplicateCd
+    - データ有無コード（S12 の年度ごと）: RailwayExistenceCd
 #}
 {% macro railway_class_name(col) %}
   CASE {{ col }}
@@ -29,5 +31,22 @@
     WHEN '3' THEN '公営鉄道'
     WHEN '4' THEN '民営鉄道'
     WHEN '5' THEN '第三セクター'
+  END
+{% endmacro %}
+
+{% macro railway_duplicate_name(col) %}
+  CASE {{ col }}
+    WHEN '1' THEN '当該路線駅に記載'
+    WHEN '2' THEN '他路線駅に記載'
+    WHEN '3' THEN '駅なし'
+  END
+{% endmacro %}
+
+{% macro railway_data_availability_name(col) %}
+  CASE {{ col }}
+    WHEN '1' THEN 'データ有'
+    WHEN '2' THEN 'データなし'
+    WHEN '3' THEN '非公開'
+    WHEN '4' THEN '駅なし'
   END
 {% endmacro %}

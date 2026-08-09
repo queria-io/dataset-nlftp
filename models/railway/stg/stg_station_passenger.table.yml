@@ -1,0 +1,6 @@
+schema: railway
+name: stg_station_passenger
+description: '駅別乗降客数のステージング。横持ちの年度別列を縦持ちに正規化し、
+
+  鉄道区分・事業者種別・重複・データ有無の各コードを名称に変換し、ジオメトリを修正。'
+published: false

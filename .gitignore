@@ -27,5 +27,6 @@ data/school/
 data/transit/
 data/flood/
 data/landuse/
+data/station_passenger/
 *.duckdb
 dist/
