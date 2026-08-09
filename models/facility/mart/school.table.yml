@@ -1,0 +1,47 @@
+schema: facility
+name: school
+title: 学校
+description: '学校の位置（ポイント）。小学校・中学校・高等学校・大学・幼稚園・特別支援学校・
+
+  認定こども園・専修学校等の名称・所在地・学校分類・管理者を持つ。
+
+  国土数値情報 P29（第2.0版・令和3年）。'
+keywords:
+  - 国土数値情報
+  - 医療機関
+  - 施設
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-v3_0.html
+fields:
+  - name: admin_code
+    title: 行政区域コード
+    description: P29_001。都道府県コードと市区町村コードからなる、学校が存在する行政区を特定するコード
+  - name: school_code
+    title: 学校コード
+    description: P29_002。全国の学校に設定された固有コード
+  - name: school_class_code
+    title: 学校分類コード
+    description: P29_003（小学校=16001、中学校=16002、中等教育学校=16003、高等学校=16004、高等専門学校=16005、短期大学=16006、大学=16007、幼稚園=16011、特別支援学校=16012、認定こども園=16013、義務教育学校=16014、各種学校=16015、専修学校=16016）
+  - name: school_class
+    title: 学校分類
+  - name: school_name
+    title: 名称
+    description: 学校の正式名称
+  - name: address
+    title: 所在地
+    description: P29_005。市区町村名を省いた所在地
+  - name: administrator_code
+    title: 管理者コード
+    description: P29_006（その他=0、国=1、都道府県=2、市区町村=3、民間=4）
+  - name: administrator
+    title: 管理者
+  - name: school_status_code
+    title: 休校区分コード
+    description: P29_007（調査なし=0、開校中=1、休校中=2）
+  - name: school_status
+    title: 休校区分
+  - name: geometry
+    title: 学校ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)'

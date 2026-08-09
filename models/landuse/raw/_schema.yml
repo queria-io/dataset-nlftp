@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: raw_landuse_mesh
+    description: >
+      国土数値情報 L03-b-u（第3.1版・令和3年度）の都市地域土地利用細分メッシュデータ。
+      パイプラインで GeoJSON から変換した 1 次メッシュごとの Parquet を結合したもの。
+      ジオメトリは WKB (BLOB) で保持する。

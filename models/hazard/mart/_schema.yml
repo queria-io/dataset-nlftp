@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: flood_inundation
+    description: |
+      洪水浸水想定区域（河川単位・想定最大規模 L2）のポリゴン。
+      国土数値情報 A31a（2025年度）のうち想定最大規模の浸水区域のみを収録する
+      （計画規模・浸水継続時間・家屋倒壊等氾濫想定区域は含まない）。
+      河川ごとに浸水深ランク別のポリゴンを持つ。
+
+      浸水深ランク（depth_rank）: 1=0.5m未満、2=0.5m以上3m未満、3=3m以上5m未満、
+      4=5m以上10m未満、5=10m以上20m未満、6=20m以上。
+
+      出典: 「国土数値情報（洪水浸水想定区域データ）」（国土交通省）。
+      2021年度以降版のライセンスは CC BY 4.0。
+    access: public
+    columns:
+      - name: region_code
+      - name: river_code
+      - name: river_name
+      - name: admin_name
+      - name: depth_rank
+      - name: depth_label
+      - name: geometry

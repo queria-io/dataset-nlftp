@@ -1,0 +1,6 @@
+schema: facility
+name: stg_welfare
+description: '福祉施設のステージング。福祉施設の大分類・中分類・小分類・管理者・位置正確度の
+
+  各コードを名称に変換し、ジオメトリを修正。'
+published: false

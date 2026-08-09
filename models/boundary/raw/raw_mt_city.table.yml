@@ -1,0 +1,4 @@
+schema: boundary
+name: raw_mt_city
+description: デジタル庁アドレス・ベース・レジストリの市区町村マスタ。政令指定都市の区→市コード対応に使用。
+published: false

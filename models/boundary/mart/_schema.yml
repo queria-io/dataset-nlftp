@@ -1,55 +1,24 @@
 version: 2
 
-_geo: &geo
-  title: 境界ポリゴン
-  description: "CRS: EPSG:4612 (JGD2011)"
-
-_meta: &meta
-  source_url: "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html"
-  published: true
-  tags: ["国土数値情報", "行政区域", "GIS", "境界"]
-
 models:
   - name: prefecture
     description: |
       都道府県の行政区域境界ポリゴン。
       国土数値情報 N03（令和7年）の行政区域データを都道府県単位で集約。
     access: public
-    config:
-      meta:
-        <<: *meta
-        title: "都道府県境界"
     columns:
       - name: prefecture_code
-        meta:
-          title: 都道府県コード
-          description: 2桁
       - name: prefecture_name
-        meta:
-          title: 都道府県名
       - name: geometry
-        meta:
-          <<: *geo
 
   - name: prefecture_thinned
     description: |
       都道府県境界（頂点間引きのみ、小島除去なし）。
       簡素化手法の比較用。小島がドットとして大量に残る。
-    config:
-      meta:
-        <<: *meta
-        title: "都道府県境界（間引きのみ）"
-        published: false
     columns:
       - name: prefecture_code
-        meta:
-          title: 都道府県コード
       - name: prefecture_name
-        meta:
-          title: 都道府県名
       - name: geometry
-        meta:
-          <<: *geo
 
   - name: municipality
     description: |
@@ -57,35 +26,14 @@ models:
       国土数値情報 N03（令和7年）の行政区域データを市区町村単位で集約。
       同一自治体の飛び地等は ST_Union_Agg で統合済み。
     access: public
-    config:
-      meta:
-        <<: *meta
-        title: "市区町村境界"
     columns:
       - name: lg_code
-        meta:
-          title: 全国地方公共団体コード
-          description: 5桁（都道府県2桁 + 市区町村3桁）
       - name: prefecture_code
-        meta:
-          title: 都道府県コード
-          description: 2桁
       - name: prefecture_name
-        meta:
-          title: 都道府県名
       - name: county_name
-        meta:
-          title: 郡名
       - name: city_name
-        meta:
-          title: 市区町村名
       - name: ward_name
-        meta:
-          title: 行政区名
-          description: 政令指定都市のみ（他は NULL）
       - name: geometry
-        meta:
-          <<: *geo
 
   - name: designated_city
     description: |
@@ -94,27 +42,10 @@ models:
       区コードから市コードへのマッピングは「アドレス・ベース・レジストリ（市区町村マスタデータ）」（デジタル庁）（https://dataset.address-br.digital.go.jp/）を加工して作成。
       東京23区（特別区）は独立した地方公共団体のため統合しない。
     access: public
-    config:
-      meta:
-        <<: *meta
-        title: "市区町村境界（政令市統合）"
     columns:
       - name: lg_code
-        meta:
-          title: 全国地方公共団体コード
-          description: 5桁（政令指定都市は市レベルのコード）
       - name: prefecture_code
-        meta:
-          title: 都道府県コード
       - name: prefecture_name
-        meta:
-          title: 都道府県名
       - name: county_name
-        meta:
-          title: 郡名
       - name: city_name
-        meta:
-          title: 市区町村名
       - name: geometry
-        meta:
-          <<: *geo

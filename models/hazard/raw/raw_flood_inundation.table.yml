@@ -1,0 +1,5 @@
+schema: hazard
+name: raw_flood_inundation
+description: 国土数値情報 A31a（2025年度）の洪水浸水想定区域データ（河川単位・想定最大規模）。 パイプラインで GeoJSON から変換した河川ごとの Parquet を結合したもの。
+  ジオメトリは WKB (BLOB) で保持する。
+published: false

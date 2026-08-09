@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: bus_stop
+    description: |
+      バス停留所の位置（ポイント）。
+      国土数値情報 P11（第3.0版・令和4年度）。民間路線バス・公営路線バス・
+      コミュニティバスが対象で、高速バス・デマンドバス・貸切バス・スクールバスは含まない。
+      同一道路上の同一事業者・同一名称の停留所は原典の時点で統合されている。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: stop_name
+      - name: operator
+      - name: bus_class_codes
+      - name: bus_classes
+      - name: route_count
+      - name: routes
+      - name: remarks
+      - name: geometry
+
+  - name: bus_route
+    description: |
+      バス路線の経路（ライン）。
+      国土数値情報 N07（令和4年度）。原典が経路を細かい区間に分けて持つため 1 行 = 1 区間で、
+      事業者ごとにまとめるには ST_Union_Agg で集約する。
+      令和4年度版の属性は事業者名のみで、系統名・運行頻度は含まれない。
+    access: public
+    columns:
+      - name: operator
+      - name: geometry

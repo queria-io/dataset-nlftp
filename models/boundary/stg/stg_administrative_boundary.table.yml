@@ -1,0 +1,13 @@
+schema: boundary
+name: stg_administrative_boundary
+description: 'N03 行政区域データのステージング。
+
+  所属未定地を除外し、カラム名を日本語属性名にリネーム。'
+published: false
+fields:
+  - name: subprefecture_name
+    description: 振興局名（北海道のみ、他は NULL）
+  - name: county_name
+    description: 郡名（市・特別区は NULL）
+  - name: ward_name
+    description: 行政区名（政令指定都市のみ、他は NULL）

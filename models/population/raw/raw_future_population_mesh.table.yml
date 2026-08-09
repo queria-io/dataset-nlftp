@@ -1,0 +1,6 @@
+schema: population
+name: raw_future_population_mesh
+description: '国土数値情報 1kmメッシュ別将来推計人口（R6国政局推計）の取り込み。
+
+  全国 47 都道府県別 Shapefile を ST_Read して UNION ALL したもの。'
+published: false

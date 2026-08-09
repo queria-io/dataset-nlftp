@@ -1,0 +1,81 @@
+schema: population
+name: future_population_municipality
+title: 将来推計人口（市区町村別）
+description: '市区町村別の将来推計人口（2020〜2070年、5年ごと）。
+
+  国土数値情報「1kmメッシュ別将来推計人口（R6国政局推計）」を市区町村コード（SHICODE）で集計。
+
+  推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
+
+  複数市区町村にまたがるメッシュの人口は該当市区町村へ均等按分して集計。
+
+  政令指定都市は区単位のコードで集計される。'
+keywords:
+  - 国土数値情報
+  - 将来推計人口
+  - 人口
+  - 統計
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html
+fields:
+  - name: city_code
+    title: 市区町村コード
+    description: 5桁（政令指定都市は区単位）
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: county_name
+    title: 郡名
+  - name: city_name
+    title: 市区町村名
+  - name: ward_name
+    title: 行政区名
+    description: 政令指定都市のみ（他は NULL）
+  - name: population_2025
+    title: 2025年推計人口
+    description: 人
+  - name: population_2035
+    title: 2035年推計人口
+    description: 人
+  - name: population_2050
+    title: 2050年推計人口
+    description: 人
+  - name: population_2070
+    title: 2070年推計人口
+    description: 人
+  - name: population_2020
+    title: 2020年推計人口
+    description: 人
+  - name: population_2030
+    title: 2030年推計人口
+    description: 人
+  - name: population_2040
+    title: 2040年推計人口
+    description: 人
+  - name: population_2045
+    title: 2045年推計人口
+    description: 人
+  - name: population_2055
+    title: 2055年推計人口
+    description: 人
+  - name: population_2060
+    title: 2060年推計人口
+    description: 人
+  - name: population_2065
+    title: 2065年推計人口
+    description: 人
+  - name: growth_rate_2025_2035
+    title: 人口増減率（2025→2035）
+    description: '%。10年後の人口増減率'
+  - name: growth_rate_2025_2050
+    title: 人口増減率（2025→2050）
+    description: '%'
+  - name: elderly_ratio_2025
+    title: 高齢化率（2025）
+    description: '%。65歳以上人口の割合'
+  - name: elderly_ratio_2050
+    title: 高齢化率（2050）
+    description: '%'
