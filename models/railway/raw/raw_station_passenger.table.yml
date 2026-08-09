@@ -1,0 +1,6 @@
+schema: railway
+name: raw_station_passenger
+description: '国土数値情報 S12（2024年度版）の駅別乗降客数データ。
+
+  1行 = 1駅（路線ごと）で、2011〜2024年度の乗降客数を横持ちで持つ。'
+published: false

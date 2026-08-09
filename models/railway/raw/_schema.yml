@@ -5,3 +5,7 @@ models:
     description: 国土数値情報 N02（令和6年）の駅データ。駅は当該駅の軌道区間を表すラインジオメトリ。
   - name: raw_railway_section
     description: 国土数値情報 N02（令和6年）の鉄道路線区間データ（ラインジオメトリ）。
+  - name: raw_station_passenger
+    description: |
+      国土数値情報 S12（2024年度版）の駅別乗降客数データ。
+      1行 = 1駅（路線ごと）で、2011〜2024年度の乗降客数を横持ちで持つ。
