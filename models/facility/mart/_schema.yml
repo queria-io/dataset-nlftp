@@ -37,3 +37,29 @@ models:
       - name: school_status_code
       - name: school_status
       - name: geometry
+
+  - name: welfare
+    description: |
+      福祉施設の位置（ポイント）。保護施設・老人福祉施設・障害者支援施設・
+      身体障害者社会参加支援施設・児童福祉施設・母子父子福祉施設等の名称・所在地・
+      分類（大／中／小）・管理者を持つ。国土数値情報 P14（第2.1版・令和3年度）。
+      一部の都道府県・市区町村は利用規約と異なる利用条件が付されているため、
+      商用等で利用する際は提供元の利用制限を確認すること。
+    access: public
+    columns:
+      - name: prefecture
+      - name: city
+      - name: admin_code
+      - name: address
+      - name: major_class_code
+      - name: major_class
+      - name: middle_class_code
+      - name: middle_class
+      - name: minor_class_code
+      - name: minor_class
+      - name: institution_name
+      - name: administrator_code
+      - name: administrator
+      - name: position_accuracy_code
+      - name: position_accuracy
+      - name: geometry

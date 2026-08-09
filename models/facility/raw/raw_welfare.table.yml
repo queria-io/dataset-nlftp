@@ -1,0 +1,4 @@
+schema: facility
+name: raw_welfare
+description: 国土数値情報 P14（第2.1版・令和3年度）の福祉施設データ。高齢者・障害者・児童福祉施設等の位置（ポイント）。47 都道府県分を統合。
+published: false
