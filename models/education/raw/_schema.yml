@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: raw_elementary_school_district
+    description: >
+      国土数値情報 A27（2023年度）の小学校区データ。
+      パイプラインで GeoJSON から変換した都道府県ごとの Parquet を結合したもの。
+      利用条件がオープンデータ公開の市区町村のみを含み、ジオメトリは WKB (BLOB) で保持する。
+
+  - name: raw_junior_high_school_district
+    description: >
+      国土数値情報 A32（2023年度）の中学校区データ。
+      raw_elementary_school_district と同じ構造で、中学校の通学区域を持つ。
+
+  - name: raw_school_district_terms
+    description: >
+      通学区域データの市区町村別の公開条件・利用条件。
+      提供元が配布する一覧をパイプラインで取り込んだもの。市区町村名の解決と取り込み範囲の検証に使う。

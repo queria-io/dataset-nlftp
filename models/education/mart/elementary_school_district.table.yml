@@ -1,0 +1,67 @@
+schema: education
+name: elementary_school_district
+title: 小学校区
+description: '市区町村の教育委員会等が指定する、公立小学校ごとの通学区域のポリゴン。
+
+  1 行 = 1 小学校の通学区域で、文部科学省の学校コードを持つ。
+
+  国土数値情報 A27（2023年度）が元データ。
+
+
+  収録範囲: 通学区域データは原典資料を作成した市区町村ごとに公開条件が
+
+  異なるため、提供元の「公開に関する利用条件」で利用条件がオープンデータ公開と
+
+  された市区町村のみを収録する。条件公開・商用利用不可・商用利用および再配布不可・
+
+  公開不可の市区町村は含まない。加えて、資料を収集できず提供元が区域を作成して
+
+  いない市区町村もある。全国の小学校区を網羅したデータではない点に注意。
+
+
+  通学区域はおおよその範囲で、空間的な誤差を含む。順次見直されるため最新の
+
+  指定状況が反映されていない場合があり、公式な資料としては扱えない。
+
+  私立小学校・特別支援学校・国立大学附属小学校は対象外。
+
+
+  出典: 「国土数値情報（小学校区データ）」（国土交通省）。'
+keywords:
+  - 国土数値情報
+  - 小学校区
+  - 学区
+  - 通学区域
+  - 学校
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A27-2023.html
+fields:
+  - name: admin_code
+    title: 行政区域コード
+    description: A27_001。小学校が存在する市区町村の行政区域コード（5桁）
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 行政区域コードの上2桁
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: municipality_name
+    title: 市区町村名
+    description: 提供元の利用条件一覧から引いた名称（原典の属性には市区町村名が無い）
+  - name: school_code
+    title: 学校コード
+    description: A27_003。文部科学省の学校コード。facility.school の school_code と結合できる。原典で未設定の区域と、コードの形式でない値は NULL
+  - name: school_name
+    title: 名称
+    description: A27_004。小学校の名称
+  - name: establisher
+    title: 設置主体
+    description: A27_002。「◯◯市立」など。表記は市区町村により揺れる
+  - name: address
+    title: 所在地
+    description: A27_005。小学校の所在地
+  - name: geometry
+    title: 通学区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'
