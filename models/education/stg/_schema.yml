@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_elementary_school_district
+    description: >
+      小学校区のステージング。行政区域コードから都道府県名を引き、
+      利用条件一覧から市区町村名を補い、WKB からジオメトリを復元する。
+
+  - name: stg_junior_high_school_district
+    description: >
+      中学校区のステージング。stg_elementary_school_district と同じ変換を中学校区に行う。

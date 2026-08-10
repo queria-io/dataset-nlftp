@@ -30,5 +30,6 @@ data/flood/
 data/landuse/
 data/station_passenger/
 data/zoning/
+data/school_district/
 *.duckdb
 dist/

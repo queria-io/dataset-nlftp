@@ -49,3 +49,8 @@ models:
       # hazard と同様、ポリゴンが大きいので raw のみ実体化する
       raw:
         +materialized: table
+    education:
+      # 公開する mart は実体化する（ジオメトリの補正をブラウザ側で毎回やらせない）。
+      # stg は view のままにして同じポリゴンを 3 重に持たない
+      raw:
+        +materialized: table
