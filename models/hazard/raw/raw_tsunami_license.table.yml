@@ -1,0 +1,4 @@
+schema: hazard
+name: raw_tsunami_license
+description: 津波浸水想定データの都道府県別の使用許諾条件。 提供元の配布ページの記載をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+published: false
