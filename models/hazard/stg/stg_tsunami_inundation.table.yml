@@ -1,0 +1,4 @@
+schema: hazard
+name: stg_tsunami_inundation
+description: 津波浸水想定区域のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+published: false

@@ -5,3 +5,8 @@ models:
     description: >
       洪水浸水想定区域（想定最大規模）のステージング。列名を付け替え、
       WKB からジオメトリを復元して ST_MakeValid で修復する。
+
+  - name: stg_tsunami_inundation
+    description: >
+      津波浸水想定区域のステージング。WKB からジオメトリを復元して
+      ST_MakeValid で修復する。
