@@ -59,3 +59,44 @@ models:
       - name: depth_min_m
       - name: depth_max_m
       - name: geometry
+
+  - name: landslide_hazard_area
+    description: |
+      土砂災害警戒区域（イエローゾーン）・土砂災害特別警戒区域（レッドゾーン）の
+      区域ポリゴン。土砂災害防止法第7条に基づいて都道府県が指定した区域を、
+      急傾斜地の崩壊・土石流・地滑りという現象の種類ごとに持つ。
+      国土数値情報 A33（2025年度版、データ基準日 2025年8月1日）が元データ。
+
+      収録範囲: 土砂災害警戒区域データは原典資料を作成した都道府県ごとに使用許諾
+      条件が異なるため、提供元が「オープンデータとしての利用可（商用利用可・
+      再配信可）」とした都道府県のみを収録する。公開条件の確認が前提になる
+      「条件付公開」の県は含まない。また、収録されている県でも県内のすべての
+      区域を網羅しているわけではない。
+
+      1 行 = 1 ポリゴンで、1 つの区域が複数のポリゴンに分かれることがある。
+      区域番号は都道府県・現象の種類ごとの通し番号で都道府県内では一意にならないため、
+      区域を数えるときは prefecture_code・phenomenon_code・zone_code・zone_number・
+      zone_name で集約する。
+      警戒区域（zone_code 1・3）と特別警戒区域（zone_code 2・4）は同じ場所に
+      重なって収録されるので、面積を合計するときは zone_type で絞る。
+      is_designated が false の行は指定前（基礎調査結果の公表段階）を表す。
+
+      位置は縮尺1/25,000〜1/50,000相当の概略で、法定図書ではない。
+      宅地建物取引業法に基づく重要事項説明等の根拠には使えない。
+
+      出典: 「国土数値情報（土砂災害警戒区域データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: phenomenon_code
+      - name: phenomenon
+      - name: zone_code
+      - name: zone_type
+      - name: is_designated
+      - name: zone_number
+      - name: zone_name
+      - name: address
+      - name: notice_date
+      - name: special_zone_unspecified
+      - name: geometry
