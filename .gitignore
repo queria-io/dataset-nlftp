@@ -32,5 +32,6 @@ data/station_passenger/
 data/zoning/
 data/school_district/
 data/tsunami/
+data/landslide/
 *.duckdb
 dist/

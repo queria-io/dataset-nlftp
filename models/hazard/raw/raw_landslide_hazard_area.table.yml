@@ -1,0 +1,5 @@
+schema: hazard
+name: raw_landslide_hazard_area
+description: 国土数値情報 A33（2025年度版）の土砂災害警戒区域データ。 パイプラインで変換した都道府県ごとの Parquet を結合したもの。
+  オープンデータ利用可の都道府県のみを含み、ジオメトリは WKB (BLOB) で保持する。
+published: false

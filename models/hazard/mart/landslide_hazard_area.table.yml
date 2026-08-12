@@ -1,0 +1,103 @@
+schema: hazard
+name: landslide_hazard_area
+title: 土砂災害警戒区域
+description: '土砂災害警戒区域（イエローゾーン）・土砂災害特別警戒区域（レッドゾーン）の
+
+  区域ポリゴン。土砂災害防止法第7条に基づいて都道府県が指定した区域を、
+
+  急傾斜地の崩壊・土石流・地滑りという現象の種類ごとに持つ。
+
+  国土数値情報 A33（2025年度版、データ基準日 2025年8月1日）が元データ。
+
+
+  収録範囲: 土砂災害警戒区域データは原典資料を作成した都道府県ごとに使用許諾
+
+  条件が異なるため、提供元が「オープンデータとしての利用可（商用利用可・
+
+  再配信可）」とした都道府県のみを収録する。公開条件の確認が前提になる
+
+  「条件付公開」の県は含まない。また、収録されている県でも県内のすべての
+
+  区域を網羅しているわけではない。
+
+
+  1 行 = 1 ポリゴンで、1 つの区域が複数のポリゴンに分かれることがある。
+
+  区域番号は都道府県・現象の種類ごとの通し番号で、都道府県内で一意ではない。
+
+  区域を数えるときは prefecture_code・phenomenon_code・zone_code・zone_number・
+
+  zone_name で集約する。警戒区域（zone_code 1・3）と特別警戒区域（zone_code 2・4）は同じ場所に
+
+  重なって収録されるので、面積を合計するときは zone_type で絞る。
+
+  is_designated が false の行は指定前（基礎調査結果の公表段階）を表す。
+
+
+  位置は縮尺1/25,000〜1/50,000相当の概略で、法定図書ではない。
+
+  宅地建物取引業法に基づく重要事項説明等の根拠には使えない。
+
+  区域の外が「土砂災害が起きない」ことを意味するわけでもなく、
+
+  厳密な範囲は指定した都道府県の所管課が持つ資料で確認する。
+
+
+  出典: 「国土数値情報（土砂災害警戒区域データ）」（国土交通省）。
+
+  原典資料は各都道府県が整備した土砂災害警戒区域の GIS データ・公示図書等。'
+keywords:
+  - 国土数値情報
+  - 土砂災害
+  - 土砂災害警戒区域
+  - イエローゾーン
+  - レッドゾーン
+  - 急傾斜地
+  - 土石流
+  - 地滑り
+  - ハザードマップ
+  - 防災
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2025.html
+fields:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: A33_003。区域を指定した都道府県を示す2桁のコード
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: phenomenon_code
+    title: 現象種別コード
+    description: A33_001。1=急傾斜地の崩壊、2=土石流、3=地滑り
+  - name: phenomenon
+    title: 現象の種類
+    description: 現象種別コードから引いた名称
+  - name: zone_code
+    title: 区域コード
+    description: A33_002。1=警戒区域（指定済）、2=特別警戒区域（指定済）、3=警戒区域（指定前）、4=特別警戒区域（指定前）
+  - name: zone_type
+    title: 区域の種別
+    description: 区域コードから読み取った種別。土砂災害警戒区域 または 土砂災害特別警戒区域
+  - name: is_designated
+    title: 指定済みか
+    description: 区域コードから読み取った指定の状態。false は基礎調査結果の公表段階で指定前
+  - name: zone_number
+    title: 区域番号
+    description: A33_004。都道府県が区域に付けた番号。現象の種類ごとの通し番号で都道府県内では一意にならず、番号を持たない区域は「-」が入る
+  - name: zone_name
+    title: 区域名
+    description: A33_005。区域の名称
+  - name: address
+    title: 所在地
+    description: A33_006。区域の位置する地名。同一の区域名が複数市町村にある場合は「※」で市町村名を示す
+  - name: notice_date
+    title: 告示日
+    description: A33_007。区域を公示した年月日
+  - name: special_zone_unspecified
+    title: 特別警戒区域未指定
+    description: A33_008。警戒区域のみ公示し、特別警戒区域の調査・公示を行っていない区域が true
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

@@ -1,0 +1,4 @@
+schema: hazard
+name: stg_landslide_hazard_area
+description: 土砂災害警戒区域のステージング。WKB からジオメトリを復元して ST_MakeValid で修復し、 特別警戒未指定フラグを真偽値に直す。
+published: false
