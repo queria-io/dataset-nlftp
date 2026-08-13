@@ -33,5 +33,6 @@ data/zoning/
 data/school_district/
 data/tsunami/
 data/landslide/
+data/storm_surge/
 *.duckdb
 dist/
