@@ -15,3 +15,8 @@ models:
     description: >
       土砂災害警戒区域のステージング。WKB からジオメトリを復元して
       ST_MakeValid で修復し、特別警戒未指定フラグを真偽値に直す。
+
+  - name: stg_storm_surge_inundation
+    description: >
+      高潮浸水想定区域のステージング。WKB からジオメトリを復元して
+      ST_MakeValid で修復する。
