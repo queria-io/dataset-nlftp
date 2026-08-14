@@ -1,0 +1,50 @@
+schema: medical
+name: tertiary_medical_area
+title: 三次医療圏
+description: '三次医療圏の区域ポリゴン。臓器移植や重症熱傷など特殊な医療を提供する
+
+  単位として、都道府県が医療法に基づく医療計画の中で設定した圏域。
+
+  1 行 = 1 医療圏で、原典で区域が複数のポリゴンに分かれている分は結合してある。
+
+  国土数値情報 A38（2020年度版）が元データ。
+
+
+  三次医療圏は原則として都道府県の区域と一致する。圏域を分けているのは
+
+  北海道だけで、北海道は6圏域に分かれる。都道府県全域が 1 つの圏域である場合は
+
+  原典に圏域の名称が無いため area_name は NULL になる。
+
+
+  区域は2020年度時点の医療計画に基づく。医療計画は数年ごとに見直されるため、
+
+  最新の指定状況とは異なることがある。
+
+
+  出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+
+  原典資料は各都道府県が定めた地域保健医療計画。'
+keywords:
+  - 国土数値情報
+  - 医療圏
+  - 三次医療圏
+  - 地域医療
+  - 医療計画
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html
+fields:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 圏域を設定した都道府県を示す2桁のコード
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: area_name
+    title: 三次医療圏名
+    description: A38c_002。都道府県全域が1つの圏域である場合は NULL
+  - name: geometry
+    title: 医療圏ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

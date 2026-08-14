@@ -54,3 +54,7 @@ models:
       # stg は view のままにして同じポリゴンを 3 重に持たない
       raw:
         +materialized: table
+    medical:
+      # education と同じく raw と mart だけを実体化する
+      raw:
+        +materialized: table

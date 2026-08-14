@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: secondary_medical_area
+    description: |
+      二次医療圏の区域ポリゴン。一般の入院に係る医療を提供する単位として、
+      都道府県が医療法に基づく医療計画の中で設定した圏域で、複数の市区町村から成る。
+      1 行 = 1 医療圏で、医療計画に載る面積・人口も持つ。
+      国土数値情報 A38（2020年度版）が元データ。
+
+      原典は離島や飛び地の分だけ区域が複数のポリゴンに分かれているため、
+      医療圏ごとに結合して 1 行にまとめてある。構成市区町村は
+      medical_area_municipality で引く。
+
+      面積と人口は出どころが 2 通りある。planned_area_km2 / planned_population は
+      都道府県が医療計画に載せた値で、計画の策定時点がまちまちなため基準日が
+      そろわない。surveyed_area_km2 と population 以下の人口は、国土地理院
+      「全国都道府県市区町村別面積調」と総務省「住民基本台帳に基づく人口」を
+      構成市区町村について合計した値で、こちらは基準がそろう。医療圏をまたいで
+      比べるときは後者を使う。
+
+      区域は2020年度時点の医療計画に基づく。医療計画は数年ごとに見直され、
+      市町村合併や圏域の再編で範囲が変わるため、最新の指定状況とは異なることがある。
+
+      出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+      原典資料は各都道府県が定めた地域保健医療計画。
+    access: public
+    columns:
+      - name: area_code
+      - name: area_name
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: planned_area_km2
+      - name: surveyed_area_km2
+      - name: planned_population
+      - name: population
+      - name: population_under_15
+      - name: population_15_to_64
+      - name: population_65_and_over
+      - name: geometry
+
+  - name: tertiary_medical_area
+    description: |
+      三次医療圏の区域ポリゴン。臓器移植や重症熱傷など特殊な医療を提供する
+      単位として、都道府県が医療法に基づく医療計画の中で設定した圏域。
+      1 行 = 1 医療圏で、原典で区域が複数のポリゴンに分かれている分は結合してある。
+      国土数値情報 A38（2020年度版）が元データ。
+
+      三次医療圏は原則として都道府県の区域と一致する。圏域を分けているのは
+      北海道だけで、北海道は6圏域に分かれる。都道府県全域が 1 つの圏域である場合は
+      原典に圏域の名称が無いため area_name は NULL になる。
+
+      区域は2020年度時点の医療計画に基づく。医療計画は数年ごとに見直されるため、
+      最新の指定状況とは異なることがある。
+
+      出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+      原典資料は各都道府県が定めた地域保健医療計画。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: area_name
+      - name: geometry
+
+  - name: medical_area_municipality
+    description: |
+      市区町村がどの二次医療圏に属するかの対応表。1 行 = 1 市区町村で、
+      二次医療圏は複数の市区町村から成るため、二次医療圏コードは重複する。
+      国土数値情報 A38（2020年度版）の一次医療圏データが元データ。
+
+      一次医療圏は日常的な医療を提供する単位で、区域は市区町村と一致する。
+      区域そのものは boundary.municipality と同じなのでこの表には持たせず、
+      対応と設定の有無だけを持つ。二次医療圏の区域は secondary_medical_area、
+      市区町村の境界は boundary.municipality で引く。
+
+      primary_area_defined は都道府県が医療計画の中で一次医療圏を定義しているかどうかで、
+      false でもその市区町村がどこかの二次医療圏に属することは変わらない。
+
+      行政区域コードは5桁（チェックディジット無し）で、2020年度時点のもの。
+      その後の市町村合併は反映されていないため、6桁の lg_code と結合するときは
+      桁をそろえたうえで廃置分合を確かめる。
+
+      出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+      原典資料は各都道府県が定めた地域保健医療計画。
+    access: public
+    columns:
+      - name: admin_code
+      - name: municipality_name
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: secondary_area_code
+      - name: secondary_area_name
+      - name: primary_area_defined

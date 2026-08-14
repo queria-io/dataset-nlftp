@@ -1,0 +1,89 @@
+schema: medical
+name: secondary_medical_area
+title: 二次医療圏
+description: '二次医療圏の区域ポリゴン。一般の入院に係る医療を提供する単位として、
+
+  都道府県が医療法に基づく医療計画の中で設定した圏域で、複数の市区町村から成る。
+
+  1 行 = 1 医療圏で、医療計画に載る面積・人口も持つ。
+
+  国土数値情報 A38（2020年度版）が元データ。
+
+
+  原典は離島や飛び地の分だけ区域が複数のポリゴンに分かれているため、
+
+  医療圏ごとに結合して 1 行にまとめてある。構成市区町村は
+
+  medical_area_municipality で引く。
+
+
+  面積と人口は出どころが 2 通りある。planned_area_km2 / planned_population は
+
+  都道府県が医療計画に載せた値で、計画の策定時点がまちまちなため基準日が
+
+  そろわない。surveyed_area_km2 と population 以下の人口は、国土地理院
+
+  「全国都道府県市区町村別面積調」と総務省「住民基本台帳に基づく人口」を
+
+  構成市区町村について合計した値で、こちらは基準がそろう。医療圏をまたいで
+
+  比べるときは後者を使う。
+
+
+  区域は2020年度時点の医療計画に基づく。医療計画は数年ごとに見直され、
+
+  市町村合併や圏域の再編で範囲が変わるため、最新の指定状況とは異なることがある。
+
+
+  出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+
+  原典資料は各都道府県が定めた地域保健医療計画。'
+keywords:
+  - 国土数値情報
+  - 医療圏
+  - 二次医療圏
+  - 地域医療
+  - 医療計画
+  - 病床
+  - 人口
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html
+fields:
+  - name: area_code
+    title: 二次医療圏コード
+    description: A38b_003。二次医療圏を示す4桁のコード。上2桁は都道府県コード
+  - name: area_name
+    title: 二次医療圏名
+    description: A38b_004。医療計画に載る圏域の名称
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 圏域を設定した都道府県を示す2桁のコード
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: planned_area_km2
+    title: 面積（医療計画）
+    description: A38b_005。都道府県が医療計画に載せた面積（km2）
+  - name: surveyed_area_km2
+    title: 面積（面積調）
+    description: A38b_006。国土地理院「全国都道府県市区町村別面積調」の市区町村別面積を構成市区町村について合計した値（km2）
+  - name: planned_population
+    title: 人口（医療計画）
+    description: A38b_007。都道府県が医療計画に載せた人口（人）
+  - name: population
+    title: 総人口（住民基本台帳）
+    description: A38b_008。住民基本台帳の市区町村別総人口を構成市区町村について合計した値（人）
+  - name: population_under_15
+    title: 人口（15歳未満）
+    description: A38b_009。住民基本台帳の年齢別人口を構成市区町村について合計した値（人）
+  - name: population_15_to_64
+    title: 人口（15歳以上65歳未満）
+    description: A38b_010。住民基本台帳の年齢別人口を構成市区町村について合計した値（人）
+  - name: population_65_and_over
+    title: 人口（65歳以上）
+    description: A38b_011。住民基本台帳の年齢別人口を構成市区町村について合計した値（人）
+  - name: geometry
+    title: 医療圏ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

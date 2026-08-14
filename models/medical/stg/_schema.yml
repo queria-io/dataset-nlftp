@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_medical_area_municipality
+    description: >
+      市区町村と二次医療圏の対応のステージング。行政区域コードから都道府県名を引き、
+      一次医療圏の設定フラグを真偽値に直す。
+
+  - name: stg_secondary_medical_area
+    description: >
+      二次医療圏のステージング。WKB からジオメトリを復元して修復し、
+      医療圏単位に結合して 1 行 = 1 医療圏にする。
+
+  - name: stg_tertiary_medical_area
+    description: >
+      三次医療圏のステージング。stg_secondary_medical_area と同じ集約を三次医療圏に行う。
