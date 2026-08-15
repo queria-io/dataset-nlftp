@@ -1,0 +1,4 @@
+schema: facility
+name: raw_public_facility
+description: 国土数値情報 P05（2022年（令和4年）版）の市町村役場等及び公的集会施設データ。本庁・支所・行政サービス施設・公立公民館・集会施設の位置（ポイント）。47 都道府県分を統合。
+published: false

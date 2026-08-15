@@ -1,0 +1,6 @@
+schema: facility
+name: stg_public_facility
+description: '市町村役場等及び公的集会施設のステージング。施設分類コードを名称に変換し、
+
+  行政区域コードから都道府県名と市区町村名を補い、ジオメトリを修正。'
+published: false
