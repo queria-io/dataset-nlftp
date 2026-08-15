@@ -1,0 +1,52 @@
+schema: facility
+name: public_facility
+title: 市町村役場等及び公的集会施設
+description: '市区町村の役場と公的集会施設の位置（ポイント）。本庁（市役所・区役所・町役場・村役場）・
+
+  支所・出張所・連絡所・その他の行政サービス施設・公立公民館・集会施設の名称・所在地・
+
+  施設分類を持つ。本庁は自治体の代表点として使えるが、政令指定都市は区役所も本庁なので
+
+  行政区域と 1 対 1 ではない。国土数値情報 P05（2022年（令和4年）版）。
+
+  原典は各市区町村の公式サイトと全国公民館名鑑で、すべての施設を網羅していない可能性がある。'
+keywords:
+  - 国土数値情報
+  - 市町村役場
+  - 役所
+  - 公民館
+  - 集会施設
+  - 施設
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-2022.html
+fields:
+  - name: admin_code
+    title: 行政区域コード
+    description: P05_001。当該施設が所在する行政区域コード（5桁）。政令指定都市は区単位
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 行政区域コードの先頭2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_name
+    title: 市区町村名
+    description: 原典に無いため行政区域データ（N03・令和7年版）から補った値。2022年以降に廃置分合のあった行政区域コードは NULL
+  - name: ward_name
+    title: 政令市の区名
+    description: 政令指定都市の区のみ。それ以外は NULL
+  - name: facility_class_code
+    title: 施設分類コード
+    description: P05_002（本庁=1、支所・出張所・連絡所=2、その他の行政サービス施設=3、公立公民館=4、集会施設=5）
+  - name: facility_class
+    title: 施設分類
+  - name: facility_name
+    title: 名称
+    description: 当該施設の名称
+  - name: address
+    title: 所在地
+    description: 当該施設の所在地
+  - name: geometry
+    title: 施設ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)'

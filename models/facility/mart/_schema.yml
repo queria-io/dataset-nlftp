@@ -63,3 +63,22 @@ models:
       - name: position_accuracy_code
       - name: position_accuracy
       - name: geometry
+
+  - name: public_facility
+    description: |
+      市区町村の役場と公的集会施設の位置（ポイント）。本庁（市役所・区役所・町役場・村役場）・
+      支所・出張所・連絡所・その他の行政サービス施設・公立公民館・集会施設の名称・所在地・
+      施設分類を持つ。本庁は自治体の代表点として使えるが、政令指定都市は区役所も
+      本庁なので行政区域と 1 対 1 ではない。国土数値情報 P05（2022年（令和4年）版）。
+    access: public
+    columns:
+      - name: admin_code
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: city_name
+      - name: ward_name
+      - name: facility_class_code
+      - name: facility_class
+      - name: facility_name
+      - name: address
+      - name: geometry
