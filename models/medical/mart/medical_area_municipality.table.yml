@@ -1,0 +1,67 @@
+schema: medical
+name: medical_area_municipality
+title: 医療圏の構成市区町村
+description: '市区町村がどの二次医療圏に属するかの対応表。1 行 = 1 市区町村で、
+
+  二次医療圏は複数の市区町村から成るため、二次医療圏コードは重複する。
+
+  国土数値情報 A38（2020年度版）の一次医療圏データが元データ。
+
+
+  一次医療圏は日常的な医療を提供する単位で、区域は市区町村と一致する。
+
+  区域そのものは boundary.municipality と同じなのでこの表には持たせず、
+
+  対応と設定の有無だけを持つ。二次医療圏の区域は secondary_medical_area、
+
+  市区町村の境界は boundary.municipality で引く。
+
+
+  primary_area_defined は都道府県が医療計画の中で一次医療圏を定義しているかどうかで、
+
+  false でもその市区町村がどこかの二次医療圏に属することは変わらない。
+
+
+  行政区域コードは5桁（チェックディジット無し）で、2020年度時点のもの。
+
+  その後の市町村合併は反映されていないため、6桁の lg_code と結合するときは
+
+  桁をそろえたうえで廃置分合を確かめる。
+
+
+  出典: 「国土数値情報（医療圏データ）」（国土交通省）。
+
+  原典資料は各都道府県が定めた地域保健医療計画。'
+keywords:
+  - 国土数値情報
+  - 医療圏
+  - 二次医療圏
+  - 一次医療圏
+  - 市区町村
+  - 対応表
+  - 地域医療
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html
+fields:
+  - name: admin_code
+    title: 行政区域コード
+    description: A38a_001。市区町村を特定する5桁のコード
+  - name: municipality_name
+    title: 市区町村名
+    description: A38a_002。当該市区町村の名称
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 行政区域コードの上2桁
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: secondary_area_code
+    title: 二次医療圏コード
+    description: A38a_003。当該市区町村が属する二次医療圏のコード。secondary_medical_area の area_code と結合できる
+  - name: secondary_area_name
+    title: 二次医療圏名
+    description: A38a_004。当該市区町村が属する二次医療圏の名称
+  - name: primary_area_defined
+    title: 一次医療圏の設定
+    description: A38a_005。都道府県が医療計画等で一次医療圏を定義しているかどうか

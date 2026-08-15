@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: raw_primary_medical_area
+    description: >
+      国土数値情報 A38（2020年度）の一次医療圏データの属性。
+      パイプラインで変換した都道府県ごとの Parquet を結合したもの。
+      区域は市区町村と同じなのでジオメトリは取り込まず、市区町村と二次医療圏の
+      対応だけを持つ。
+
+  - name: raw_secondary_medical_area
+    description: >
+      国土数値情報 A38（2020年度）の二次医療圏データ。
+      パイプラインで変換した都道府県ごとの Parquet を結合したもの。
+      1 行 = 1 ポリゴンで、ジオメトリは WKB (BLOB) で保持する。
+
+  - name: raw_tertiary_medical_area
+    description: >
+      国土数値情報 A38（2020年度）の三次医療圏データ。
+      raw_secondary_medical_area と同じ構造で、属性は医療圏名だけを持つ。
