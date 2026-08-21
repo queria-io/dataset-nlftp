@@ -1,0 +1,72 @@
+schema: boundary
+name: did
+title: 人口集中地区（DID）
+description: '国勢調査に基づく人口集中地区（DID）の区域ポリゴン。
+
+  人口密度 4,000人/km² 以上の基本単位区が市区町村内で隣接し、人口 5,000人以上に
+  なる地域で、「市街地かどうか」を面で表す公式の区域。
+
+  1 行 = 1 地区で、令和2年（2020年）国勢調査に基づく 1,463 地区・969 市区町村。
+
+  国土数値情報 A16（令和2年国勢調査）が元データ。'
+keywords:
+  - 国土数値情報
+  - 人口集中地区
+  - DID
+  - 市街地
+  - 都市化
+  - 国勢調査
+  - 人口
+  - 境界
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html
+fields:
+  - name: did_code
+    title: 人口集中地区コード
+    description: 7桁（行政区域コード5桁 + 人口集中地区符号2桁）。この表で一意
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（チェックディジット無し）。2020年時点のコードで、同じ市区町村に複数の地区があると重複する。boundary.municipality（令和7年版）と結合すると2024年に再編された浜松市の旧区6件が一致しない
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: municipality_name
+    title: 市区町村名
+    description: 政令指定都市は区まで（例 さいたま市緑区）
+  - name: did_number
+    title: 人口集中地区符号
+    description: 同じ市区町村に複数の地区がある場合に人口の多い順に振られる番号。1 か所だけなら 1
+  - name: population
+    title: 人口
+    description: 当該地区の人口（人）
+  - name: area_km2
+    title: 面積
+    description: 当該地区の面積（km²）
+  - name: previous_population
+    title: 前回人口
+    description: 前回国勢調査（2015年）時点の人口。前回は人口集中地区でなかった地区など、原典が欠測としている 82 地区は NULL
+  - name: previous_area_km2
+    title: 前回面積
+    description: 前回国勢調査（2015年）時点の面積（km²）。前回は人口集中地区でなかった地区など、原典が欠測としている 73 地区は NULL
+  - name: population_share_pct
+    title: 市区町村人口に占める割合
+    description: 当該地区の人口を市区町村人口で除した値（%）
+  - name: area_share_pct
+    title: 市区町村面積に占める割合
+    description: 当該地区の面積を市区町村面積で除した値（%）
+  - name: census_year
+    title: 国勢調査年
+  - name: population_male
+    title: 人口（男）
+  - name: population_female
+    title: 人口（女）
+  - name: households
+    title: 世帯数
+    description: 当該地区の世帯数（総数）
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

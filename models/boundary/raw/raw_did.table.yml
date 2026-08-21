@@ -1,0 +1,4 @@
+schema: boundary
+name: raw_did
+description: 国土数値情報 A16（令和2年国勢調査）の人口集中地区データ。全国版 GeoJSON をパイプラインで Parquet に変換したもので、ジオメトリは WKB (BLOB) で保持する。
+published: false
