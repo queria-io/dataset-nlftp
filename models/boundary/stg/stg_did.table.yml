@@ -1,0 +1,6 @@
+schema: boundary
+name: stg_did
+description: '人口集中地区のステージング。属性名を英語にリネームし、前回国勢調査の
+
+  欠測値（-99999）を NULL に直し、ジオメトリを修正。'
+published: false
