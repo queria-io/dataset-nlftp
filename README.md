@@ -14,9 +14,10 @@
 
 - 人口集中地区データ（A16-2020）: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html
 
-将来推計人口は「1kmメッシュ別将来推計人口データ（R6国政局推計）」を使用する。推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づき、2020〜2070年の5年ごとの値を収録する。メッシュポリゴンの座標参照系は EPSG:6668（JGD2011）。
+将来推計人口は「1kmメッシュ別将来推計人口データ（R6国政局推計）」と「500mメッシュ別将来推計人口データ（R6国政局推計）」を使用する。推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づき、2020〜2070年の5年ごとの値を収録する。500mメッシュは同じ推計を細かい粒度で集計し直したもので、全国・都道府県の合計は1kmメッシュ版と一致する。メッシュポリゴンの座標参照系は EPSG:6668（JGD2011）。
 
 - 1kmメッシュ別将来推計人口（R6国政局推計）: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html
+- 500mメッシュ別将来推計人口（R6国政局推計）: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html
 
 鉄道データは「鉄道データ（N02、令和6年版）」を使用する。全国の鉄道路線・駅を収録する。座標参照系は EPSG:6668（JGD2011）。
 
@@ -173,6 +174,23 @@ previous_population / previous_area_km2 は前回国勢調査（2015年）時点
 - growth_rate_2025_2050: 人口増減率（%。2025年比）
 - elderly_ratio_2025 / elderly_ratio_2050: 高齢化率（%）
 - geometry: メッシュポリゴン（EPSG:6668 / JGD2011）
+
+## テーブル: future_population_mesh_500m
+
+500mメッシュ単位の将来推計人口。1kmメッシュでは粗すぎる商圏分析や按分の用途向け。
+
+- mesh_id: メッシュコード（2分の1地域メッシュ、500m四方の9桁）
+- city_code: 市区町村コード（複数市区町村にまたがるメッシュは "_" 連結）
+- population_2025 / population_2035 / population_2050: 推計年次別の総人口（人）
+- growth_rate_2025_2050: 人口増減率（%。2025年比）
+- elderly_ratio_2025 / elderly_ratio_2050: 高齢化率（%）
+- geometry: メッシュポリゴン（EPSG:6668 / JGD2011）
+
+466,792 行。mesh_id の先頭8桁が future_population_mesh の mesh_id と一致するので、粒度をまたぐ結合はこの桁で行う。
+
+メッシュコードは一意ではない。都府県境をまたぐメッシュは県ごとに行が分かれ、それぞれの県の分だけを持つ（1kmで895・500mで897メッシュ）。市区町村ごとの合計は粒度をまたいで一致しない。複数市区町村にまたがるメッシュの city_code が "_" 連結になり、どのメッシュがまたぐかが粒度で変わるため。市区町村単位の値は future_population_municipality を使う。
+
+人口の少ないメッシュは原典で秘匿処理の対象になり、65歳以上人口が近隣のメッシュへ移される。総人口は秘匿処理前の値（PTN）を収録しているのに対し、高齢化率の分子となる65歳以上人口（PTC）は秘匿処理後の値なので、メッシュ単位の高齢化率は秘匿された側で低く、移された先で高く出る。elderly_ratio_2025 が 0 になる行（population_2025 は正）は1kmで5.0%・500mで9.6%、100 を超える行は1kmで0.5%・500mで1.2%ある。人口の多いメッシュでも起きるため（500mの100超えのうち335行は population_2025 が10以上、最大100.1）、人口での足切りでは取り除けない。高齢化率はメッシュ単位で読まず、対象範囲を総人口で重み付けして平均する（`sum(population_2025 * elderly_ratio_2025) / sum(population_2025)`）。合計すれば移された分が戻り、都道府県単位の高齢化率は1kmメッシュ版と小数第3位まで一致する。
 
 ## テーブル: railway_line
 
@@ -538,7 +556,7 @@ primary_area_defined は都道府県単位で決まり、一次医療圏を医�
 
 1. 行政区域データ（N03）はパイプライン実行時に N03-2025 の全国版 GML を自動ダウンロードする。
 2. 市区町村マスタ（ABR）はアドレス・ベース・レジストリのサイトから最新の zip をダウンロードし、`data/mt_city/mt_city_all.csv.zip` に配置してコミットする。
-3. 将来推計人口（1kmメッシュ）はパイプライン実行時に全国版 Shapefile を自動ダウンロードする。
+3. 将来推計人口（1kmメッシュ・500mメッシュ）はパイプライン実行時に全国版 Shapefile を自動ダウンロードする。どちらも全国版 zip に都道府県別 zip が入れ子になっている。
 4. 鉄道データ（N02）はパイプライン実行時に全国版 Shapefile を自動ダウンロードする。
 5. 医療機関データ（P04）はパイプライン実行時に全国版 GeoJSON を自動ダウンロードする。
 6. 学校データ（P29）はパイプライン実行時に全国版 GeoJSON を自動ダウンロードする。
@@ -627,6 +645,7 @@ primary_area_defined は都道府県単位で決まり、一次医療圏を医�
 - 「国土数値情報（行政区域データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html）
 - 「国土数値情報（人口集中地区データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html）
 - 「国土数値情報（1kmメッシュ別将来推計人口データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html）
+- 「国土数値情報（500mメッシュ別将来推計人口データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html）
 - 「国土数値情報（鉄道データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html）
 - 「国土数値情報（医療機関データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-v3_0.html）
 - 「国土数値情報（医療圏データ）」（国土交通省）（https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html）

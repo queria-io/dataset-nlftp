@@ -12,3 +12,15 @@ models:
         description: 2025年の65歳以上人口
       - name: elderly_2050
         description: 2050年の65歳以上人口
+
+  - name: stg_future_population_mesh_500m
+    description: |
+      500mメッシュ別将来推計人口のステージング。
+      総人口（PTN）と65歳以上人口（PTC）のカラム名を英語化し、ジオメトリを修正。
+    columns:
+      - name: city_code
+        description: 市区町村コード（複数市区町村にまたがるメッシュは "_" 連結）
+      - name: elderly_2025
+        description: 2025年の65歳以上人口
+      - name: elderly_2050
+        description: 2050年の65歳以上人口
