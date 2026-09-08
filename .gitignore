@@ -21,6 +21,7 @@ package-lock.yml
 data/administrative_boundary/
 data/mt_city/*.csv
 data/future_population/
+data/future_population_500m/
 data/railway/
 data/medical/
 data/school/

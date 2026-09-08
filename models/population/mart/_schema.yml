@@ -41,3 +41,20 @@ models:
       - name: elderly_ratio_2025
       - name: elderly_ratio_2050
       - name: geometry
+
+  - name: future_population_mesh_500m
+    description: |
+      500mメッシュ単位の将来推計人口。1kmメッシュでは粗すぎる商圏分析や按分の用途向け。
+      国土数値情報「500mメッシュ別将来推計人口（R6国政局推計）」。
+      推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
+    access: public
+    columns:
+      - name: mesh_id
+      - name: city_code
+      - name: population_2025
+      - name: population_2035
+      - name: population_2050
+      - name: growth_rate_2025_2050
+      - name: elderly_ratio_2025
+      - name: elderly_ratio_2050
+      - name: geometry
