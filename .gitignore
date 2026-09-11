@@ -38,5 +38,6 @@ data/storm_surge/
 data/medical_area/
 data/public_facility/
 data/did/
+data/pluvial_flood/
 *.duckdb
 dist/

@@ -20,3 +20,8 @@ models:
     description: >
       高潮浸水想定区域のステージング。WKB からジオメトリを復元して
       ST_MakeValid で修復する。
+
+  - name: stg_pluvial_flood_inundation
+    description: >
+      雨水出水（内水）浸水想定区域のステージング。WKB からジオメトリを復元して
+      ST_MakeValid で修復する。
