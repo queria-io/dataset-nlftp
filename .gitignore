@@ -39,5 +39,6 @@ data/medical_area/
 data/public_facility/
 data/did/
 data/pluvial_flood/
+data/multi_stage_flood/
 *.duckdb
 dist/
