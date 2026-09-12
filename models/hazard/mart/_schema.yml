@@ -176,3 +176,47 @@ models:
       - name: depth_min_m
       - name: depth_max_m
       - name: geometry
+
+  - name: multi_stage_flood_inundation
+    description: |
+      降雨規模ごとの浸水想定のポリゴン。洪水浸水想定区域（flood_inundation）が
+      想定最大規模の降雨だけを対象にするのに対し、こちらは 1/10・1/30・1/50・1/100 と
+      河川整備の計画規模（1/150 または 1/200）の降雨規模ごとに浸水深の区分を持つ。
+      国土数値情報 A53（2025年度版）が元データ。
+
+      1 行 = 対象区間 × 降雨規模 × 浸水深の区分のポリゴン。同じ場所が降雨規模の数だけ
+      重なって入るので、浸水面積や件数を出すときは降雨規模を 1 つに絞る。
+
+      収録される降雨規模は対象区間ごとに違う。計画規模は区間によって 1/150 か 1/200 の
+      どちらか一方で、両方を持つ区間は無い。
+
+      収録範囲: 河川管理者（地方整備局等）が作成した多段階浸水想定図のうち、提供元が
+      提供を受けたものだけが入る。区域の無い場所は行そのものが存在せず、それは
+      「浸水しない」ではなく「まだ想定図が作られていない」場合を含む。
+
+      水系コードは対象区間で一意にならない。1 つの水系が複数の区間に分かれる場合が
+      あり、区間名は水系名のかっこ書きに入る。
+
+      浸水深は 3 段階（depth_rank_3）と 6 段階（depth_rank_6）の 2 系統で入る。
+      6 段階は 3 段階の 3m 以上をさらに分けたもので、区切りは洪水浸水想定区域
+      （flood_inundation）の浸水深ランクと同じ。区分から読み取った下限・上限は
+      depth_min_m / depth_max_m に入れてある。
+
+      整備年度（data_year）は対象区間ごとに違う。
+
+      出典: 「国土数値情報（多段階浸水想定データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: bureau_code
+      - name: bureau_name
+      - name: river_system_code
+      - name: river_system_name
+      - name: data_year
+      - name: rainfall_probability_denominator
+      - name: depth_rank_3
+      - name: depth_rank_3_label
+      - name: depth_rank_6
+      - name: depth_rank_6_label
+      - name: depth_min_m
+      - name: depth_max_m
+      - name: geometry

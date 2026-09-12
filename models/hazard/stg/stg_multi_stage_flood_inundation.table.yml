@@ -1,0 +1,4 @@
+schema: hazard
+name: stg_multi_stage_flood_inundation
+description: 多段階浸水想定のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+published: false
