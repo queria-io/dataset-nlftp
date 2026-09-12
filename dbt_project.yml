@@ -58,3 +58,8 @@ models:
       # education と同じく raw と mart だけを実体化する
       raw:
         +materialized: table
+    region:
+      # 指定区域のポリゴンは行政区域から切り出したもので数が限られるため、
+      # raw と mart を実体化して stg は view のままにする
+      raw:
+        +materialized: table

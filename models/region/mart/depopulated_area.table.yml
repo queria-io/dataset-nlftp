@@ -1,0 +1,73 @@
+schema: region
+name: depopulated_area
+title: 過疎地域
+description: '過疎地域として指定された区域のポリゴン。
+
+  過疎地域自立促進特別措置法に基づき公示された市町村・旧市町村の区域を、
+
+  総務省自治行政局の過疎指定地域一覧から行政区域データのポリゴンを抽出して
+
+  作られたもの。国土数値情報 A17（2017年（平成29年）版）が元データ。
+
+
+  1 行 = 1 指定区域で、島や飛び地はマルチポリゴンにまとめてある。
+
+  816 区域あり、過疎市町村 646・過疎地域とみなされる市町村 25・
+
+  過疎地域とみなされる区域（一部過疎）145 に分かれる。
+
+  過疎IDと行政区域コードは 1 対 1 に対応する。
+
+
+  提供元の最新版である 2017年（平成29年）時点の指定で、現在の指定ではない。
+
+  根拠法は 2021年3月末で失効し、過疎地域の持続的発展の支援に関する特別措置法に
+
+  引き継がれて指定も見直されている。過疎地域の指定が無い神奈川県は行が無い。'
+keywords:
+  - 国土数値情報
+  - 過疎地域
+  - 過疎
+  - 条件不利地域
+  - 地域指定
+  - 人口減少
+  - 地方創生
+  - 市町村
+  - 境界
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17-2017.html
+fields:
+  - name: area_code
+    title: 過疎地域コード
+    description: 5桁（都道府県コード2桁 + 通し番号3桁）。この表で一意
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（チェックディジット無し）。2017年時点のコードで、過疎地域コードと 1 対 1 に対応する。boundary.municipality（令和7年版）と結合するときは、その後の廃置分合を確かめる
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁。過疎地域の指定が無い神奈川県（14）は行が無い
+  - name: prefecture_name
+    title: 都道府県名
+  - name: subprefecture_name
+    title: 支庁・振興局名
+    description: 北海道の振興局名。北海道以外は NULL（該当する区域は 149）
+  - name: district_name
+    title: 郡・政令都市名
+    description: 郡に属さない市は NULL（該当する区域は 532）
+  - name: municipality_name
+    title: 市区町村名
+    description: 2017年時点の市区町村名
+  - name: former_municipality_name
+    title: 旧市町村名
+    description: 一部過疎（category_code が 3）の区域で、原典資料が旧市町村名で示す範囲。それ以外は NULL（該当する区域は 145）
+  - name: category_code
+    title: 過疎区分コード
+    description: 1=過疎市町村、2=過疎地域とみなされる市町村（法33条第1項）、3=過疎地域とみなされる区域（法33条第2項）
+  - name: category
+    title: 過疎区分
+    description: category_code を名称にしたもの
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

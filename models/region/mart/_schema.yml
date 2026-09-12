@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: depopulated_area
+    description: |
+      過疎地域の指定区域ポリゴン。過疎地域自立促進特別措置法に基づいて
+      公示された市町村および旧市町村の区域で、総務省自治行政局の過疎指定
+      地域一覧に載る市町村名から行政区域データのポリゴンを抽出したもの。
+      国土数値情報 A17（2017年（平成29年）版）が元データ。
+
+      1 行 = 1 指定区域で、島や飛び地に分かれる分はマルチポリゴンにまとめて
+      ある。区域は 816 で、過疎IDと行政区域コードは 1 対 1 に対応する。
+      指定の区分（category_code）は、過疎市町村が 646・過疎地域とみなされる
+      市町村が 25・過疎地域とみなされる区域（一部過疎）が 145。
+
+      収録は提供元の最新版である 2017年（平成29年）時点の指定で、現在の指定
+      ではない。根拠法の過疎地域自立促進特別措置法は 2021年3月末で失効し、
+      過疎地域の持続的発展の支援に関する特別措置法に引き継がれて指定も
+      見直されている。行政区域コードも 2017年時点のもので、その後の廃置分合は
+      反映されていない。boundary.municipality（令和7年版）と結合するときは
+      コードの変更を確かめる。
+
+      過疎地域の指定が無い神奈川県は行そのものが無い。
+
+      出典: 「国土数値情報（過疎地域データ）」（国土交通省）。
+      原典資料は総務省自治行政局の過疎指定地域一覧。
+    access: public
+    columns:
+      - name: area_code
+      - name: lg_code
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: subprefecture_name
+      - name: district_name
+      - name: municipality_name
+      - name: former_municipality_name
+      - name: category_code
+      - name: category
+      - name: geometry
