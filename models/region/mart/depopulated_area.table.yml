@@ -52,16 +52,16 @@ fields:
     title: 都道府県名
   - name: subprefecture_name
     title: 支庁・振興局名
-    description: 北海道の振興局名。北海道以外は NULL（該当する区域は 149）
+    description: 北海道の振興局名。値が入るのは北海道の 149 区域だけで、ほかは NULL
   - name: district_name
     title: 郡・政令都市名
-    description: 郡に属さない市は NULL（該当する区域は 532）
+    description: 値が入るのは郡に属する町村など 532 区域で、ほかは NULL
   - name: municipality_name
     title: 市区町村名
     description: 2017年時点の市区町村名
   - name: former_municipality_name
     title: 旧市町村名
-    description: 一部過疎（category_code が 3）の区域で、原典資料が旧市町村名で示す範囲。それ以外は NULL（該当する区域は 145）
+    description: 原典資料が旧市町村名で示す範囲。値が入るのは一部過疎（category_code が 3）の 145 区域だけで、ほかは NULL
   - name: category_code
     title: 過疎区分コード
     description: 1=過疎市町村、2=過疎地域とみなされる市町村（法33条第1項）、3=過疎地域とみなされる区域（法33条第2項）
