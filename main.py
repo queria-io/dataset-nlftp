@@ -23,7 +23,8 @@
 21. pluvial_flood:          雨水出水（内水）浸水想定区域データ取得 (A51)
 22. multi_stage_flood:      多段階浸水想定データ取得 (A53)
 23. depopulated_area:       過疎地域データ取得 (A17)
-24. dbt:                    dbt ビルド
+24. steep_slope:            急傾斜地崩壊危険区域データ取得 (A47)
+25. dbt:                    dbt ビルド
 """
 
 import logging
@@ -50,6 +51,7 @@ from pipelines.railway import download_railway
 from pipelines.school import download_school
 from pipelines.school_district import download_school_district
 from pipelines.station_passenger import download_station_passenger
+from pipelines.steep_slope import download_steep_slope
 from pipelines.storm_surge import download_storm_surge
 from pipelines.transit import download_transit
 from pipelines.tsunami import download_tsunami
@@ -83,99 +85,103 @@ def dbt_build():
 
 def main():
     # 1. 行政区域データ (国土数値情報 N03)
-    logger.info("1/24: administrative_boundary (行政区域データ)")
+    logger.info("1/25: administrative_boundary (行政区域データ)")
     download_administrative_boundary("data/administrative_boundary")
 
     # 2. 市区町村マスタ (アドレス・ベース・レジストリ)
-    logger.info("2/24: mt_city (市区町村マスタ)")
+    logger.info("2/25: mt_city (市区町村マスタ)")
     extract_mt_city("data/mt_city")
 
     # 3. 将来推計人口メッシュ (国土数値情報 1kmメッシュ R6推計)
-    logger.info("3/24: future_population (将来推計人口メッシュ)")
+    logger.info("3/25: future_population (将来推計人口メッシュ)")
     download_future_population("data/future_population")
 
     # 4. 将来推計人口メッシュ (国土数値情報 500mメッシュ R6推計)
-    logger.info("4/24: future_population_500m (将来推計人口メッシュ 500m)")
+    logger.info("4/25: future_population_500m (将来推計人口メッシュ 500m)")
     download_future_population_500m("data/future_population_500m")
 
     # 5. 鉄道データ (国土数値情報 N02 駅・路線)
-    logger.info("5/24: railway (鉄道データ)")
+    logger.info("5/25: railway (鉄道データ)")
     download_railway("data/railway")
 
     # 6. 医療機関データ (国土数値情報 P04)
-    logger.info("6/24: medical (医療機関データ)")
+    logger.info("6/25: medical (医療機関データ)")
     download_medical("data/medical")
 
     # 7. 学校データ (国土数値情報 P29)
-    logger.info("7/24: school (学校データ)")
+    logger.info("7/25: school (学校データ)")
     download_school("data/school")
 
     # 8. バス停留所・バスルート (国土数値情報 P11 / N07)
-    logger.info("8/24: transit (バス停留所・バスルート)")
+    logger.info("8/25: transit (バス停留所・バスルート)")
     download_transit("data/transit")
 
     # 9. 洪水浸水想定区域データ (国土数値情報 A31a)
-    logger.info("9/24: flood (洪水浸水想定区域データ)")
+    logger.info("9/25: flood (洪水浸水想定区域データ)")
     download_flood("data/flood")
 
     # 10. 都市地域土地利用細分メッシュ (国土数値情報 L03-b-u)
-    logger.info("10/24: landuse (土地利用細分メッシュ)")
+    logger.info("10/25: landuse (土地利用細分メッシュ)")
     download_landuse("data/landuse")
 
     # 11. 駅別乗降客数 (国土数値情報 S12)
-    logger.info("11/24: station_passenger (駅別乗降客数)")
+    logger.info("11/25: station_passenger (駅別乗降客数)")
     download_station_passenger("data/station_passenger")
 
     # 12. 福祉施設データ (国土数値情報 P14)
-    logger.info("12/24: welfare (福祉施設データ)")
+    logger.info("12/25: welfare (福祉施設データ)")
     download_welfare("data/welfare")
 
     # 13. 用途地域データ (国土数値情報 A29)
-    logger.info("13/24: zoning (用途地域データ)")
+    logger.info("13/25: zoning (用途地域データ)")
     download_zoning("data/zoning")
 
     # 14. 通学区域データ (国土数値情報 A27 小学校区 / A32 中学校区)
-    logger.info("14/24: school_district (通学区域データ)")
+    logger.info("14/25: school_district (通学区域データ)")
     download_school_district("data/school_district")
 
     # 15. 津波浸水想定データ (国土数値情報 A40)
-    logger.info("15/24: tsunami (津波浸水想定データ)")
+    logger.info("15/25: tsunami (津波浸水想定データ)")
     download_tsunami("data/tsunami")
 
     # 16. 土砂災害警戒区域データ (国土数値情報 A33)
-    logger.info("16/24: landslide (土砂災害警戒区域データ)")
+    logger.info("16/25: landslide (土砂災害警戒区域データ)")
     download_landslide("data/landslide")
 
     # 17. 高潮浸水想定区域データ (国土数値情報 A49)
-    logger.info("17/24: storm_surge (高潮浸水想定区域データ)")
+    logger.info("17/25: storm_surge (高潮浸水想定区域データ)")
     download_storm_surge("data/storm_surge")
 
     # 18. 医療圏データ (国土数値情報 A38)
-    logger.info("18/24: medical_area (医療圏データ)")
+    logger.info("18/25: medical_area (医療圏データ)")
     download_medical_area("data/medical_area")
 
     # 19. 市町村役場等及び公的集会施設データ (国土数値情報 P05)
-    logger.info("19/24: public_facility (市町村役場等及び公的集会施設データ)")
+    logger.info("19/25: public_facility (市町村役場等及び公的集会施設データ)")
     download_public_facility("data/public_facility")
 
     # 20. 人口集中地区データ (国土数値情報 A16)
-    logger.info("20/24: did (人口集中地区データ)")
+    logger.info("20/25: did (人口集中地区データ)")
     download_did("data/did")
 
     # 21. 雨水出水（内水）浸水想定区域データ (国土数値情報 A51)
-    logger.info("21/24: pluvial_flood (雨水出水（内水）浸水想定区域データ)")
+    logger.info("21/25: pluvial_flood (雨水出水（内水）浸水想定区域データ)")
     download_pluvial_flood("data/pluvial_flood")
 
     # 22. 多段階浸水想定データ (国土数値情報 A53)
-    logger.info("22/24: multi_stage_flood (多段階浸水想定データ)")
+    logger.info("22/25: multi_stage_flood (多段階浸水想定データ)")
     download_multi_stage_flood("data/multi_stage_flood")
 
     # 23. 過疎地域データ (国土数値情報 A17)
-    logger.info("23/24: depopulated_area (過疎地域データ)")
+    logger.info("23/25: depopulated_area (過疎地域データ)")
     download_depopulated_area("data/depopulated_area")
 
-    # 24. dbt ビルド
-    logger.info("24/24: dbt build")
+    # 24. 急傾斜地崩壊危険区域データ (国土数値情報 A47)
+    logger.info("24/25: steep_slope (急傾斜地崩壊危険区域データ)")
+    download_steep_slope("data/steep_slope")
+
+    # 25. dbt ビルド
+    logger.info("25/25: dbt build")
     dbt_build()
 
 

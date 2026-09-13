@@ -30,3 +30,8 @@ models:
     description: >
       多段階浸水想定のステージング。WKB からジオメトリを復元して
       ST_MakeValid で修復する。
+
+  - name: stg_steep_slope_hazard_zone
+    description: >
+      急傾斜地崩壊危険区域のステージング。WKB からジオメトリを復元して
+      ST_MakeValid で修復し、未記載を表す空文字・0・9999/1/1 を NULL に直す。
