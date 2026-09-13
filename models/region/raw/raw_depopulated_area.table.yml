@@ -1,0 +1,4 @@
+schema: region
+name: raw_depopulated_area
+description: 国土数値情報 A17（2017年（平成29年）版）の過疎地域データ。 パイプラインで変換した都道府県ごとの Parquet を結合したもので、ジオメトリは WKB (BLOB) で保持する。
+published: false

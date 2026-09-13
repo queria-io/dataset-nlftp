@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: stg_depopulated_area
+    description: >
+      過疎地域のステージング。WKB からジオメトリを復元して ST_MakeValid で
+      修復し、属性の付いていない退化ポリゴンを落とす。1 行 = 1 ポリゴン。
