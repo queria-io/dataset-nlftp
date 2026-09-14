@@ -41,5 +41,6 @@ data/did/
 data/pluvial_flood/
 data/multi_stage_flood/
 data/depopulated_area/
+data/steep_slope/
 *.duckdb
 dist/
