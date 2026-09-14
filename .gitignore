@@ -42,5 +42,7 @@ data/pluvial_flood/
 data/multi_stage_flood/
 data/depopulated_area/
 data/steep_slope/
+data/landslide_prevention/
+data/sabo/
 *.duckdb
 dist/

@@ -1,0 +1,6 @@
+schema: hazard
+name: stg_sabo_designated_area
+description: >
+  砂防指定地のステージング。WKB からジオメトリを復元して ST_MakeValid で修復し、
+  未記載を表す空白・0 を NULL に直して、和暦の告示年月日を日付に変換する。
+published: false
