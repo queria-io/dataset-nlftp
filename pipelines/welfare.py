@@ -14,7 +14,8 @@ import json
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -35,10 +36,7 @@ def _download_prefecture(pref: int, dest: Path) -> Path:
         return geojson_path
 
     zip_path = dest / f"P14-21_{pref:02d}_GML.zip"
-    url = URL_TEMPLATE.format(pref=pref)
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(zip_path, "wb") as f:
-        f.write(resp.read())
+    download(URL_TEMPLATE.format(pref=pref), zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         with zf.open(geojson_name) as src, open(geojson_path, "wb") as dst:

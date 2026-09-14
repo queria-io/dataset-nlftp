@@ -22,20 +22,18 @@ boundary スキーマが持つ）。市区町村と二次医療圏の対応表�
 https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html
 """
 
-import http.client
 import logging
 import os
 import re
 import shutil
-import ssl
-import time
 import zipfile
 from pathlib import Path
-from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 import duckdb
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -55,13 +53,6 @@ PREFECTURE_CODES = {f"{i:02d}" for i in range(1, 48)}
 # 医療圏の種別ごとの GeoJSON（zip 内のファイル名の接尾辞）と出力先
 LAYERS = ("primary", "secondary", "tertiary")
 
-# zip 1 ファイルあたりの取得試行回数
-_DOWNLOAD_ATTEMPTS = 3
-
-# 1 回のソケット読み出しの待ち時間（秒）。既定は無期限で、無音で止まった接続を
-# 待ち続けてしまうため明示する
-_DOWNLOAD_TIMEOUT = 60
-
 
 def _prefectures() -> set[str] | None:
     """処理対象を絞る都道府県コード。
@@ -73,48 +64,6 @@ def _prefectures() -> set[str] | None:
     if not env:
         return None
     return {p.strip() for p in env.split(",") if p.strip()}
-
-
-class TruncatedDownload(Exception):
-    """応答が Content-Length より短く終わった。"""
-
-
-def _download(url: str, dest: Path) -> None:
-    """zip を取得する。
-
-    1 ファイル数十 MB を 47 回続けるので、途中で切れた応答が壊れた zip として
-    残ることがある。読み終えた長さを Content-Length と突き合わせ、合わなければ
-    取り直す。
-    """
-    for attempt in range(1, _DOWNLOAD_ATTEMPTS + 1):
-        try:
-            req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-            with (
-                urlopen(req, timeout=_DOWNLOAD_TIMEOUT) as resp,
-                open(dest, "wb") as f,
-            ):
-                declared = resp.headers.get("Content-Length")
-                shutil.copyfileobj(resp, f, 1024 * 1024)
-            received = dest.stat().st_size
-            if declared is not None and received != int(declared):
-                raise TruncatedDownload(
-                    f"{received} bytes received, {declared} declared"
-                )
-            return
-        except (
-            HTTPError,
-            URLError,
-            TimeoutError,
-            ConnectionError,
-            http.client.HTTPException,
-            ssl.SSLError,
-            TruncatedDownload,
-        ) as e:
-            dest.unlink(missing_ok=True)
-            if attempt == _DOWNLOAD_ATTEMPTS:
-                raise
-            logger.warning(f"  retrying {url} after {type(e).__name__}: {e}")
-            time.sleep(2**attempt)
 
 
 def _fetch_page() -> str:
@@ -273,7 +222,7 @@ def download_medical_area(dest_dir: str) -> None:
 
         zip_path = tmp_dir / f"{stem}_GML.zip"
         logger.info(f"  downloading {stem}...")
-        _download(url, zip_path)
+        download(url, zip_path)
 
         con = duckdb.connect()
         try:

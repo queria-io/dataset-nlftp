@@ -11,7 +11,8 @@ https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -40,9 +41,7 @@ def download_station_passenger(dest_dir: str) -> None:
     zip_path = dest / "S12-25_GML.zip"
 
     logger.info("  downloading S12 station passenger data...")
-    req = Request(URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(zip_path, "wb") as f:
-        f.write(resp.read())
+    download(URL, zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         for ext in _EXTS:
