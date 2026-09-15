@@ -49,6 +49,8 @@ from urllib.request import Request, urlopen
 
 import duckdb
 
+from pipelines.download import download
+
 logger = logging.getLogger("pipelines")
 
 # 配布ページはデータ基準年度ごとに新設される。新しい年度が出ても既存のページには
@@ -73,12 +75,6 @@ def _bureaus() -> set[str] | None:
     if not env:
         return None
     return {b.strip() for b in env.split(",") if b.strip()}
-
-
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        shutil.copyfileobj(resp, f, 1024 * 1024)
 
 
 def _fetch_page() -> str:
@@ -233,7 +229,7 @@ def download_multi_stage_flood(dest_dir: str) -> None:
 
         zip_path = tmp_dir / f"{name}_GEOJSON.zip"
         logger.info(f"  downloading {name}...")
-        _download(url, zip_path)
+        download(url, zip_path)
 
         con = duckdb.connect()
         try:

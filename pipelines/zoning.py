@@ -33,10 +33,11 @@ import shutil
 import zipfile
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.request import Request, urlopen
 
 import duckdb
 from pypdf import PdfReader
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -121,12 +122,6 @@ def _admin_codes_in_zip(zip_path: Path) -> list[str]:
     return codes
 
 
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        shutil.copyfileobj(resp, f, 1024 * 1024)
-
-
 def _zenkaku(value: int) -> str:
     """半角数字を全角数字に変換する（PDF の区分番号が全角のため）。"""
     return str(value).translate(str.maketrans("0123456789", "０１２３４５６７８９"))
@@ -161,7 +156,7 @@ def _load_disclosure_terms(dest: Path) -> dict[str, int]:
     """利用条件一覧を取得してパースする。"""
     pdf_path = dest / "disclosure_terms.pdf"
     logger.info("  downloading disclosure terms...")
-    _download(TERMS_URL, pdf_path)
+    download(TERMS_URL, pdf_path)
     try:
         categories = _parse_terms(pdf_path)
     finally:
@@ -295,7 +290,7 @@ def download_zoning(dest_dir: str) -> None:
         zip_path = tmp_dir / f"A29-19_{pref}_GML.zip"
         logger.info(f"  downloading A29-19_{pref}...")
         try:
-            _download(url, zip_path)
+            download(url, zip_path)
         except HTTPError as e:
             if e.code == 404:
                 logger.info(f"  skip A29-19_{pref} (not found)")

@@ -9,7 +9,8 @@ https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -36,9 +37,7 @@ def download_administrative_boundary(dest_dir: str) -> None:
     zip_path = dest / "N03.zip"
 
     logger.info("  downloading N03 administrative boundary data...")
-    req = Request(URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(zip_path, "wb") as f:
-        f.write(resp.read())
+    download(URL, zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         zf.extractall(dest)

@@ -17,7 +17,8 @@ UTF-8 の GeoJSON が同梱されるため、文字化けを避けて UTF-8 版�
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -32,12 +33,6 @@ BUS_ROUTE_MEMBER = "N07-22_SHP/N07-22.geojson"
 BUS_ROUTE_GEOJSON = "N07-22.geojson"
 
 
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        f.write(resp.read())
-
-
 def _download_bus_stop(dest: Path) -> None:
     """バス停留所（P11・都道府県別）の GeoJSON を展開する。"""
     if all((dest / f"P11-22_{code}.geojson").exists() for code in PREFECTURE_CODES):
@@ -46,7 +41,7 @@ def _download_bus_stop(dest: Path) -> None:
 
     zip_path = dest / "P11-22_SHP.zip"
     logger.info("  downloading P11 bus stop data...")
-    _download(BUS_STOP_URL, zip_path)
+    download(BUS_STOP_URL, zip_path)
 
     with zipfile.ZipFile(zip_path) as outer:
         for code in PREFECTURE_CODES:
@@ -71,7 +66,7 @@ def _download_bus_route(dest: Path) -> None:
 
     zip_path = dest / "N07-22_SHP.zip"
     logger.info("  downloading N07 bus route data...")
-    _download(BUS_ROUTE_URL, zip_path)
+    download(BUS_ROUTE_URL, zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         with (

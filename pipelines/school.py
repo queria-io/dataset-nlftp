@@ -12,7 +12,8 @@ https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P29-v2_0.html
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -39,9 +40,7 @@ def download_school(dest_dir: str) -> None:
     zip_path = dest / "P29-21_GML.zip"
 
     logger.info("  downloading P29 school data...")
-    req = Request(URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(zip_path, "wb") as f:
-        f.write(resp.read())
+    download(URL, zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         with zf.open(MEMBER) as src, open(dest / EXPECTED_GEOJSON, "wb") as dst:

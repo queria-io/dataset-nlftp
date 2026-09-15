@@ -14,7 +14,8 @@ https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -42,9 +43,7 @@ def _download_mesh(dest_dir: str, url: str, prefix: str, label: str) -> None:
     zip_path = dest / f"{prefix}_SHP.zip"
 
     logger.info(f"  downloading {label} future population data...")
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(zip_path, "wb") as f:
-        f.write(resp.read())
+    download(url, zip_path)
 
     with zipfile.ZipFile(zip_path) as zf:
         zf.extractall(dest)

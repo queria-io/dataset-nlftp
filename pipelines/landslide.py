@@ -39,6 +39,8 @@ from urllib.request import Request, urlopen
 
 import duckdb
 
+from pipelines.download import download
+
 logger = logging.getLogger("pipelines")
 
 PAGE_URL = "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2025.html"
@@ -120,12 +122,6 @@ def _prefectures() -> set[str] | None:
     if not env:
         return None
     return {p.strip() for p in env.split(",") if p.strip()}
-
-
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        shutil.copyfileobj(resp, f, 1024 * 1024)
 
 
 def _fetch_page() -> str:
@@ -308,7 +304,7 @@ def download_landslide(dest_dir: str) -> None:
 
         zip_path = tmp_dir / f"{stem}_GEOJSON.zip"
         logger.info(f"  downloading {stem}...")
-        _download(url, zip_path)
+        download(url, zip_path)
 
         con = duckdb.connect()
         try:

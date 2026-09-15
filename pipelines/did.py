@@ -32,6 +32,8 @@ from urllib.request import Request, urlopen
 
 import duckdb
 
+from pipelines.download import download
+
 logger = logging.getLogger("pipelines")
 
 PAGE_URL = "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html"
@@ -45,12 +47,6 @@ GEOJSON_NAME = f"{FILE_STEM}_00_DID.geojson"
 # 使用許諾条件は整備年度で分かれる。1995年より前の版を商用可として扱わないよう、
 # 記載が一字でも変わったら取り込みを続けない
 LICENSE_TEXT = "1995年（平成7年）以降：商用可"
-
-
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        shutil.copyfileobj(resp, f, 1024 * 1024)
 
 
 def _fetch_page() -> str:
@@ -147,7 +143,7 @@ def download_did(dest_dir: str) -> None:
 
     zip_path = tmp_dir / f"{FILE_STEM}_GML.zip"
     logger.info(f"  downloading {FILE_STEM}...")
-    _download(url, zip_path)
+    download(url, zip_path)
 
     try:
         geojson_path = _extract(zip_path, tmp_dir)

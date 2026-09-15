@@ -27,6 +27,8 @@ from urllib.request import Request, urlopen
 
 import duckdb
 
+from pipelines.download import download
+
 # 巨大フィーチャ(利根川等)で GDAL の GeoJSON サイズ上限に当たるため無制限にする
 os.environ.setdefault("OGR_GEOJSON_MAX_OBJ_SIZE", "0")
 
@@ -233,9 +235,7 @@ def download_flood(dest_dir: str) -> None:
 
             zip_path = tmp_dir / f"A31a-25_{region}_{kind}_GEOJSON.zip"
             logger.info(f"  downloading A31a-25_{region}_{kind}...")
-            req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-            with urlopen(req) as resp, open(zip_path, "wb") as f:
-                shutil.copyfileobj(resp, f, 1024 * 1024)
+            download(url, zip_path)
 
             con = duckdb.connect()
             try:

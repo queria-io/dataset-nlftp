@@ -28,10 +28,11 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.error import HTTPError
-from urllib.request import Request, urlopen
 
 import duckdb
 import openpyxl
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -108,12 +109,6 @@ def _prefectures() -> list[str]:
     return PREFECTURES
 
 
-def _download(url: str, dest: Path) -> None:
-    req = Request(url, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp, open(dest, "wb") as f:
-        shutil.copyfileobj(resp, f, 1024 * 1024)
-
-
 def _decode_member_name(name: str) -> str:
     """zip 内のファイル名を CP932 として復元する。
 
@@ -166,7 +161,7 @@ def _load_terms(dest: Path) -> list[dict[str, str]]:
     """利用条件一覧を取得してパースする。"""
     xlsx_path = dest / "terms_of_use.xlsx"
     logger.info("  downloading terms of use...")
-    _download(TERMS_URL, xlsx_path)
+    download(TERMS_URL, xlsx_path)
     try:
         terms = _parse_terms(xlsx_path)
     finally:
@@ -326,7 +321,7 @@ def download_school_district(dest_dir: str) -> None:
             zip_path = tmp_dir / f"{name}_GML.zip"
             logger.info(f"  downloading {name}...")
             try:
-                _download(district.url_template.format(pref=pref), zip_path)
+                download(district.url_template.format(pref=pref), zip_path)
             except HTTPError as e:
                 if e.code == 404:
                     logger.info(f"  skip {name} (not found)")
