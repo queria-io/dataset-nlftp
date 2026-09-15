@@ -1,0 +1,6 @@
+schema: hazard
+name: raw_sabo_datapoint
+description: >
+  砂防指定地データの都道府県別のデータ時点。
+  提供元が配布する一覧をパイプラインで取り込んだもの。
+published: false

@@ -1,0 +1,6 @@
+schema: hazard
+name: raw_landslide_prevention_terms
+description: >
+  地すべり防止区域データの都道府県 × 所管省庁別の公開条件。
+  提供元が配布する一覧をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+published: false

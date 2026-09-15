@@ -1,0 +1,7 @@
+schema: hazard
+name: raw_sabo_designated_area
+description: >
+  国土数値情報 A52（2023年度）の砂防指定地データ。
+  パイプラインで変換した都道府県ごとの Parquet を結合したもの。
+  ジオメトリは WKB (BLOB) で保持する。
+published: false

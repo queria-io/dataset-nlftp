@@ -258,3 +258,79 @@ models:
       - name: notice_number
       - name: designated_area_ha
       - name: geometry
+
+  - name: landslide_prevention_zone
+    description: |
+      地すべり防止区域の区域ポリゴン。地すべり等防止法第3条に基づいて主務大臣が
+      指定した区域で、区域内では地下水を増やす行為・のり切・切土などが
+      都道府県知事の許可を要する。国土数値情報 A46（2021年度）が元データ。
+
+      所管省庁が3つに分かれる（国土交通省・農林水産省農村振興局・林野庁）。
+      宅地や河川の地すべりは国土交通省、農地は農林水産省農村振興局、
+      森林は林野庁が所管し、同じ都道府県の中に3者の区域が並ぶ。
+
+      収録範囲: 公開条件が都道府県 × 所管省庁ごとに異なるため、提供元が
+      「オープンデータにて公開」とした79の組み合わせ（43都道府県）のみを収録する。
+      都道府県の単位では欠けが分からないので、ある県の区域が全部入っているとは
+      限らない。千葉県・東京都・福井県・香川県は行が無い。
+
+      1 行 = 1 ポリゴンで、1 つの区域が複数のポリゴンに分かれることがある
+      （5,798 ポリゴンに対して 5,689 区域）。区域名は都道府県内で一意にならない。
+
+      指定面積は区域全体の値が各ポリゴンの行に繰り返し入るので、行のまま合計しない。
+      4府県は全行で未記載、告示年月日は323行が未記載。
+      位置は縮尺1/25,000相当の概略で、法定図書ではない。
+
+      出典: 「国土数値情報（地すべり防止区域データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: municipality_code
+      - name: municipality_name
+      - name: zone_name
+      - name: address
+      - name: notice_date
+      - name: notice_number
+      - name: designated_area_ha
+      - name: competent_agency
+      - name: geometry
+
+  - name: sabo_designated_area
+    description: |
+      砂防指定地のポリゴン。砂防法第2条に基づいて国土交通大臣が指定した土地で、
+      指定地内では土石の採取・工作物の設置・樹木の伐採などが都道府県の条例で
+      制限される。国土数値情報 A52（2023年度）が元データ。
+
+      収録範囲: 提供元が原典資料の提供を受けた24都道府県のみ。残りの23道府県は
+      行そのものが無く、それは「砂防指定地が無い」ではなく「資料の提供を
+      受けていない」。収録された都道府県の中でもすべての砂防指定地を
+      網羅しているわけではない。データの時点は都道府県ごとに違う（data_as_of）。
+
+      1 行 = 1 ポリゴンで、1 つの指定地が複数のポリゴンに分かれることがある。
+      指定地を数えるときは prefecture_code と reference_number で集約するが、
+      整理番号が未記載の行は分けられない。
+      指定面積が入っているのは 37% の行だけで、13都県は全行で未記載。
+
+      告示年月日は提供元の表記がそろっていないため、和暦の年月日として読める
+      41,690 行（90%）だけを notice_date に入れる。元の表記は notice_date_text。
+
+      位置は縮尺1/25,000〜1/50,000相当の概略で、法定図書ではない。
+
+      出典: 「国土数値情報（砂防指定地データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: municipality_code
+      - name: municipality_name
+      - name: river_name
+      - name: tributary_name
+      - name: notice_date
+      - name: notice_date_text
+      - name: notice_number
+      - name: designated_area_ha
+      - name: reference_number
+      - name: designation_method
+      - name: data_as_of
+      - name: geometry

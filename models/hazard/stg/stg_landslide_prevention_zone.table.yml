@@ -1,0 +1,6 @@
+schema: hazard
+name: stg_landslide_prevention_zone
+description: >
+  地すべり防止区域のステージング。WKB からジオメトリを復元して
+  ST_MakeValid で修復し、未記載を表す空文字・0・9999/1/1 を NULL に直す。
+published: false

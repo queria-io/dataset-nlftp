@@ -62,3 +62,25 @@ models:
     description: >
       急傾斜地崩壊危険区域データの都道府県別の公開条件。
       提供元が配布する一覧をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+
+  - name: raw_landslide_prevention_zone
+    description: >
+      国土数値情報 A46（2021年度）の地すべり防止区域データ。
+      パイプラインで変換した都道府県 × 所管省庁ごとの Parquet を結合したもの。
+      オープンデータ公開の組み合わせのみを含み、ジオメトリは WKB (BLOB) で保持する。
+
+  - name: raw_landslide_prevention_terms
+    description: >
+      地すべり防止区域データの都道府県 × 所管省庁別の公開条件。
+      提供元が配布する一覧をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+
+  - name: raw_sabo_designated_area
+    description: >
+      国土数値情報 A52（2023年度）の砂防指定地データ。
+      パイプラインで変換した都道府県ごとの Parquet を結合したもの。
+      ジオメトリは WKB (BLOB) で保持する。
+
+  - name: raw_sabo_datapoint
+    description: >
+      砂防指定地データの都道府県別のデータ時点。
+      提供元が配布する一覧をパイプラインで取り込んだもの。
