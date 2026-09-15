@@ -39,11 +39,10 @@ import struct
 import zipfile
 from pathlib import Path
 from urllib.parse import urljoin
-from urllib.request import Request, urlopen
 
 import duckdb
 
-from pipelines.download import download
+from pipelines.download import download, fetch_text
 
 logger = logging.getLogger("pipelines")
 
@@ -134,9 +133,7 @@ def _fetch_page() -> str:
     コメントアウトされた記載（過去の但し書きが残っている）を利用条件の
     判定に拾わないようにする。
     """
-    req = Request(PAGE_URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp:
-        html = resp.read().decode("utf-8", errors="replace")
+    html = fetch_text(PAGE_URL)
     return re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
 
 
