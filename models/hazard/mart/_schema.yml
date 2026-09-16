@@ -334,3 +334,47 @@ models:
       - name: designation_method
       - name: data_as_of
       - name: geometry
+
+  - name: disaster_risk_area
+    description: |
+      災害危険区域の区域ポリゴン。建築基準法第39条に基づいて地方公共団体が条例で
+      指定した区域で、区域内では住居の用に供する建築物の建築が制限される。
+      国土数値情報 A48（2021年度）が元データ。
+
+      指定するのは都道府県と市町村の両方で、砂防三法に基づく区域
+      （steep_slope_hazard_zone・landslide_prevention_zone・sabo_designated_area）
+      のように都道府県知事が指定する区域とは指定の主体も規制の内容も違う。
+      指定の理由は急傾斜地の崩壊のほか、津波・高潮・出水・火山被害にわたる。
+
+      収録範囲: 地方公共団体ごとに公開条件が異なるため、提供元が「オープンデータ
+      にて公開」とした団体が指定した区域のみを収録する（35都道府県・550市区町村・
+      19,305ポリゴン）。条件付き公開の9団体と非公開の4団体は含まず、静岡県は
+      行が無い。一覧で「未作成」（GIS データが作られていない）とされた41団体と、
+      形状のデータが配布されていない山形県は提供元から配布されていない。
+
+      1 行 = 1 ポリゴンで、1 つの区域が複数のポリゴンに分かれることがある
+      （19,305 ポリゴンに対して 13,271 区域）。区域名は都道府県内で一意にならない。
+
+      指定面積は区域全体の値が各ポリゴンの行に繰り返し入るので、行のまま合計しない。
+      10,300 行が未記載で、9 都道府県は全行で未記載。告示年月日は 1,243 行が未記載。
+      位置は縮尺1/25,000相当の概略で、法定図書ではない。
+
+      出典: 「国土数値情報（災害危険区域データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: municipality_code
+      - name: municipality_name
+      - name: designating_body
+      - name: zone_name
+      - name: address
+      - name: reason
+      - name: reason_detail
+      - name: notice_date
+      - name: notice_number
+      - name: ordinance_name
+      - name: designated_area_ha
+      - name: reference_scale
+      - name: remarks
+      - name: geometry

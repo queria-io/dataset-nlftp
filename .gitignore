@@ -44,5 +44,6 @@ data/depopulated_area/
 data/steep_slope/
 data/landslide_prevention/
 data/sabo/
+data/disaster_risk_area/
 *.duckdb
 dist/
