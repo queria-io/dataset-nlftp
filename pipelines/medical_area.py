@@ -29,11 +29,10 @@ import shutil
 import zipfile
 from pathlib import Path
 from urllib.parse import urljoin
-from urllib.request import Request, urlopen
 
 import duckdb
 
-from pipelines.download import download
+from pipelines.download import download, fetch_text
 
 logger = logging.getLogger("pipelines")
 
@@ -68,9 +67,7 @@ def _prefectures() -> set[str] | None:
 
 def _fetch_page() -> str:
     """配布ページの HTML を取得する（HTML コメントは落とす）。"""
-    req = Request(PAGE_URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp:
-        html = resp.read().decode("utf-8", errors="replace")
+    html = fetch_text(PAGE_URL)
     return re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
 
 

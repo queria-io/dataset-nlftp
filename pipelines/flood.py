@@ -22,12 +22,10 @@ import re
 import shutil
 import zipfile
 from pathlib import Path
-from urllib.error import HTTPError
-from urllib.request import Request, urlopen
 
 import duckdb
 
-from pipelines.download import download
+from pipelines.download import download, url_exists
 
 # 巨大フィーチャ(利根川等)で GDAL の GeoJSON サイズ上限に当たるため無制限にする
 os.environ.setdefault("OGR_GEOJSON_MAX_OBJ_SIZE", "0")
@@ -89,18 +87,6 @@ def _decode_member_name(name: str) -> str:
         return name.encode("cp437").decode("cp932")
     except (UnicodeEncodeError, UnicodeDecodeError):
         return name
-
-
-def _url_exists(url: str) -> bool:
-    """HEAD リクエストで URL の存在を確認する（404 は False）。"""
-    req = Request(url, method="HEAD", headers={"User-Agent": "dataset-nlftp"})
-    try:
-        with urlopen(req):
-            return True
-    except HTTPError as e:
-        if e.code == 404:
-            return False
-        raise
 
 
 def _convert_geojson(
@@ -229,7 +215,7 @@ def download_flood(dest_dir: str) -> None:
                 continue
 
             url = URL_TEMPLATE.format(region=region, kind=kind)
-            if not _url_exists(url):
+            if not url_exists(url):
                 logger.info(f"  skip A31a-25_{region}_{kind} (not found)")
                 continue
 

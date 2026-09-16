@@ -16,7 +16,8 @@ import json
 import logging
 import zipfile
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from pipelines.download import download
 
 logger = logging.getLogger("pipelines")
 
@@ -49,20 +50,22 @@ def download_public_facility(dest_dir: str) -> None:
         return
 
     logger.info("  downloading P05 public facility data...")
-    req = Request(URL, headers={"User-Agent": "dataset-nlftp"})
-    with urlopen(req) as resp:
-        archive = io.BytesIO(resp.read())
+    archive_path = dest / "P05-22_GML.zip"
+    download(URL, archive_path)
 
     features: list[dict] = []
     crs = None
-    with zipfile.ZipFile(archive) as outer:
-        for pref in PREF_CODES:
-            member = f"P05-22_{pref:02d}_GML.zip"
-            with zipfile.ZipFile(io.BytesIO(outer.read(member))) as inner:
-                name = f"P05-22_{pref:02d}.geojson"
-                data = json.loads(inner.read(name).decode("utf-8"))
-            crs = crs or data.get("crs")
-            features.extend(data["features"])
+    try:
+        with zipfile.ZipFile(archive_path) as outer:
+            for pref in PREF_CODES:
+                member = f"P05-22_{pref:02d}_GML.zip"
+                with zipfile.ZipFile(io.BytesIO(outer.read(member))) as inner:
+                    name = f"P05-22_{pref:02d}.geojson"
+                    data = json.loads(inner.read(name).decode("utf-8"))
+                crs = crs or data.get("crs")
+                features.extend(data["features"])
+    finally:
+        archive_path.unlink(missing_ok=True)
 
     merged = {"type": "FeatureCollection", "crs": crs, "features": features}
     tmp_path = merged_path.with_suffix(".geojson.tmp")
