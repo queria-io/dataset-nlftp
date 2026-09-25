@@ -1,0 +1,66 @@
+schema: region
+name: specified_rural_area
+title: 特定農山村地域
+description: '特定農山村地域として指定された区域のポリゴン。
+
+  特定農山村地域における農林業等の活性化のための基盤整備の促進に関する法律（特定農山村法）に
+
+  基づいて指定された市町村・旧市町村の区域で、地勢などの地理的条件が悪く、農林業の生産条件が
+
+  不利な山間の地域が対象になる。国土数値情報 A25（2016年（平成28年）版）が元データ。
+
+
+  1 行 = 1 指定区域で、島や飛び地はマルチポリゴンにまとめてある。
+
+  1,728 区域が 47 都道府県にある。指定は合併前の市町村の単位で行われているため、
+
+  合併後の 1 つの市町村に複数の区域が入ることがある（行政区域コード 960 のうち 351）。
+
+  市町村単位で見るときは lg_code で集約する。
+
+  提供元の最新版である 2016年（平成28年）時点の指定で、現在の指定ではない。'
+keywords:
+  - 国土数値情報
+  - 特定農山村地域
+  - 特定農山村法
+  - 中山間地域
+  - 山村
+  - 条件不利地域
+  - 地域指定
+  - 農林業
+  - 市町村
+  - 境界
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A25-2016.html
+fields:
+  - name: area_code
+    title: 特定農山村地域コード
+    description: 5桁（都道府県コード2桁 + 通し番号3桁）。この表で一意
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（チェックディジット無し）。2016年時点のコード。1 つのコードに複数の区域が入ることがある。boundary.municipality（令和7年版）と結合するときは、その後の廃置分合を確かめる
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁
+  - name: prefecture_name
+    title: 都道府県名
+  - name: subprefecture_name
+    title: 支庁・振興局名
+    description: 北海道の振興局名。値が入るのは北海道の 110 区域だけで、ほかは NULL
+  - name: district_name
+    title: 郡・政令都市名
+    description: 値が入るのは郡に属する町村と政令指定都市の区の 708 区域で、ほかは NULL
+  - name: municipality_name
+    title: 市区町村名
+    description: 2016年時点の市区町村名
+  - name: source_municipality_name
+    title: 原典市区町村名
+    description: 原典資料が指定を示した時点の市区町村名（例 茅部郡南茅部町）。合併前の名称で入るので、合併後の区域のどの部分が指定されたかを表す
+  - name: former_municipality_name
+    title: 旧市町村名
+    description: 原典資料が旧市町村名で示す指定の範囲。値が入るのは 488 区域で、ほかは NULL
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'
