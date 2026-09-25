@@ -1,0 +1,72 @@
+schema: region
+name: special_soil_area
+title: 特殊土壌地帯
+description: '特殊土壌地帯として指定された区域のポリゴン。
+
+  特殊土じょう地帯災害防除及び振興臨時措置法に基づいて指定された市町村・旧市町村の区域で、
+
+  シラス・ボラ・コラ・赤ホヤ・花崗岩風化土・ヨナ・富士マサなど、雨水で侵食されやすく
+
+  災害の起きやすい土壌に広く覆われた地域が対象になる。
+
+  国土数値情報 A23（2016年（平成28年）版）が元データ。
+
+
+  1 行 = 1 指定区域で、島や飛び地はマルチポリゴンにまとめてある。
+
+  270 区域あり、特殊土壌IDと行政区域コードは 1 対 1 に対応する。
+
+  指定があるのは静岡・兵庫と中国・四国・九州の 14 県だけで、ほかの道府県は行が無い。
+
+  提供元の最新版である 2016年（平成28年）時点の指定で、現在の指定ではない。'
+keywords:
+  - 国土数値情報
+  - 特殊土壌地帯
+  - 特殊土壌
+  - シラス
+  - 火山灰土
+  - 条件不利地域
+  - 地域指定
+  - 土砂災害
+  - 市町村
+  - 境界
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A23-2016.html
+fields:
+  - name: area_code
+    title: 特殊土壌地帯コード
+    description: 5桁（都道府県コード2桁 + 通し番号3桁）。この表で一意
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（チェックディジット無し）。2016年時点のコードで、特殊土壌地帯コードと 1 対 1 に対応する。boundary.municipality（令和7年版）と結合するときは、その後の廃置分合を確かめる
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁。指定のある 14 県だけが入る
+  - name: prefecture_name
+    title: 都道府県名
+  - name: subprefecture_name
+    title: 支庁・振興局名
+    description: 北海道の振興局名。北海道に指定が無いため全行 NULL
+  - name: district_name
+    title: 郡・政令都市名
+    description: 値が入るのは郡に属する町村と政令指定都市の区の 158 区域で、ほかは NULL
+  - name: municipality_name
+    title: 市区町村名
+    description: 2016年時点の市区町村名
+  - name: source_municipality_name
+    title: 原典市区町村名
+    description: 原典資料が指定を示した時点の表記。「駿東郡」のような郡名、「富士市の一部」、「全域（奄美群島（奄美市、大島郡）を除く）」のような範囲の注記を含む
+  - name: former_municipality_name
+    title: 旧市町村名
+    description: 市町村の一部だけが指定された区域の範囲を旧市町村名で示したもの。値が入るのは 42 区域で、そのうち 25 区域は「旧長尾村及び旧淡河村を除く」のように指定から外れる範囲を示す
+  - name: category_code
+    title: 特殊土壌区分コード
+    description: 1〜8。地帯を構成する特殊土壌の組み合わせ（コードリスト 特殊土壌区分コード）
+  - name: category
+    title: 特殊土壌区分
+    description: category_code を名称にしたもの。例 5=花崗岩風化土、7=富士マサ
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

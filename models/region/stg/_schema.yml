@@ -5,3 +5,11 @@ models:
     description: >
       過疎地域のステージング。WKB からジオメトリを復元して ST_MakeValid で
       修復し、属性の付いていない退化ポリゴンを落とす。1 行 = 1 ポリゴン。
+  - name: stg_special_soil_area
+    description: >
+      特殊土壌地帯のステージング。WKB からジオメトリを復元して ST_MakeValid で
+      修復する。1 行 = 1 ポリゴン。
+  - name: stg_specified_rural_area
+    description: >
+      特定農山村地域のステージング。WKB からジオメトリを復元して ST_MakeValid で
+      修復し、名称の文字化けを直す。1 行 = 1 ポリゴン。
