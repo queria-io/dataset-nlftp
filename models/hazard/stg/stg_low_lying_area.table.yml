@@ -1,0 +1,5 @@
+schema: hazard
+name: stg_low_lying_area
+description: >
+  低位地帯のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+published: false

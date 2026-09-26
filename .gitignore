@@ -49,3 +49,4 @@ data/sabo/
 data/disaster_risk_area/
 *.duckdb
 dist/
+data/lowland/

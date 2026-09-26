@@ -378,3 +378,25 @@ models:
       - name: reference_scale
       - name: remarks
       - name: geometry
+
+  - name: low_lying_area
+    description: |
+      低位地帯のポリゴン。周辺よりも標高が低く凹んでいる土地で、標高メッシュから
+      抽出した 1ha 以上の凹地を収録する。国土数値情報 G08（2015年度）が元データ。
+      47都道府県・123,745ポリゴン。
+
+      海面より低い土地（ゼロメートル地帯）のデータではない。湖沼も凹地として入る。
+      最大浸水深は凹地を縁まで満たしたときの深さで、カルデラや盆地では数百mになる。
+      面積は低位地帯全体の値で、複数のポリゴンに分かれると各行に繰り返し入るので
+      行のまま合計しない。
+
+      出典: 「国土数値情報（低位地帯データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: area_ha
+      - name: max_inundation_depth_m
+      - name: reference_data_code
+      - name: reference_data
+      - name: geometry
