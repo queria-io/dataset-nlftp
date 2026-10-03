@@ -81,12 +81,14 @@ fields:
   - name: prefecture_code
     title: 都道府県コード
     description: 区域が属する都道府県を示す2桁のコード。区域を指定した団体の都道府県ではなく、配布の単位
+    semantic: { role: entity, name: prefecture }
   - name: prefecture_name
     title: 都道府県名
     description: 都道府県コードから引いた名称
   - name: municipality_code
     title: 市町村コード
     description: A48_003。区域が存在する市区町村の5桁の代表行政コード。複数の市区町村にまたがる区域は代表の1つが入る
+    semantic: { role: entity, name: city }
   - name: municipality_name
     title: 市町村名
     description: A48_002。区域が存在する市区町村名

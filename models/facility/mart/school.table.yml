@@ -18,6 +18,7 @@ fields:
   - name: admin_code
     title: 行政区域コード
     description: P29_001。都道府県コードと市区町村コードからなる、学校が存在する行政区を特定するコード
+    semantic: { role: entity, name: city }
   - name: school_code
     title: 学校コード
     description: P29_002。全国の学校に設定された固有コード

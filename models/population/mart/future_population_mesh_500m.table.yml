@@ -19,6 +19,7 @@ fields:
   - name: mesh_id
     title: メッシュコード
     description: 2分の1地域メッシュ（500m四方）の9桁コード。先頭8桁が1kmメッシュのコード。都府県境をまたぐメッシュは県ごとに行が分かれるため一意ではない
+    semantic: { role: entity, name: mesh }
   - name: city_code
     title: 市区町村コード
     description: 複数市区町村にまたがるメッシュは "_" 連結
