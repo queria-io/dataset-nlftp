@@ -37,17 +37,24 @@ models:
       stg:
         +materialized: table
     hazard:
-      # raw のみ実体化し、stg / mart は view として二重にストレージを
-      # 消費しないようにする（全国で数百万ポリゴンあるため）
+      # raw と stg を実体化し、mart は view にする。ST_MakeValid などの spatial の
+      # 関数は stg に寄せてあり、stg が view だと spatial 拡張を読み込んでいない
+      # ブラウザの DuckDB からは stg も mart も読めない。mart まで実体化すると
+      # 数百万ポリゴンを 3 重に持つので、mart は view のままにする
       raw:
         +materialized: table
+      stg:
+        +materialized: table
     landuse:
-      # hazard と同じ理由で raw のみ実体化する（100mメッシュが数百万ポリゴン）
+      # raw のみ実体化する（100mメッシュが数百万ポリゴン）。stg / mart の
+      # ST_GeomFromWKB は DuckDB 本体にあるので、view でも spatial なしで読める
       raw:
         +materialized: table
     zoning:
-      # hazard と同様、ポリゴンが大きいので raw のみ実体化する
+      # hazard と同じく raw と stg を実体化し、mart は view にする
       raw:
+        +materialized: table
+      stg:
         +materialized: table
     education:
       # 公開する mart は実体化する（ジオメトリの補正をブラウザ側で毎回やらせない）。
