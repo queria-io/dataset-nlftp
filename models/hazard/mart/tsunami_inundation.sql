@@ -1,4 +1,6 @@
-{{ config(tags=['tsunami']) }}
+-- 整備年度の範囲を ST_XMin などで比べるので、view だと spatial 拡張を読み込んで
+-- いない DuckDB から読めない。mart だがテーブルとして実体化する
+{{ config(materialized='table', tags=['tsunami']) }}
 
 -- 津波浸水想定区域のポリゴン（オープンデータ利用可の都道府県のみ）
 --
