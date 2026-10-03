@@ -893,7 +893,7 @@ primary_area_defined は都道府県単位で決まり、一次医療圏を医�
 
 洪水浸水想定区域データ（A31a）の更新運用:
 
-- 全国分のダウンロードは zip 合計 10GB 超と重いため、CI（GitHub Actions）ではスキップされる（`GITHUB_ACTIONS` 環境変数を検出して自動スキップ。`NLFTP_SKIP_FLOOD=1` で明示的にスキップ、`=0` で強制実行も可能）。CI のビルドでは flood タグのモデルが `--exclude` され、カタログ上の既存テーブルはそのまま維持される。
+- 全国分のダウンロードは zip 合計 10GB 超と重いため、CI（GitHub Actions）ではスキップされる（`GITHUB_ACTIONS` 環境変数を検出して自動スキップ。`NLFTP_SKIP_FLOOD=1` で明示的にスキップ、`=0` で強制実行も可能）。CI のビルドでは flood タグの raw モデルが `--exclude` され、カタログ上の既存の raw テーブルはそのまま維持される。stg 以降はその raw テーブルから毎回作り直す。
 - 初回フルビルドと年次更新は手元で `bash scripts/build.sh` を実行する（`QUERIA_TOKEN` が要る。公開先は選ばない）。
 - 変換済み Parquet（`data/flood/parquet/`）と処理済みマーカー（`data/flood/.done/`）が残っていれば該当分はスキップされるため、中断しても再実行で続きから処理できる。年次更新時はパイプラインの URL の版（A31a-25 等）を更新し、`data/flood/` を削除してから再実行する。
 - 対象地域を絞る場合は `NLFTP_FLOOD_REGIONS`（カンマ区切り、例: `NLFTP_FLOOD_REGIONS=13,83`）を指定する。

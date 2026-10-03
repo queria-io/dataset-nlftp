@@ -82,11 +82,11 @@ def dbt_build():
     if not result.success:
         raise SystemExit("dbt deps failed")
 
-    # 洪水データスキップ時は flood タグのモデルを除外してビルドする
-    # （カタログ上の既存テーブルはそのまま維持される）
+    # 洪水データスキップ時は flood タグの raw を除外してビルドする
+    # （カタログ上の既存の raw テーブルはそのまま維持され、stg 以降はそこから作り直す）
     build_args = ["build"]
     if flood_skipped():
-        build_args += ["--exclude", "tag:flood"]
+        build_args += ["--exclude", "tag:flood,path:models/hazard/raw"]
 
     result = dbt.invoke(build_args)
     if not result.success:
