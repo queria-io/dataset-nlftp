@@ -18,6 +18,7 @@ fields:
   - name: mesh_id
     title: メッシュコード
     description: 基準地域メッシュ（1km四方）
+    semantic: { role: entity, name: mesh }
   - name: city_code
     title: 市区町村コード
     description: 複数市区町村にまたがるメッシュは "_" 連結

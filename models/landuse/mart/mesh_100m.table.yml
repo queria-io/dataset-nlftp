@@ -31,9 +31,11 @@ fields:
   - name: mesh_code
     title: 細分メッシュコード
     description: L03b_u_001。10桁（3次メッシュコード8桁 + 1/10細分の行列2桁）
+    semantic: { role: entity, name: mesh }
   - name: mesh_1km_code
     title: 1kmメッシュコード
     description: 細分メッシュコードの先頭8桁。基準地域メッシュ（1km四方）で、将来推計人口メッシュの mesh_id と結合できる
+    semantic: { role: entity, name: mesh }
   - name: landuse_code
     title: 土地利用種別コード
     description: L03b_u_002（0100=田、0200=その他の農用地、0500=森林、0600=荒地、0701=高層建物、0702=工場、0703=低層建物、0704=低層建物（密集地）、0901=道路、0902=鉄道、1001=公共施設等用地、1002=空地、1003=公園・緑地、1100=河川地及び湖沼、1400=海浜、1500=海水域、1600=ゴルフ場）

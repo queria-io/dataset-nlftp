@@ -41,9 +41,11 @@ fields:
   - name: lg_code
     title: 全国地方公共団体コード
     description: 5桁（チェックディジット無し）。2016年時点のコード。1 つのコードに複数の区域が入ることがある。boundary.municipality（令和7年版）と結合するときは、その後の廃置分合を確かめる
+    semantic: { role: entity, name: city }
   - name: prefecture_code
     title: 都道府県コード
     description: 2桁
+    semantic: { role: entity, name: prefecture }
   - name: prefecture_name
     title: 都道府県名
   - name: subprefecture_name
