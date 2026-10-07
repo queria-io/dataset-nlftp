@@ -1,0 +1,5 @@
+schema: hazard
+name: stg_large_fill_area
+description: >
+  大規模盛土造成地のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+published: false

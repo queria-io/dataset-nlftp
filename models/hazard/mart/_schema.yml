@@ -400,3 +400,24 @@ models:
       - name: reference_data_code
       - name: reference_data
       - name: geometry
+
+  - name: large_fill_area
+    description: |
+      大規模盛土造成地のポリゴン。谷や沢を埋めたり傾斜地盤上に盛土したりした
+      大規模な造成地の概ねの範囲を、市町村が造成前後の地形図を重ねて抽出したもの。
+      国土数値情報 A54（2023年）が元データ。47都道府県・998市区町村・52,530ポリゴン。
+
+      安全性の確認が必要な盛土造成地を示したもので、直ちに危険性のある盛土造成地を
+      示すものではない。すべての盛土造成地を抽出できているわけでもない。
+
+      出典: 「国土数値情報（大規模盛土造成地データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: municipality_code
+      - name: municipality_name
+      - name: fill_type_code
+      - name: fill_type
+      - name: fill_number
+      - name: geometry

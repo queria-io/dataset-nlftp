@@ -1,0 +1,7 @@
+schema: hazard
+name: raw_large_fill_area
+description: >
+  国土数値情報 A54（2023年）の大規模盛土造成地データ。
+  パイプラインで全国版の都道府県ごとの GeoJSON を 1 つの Parquet に変換したもの。
+  ジオメトリは WKB (BLOB) で保持する。
+published: false
