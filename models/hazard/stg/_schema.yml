@@ -54,3 +54,8 @@ models:
   - name: stg_low_lying_area
     description: >
       低位地帯のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+
+  - name: stg_large_fill_area
+    description: >
+      大規模盛土造成地のステージング。WKB からジオメトリを復元して ST_MakeValid で
+      修復し、番号を持たないことを表す盛土番号 '-' を NULL に直す。
