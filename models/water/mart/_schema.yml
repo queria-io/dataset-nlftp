@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: lake
+    description: |
+      全国の湖沼と貯水池の範囲のポリゴン。国土数値情報 W09（2005年）が元データ。
+      1 行 = 1 湖沼で 556 行。湖沼名・行政区域コード・最大水深・水面標高を持ち、
+      面積はポリゴンから計算する。
+
+      最大水深は「日本の湖沼アトラス」に載る自然湖沼の 58 湖沼にだけある。
+      水面標高はダム湖・貯水池を含む 228 湖沼にある。値が無いのは「浅い」ではなく「未記載」。
+      行政区域コードは 2005 年時点のもので、湖沼がまたぐ市区町村の数だけ入る。
+
+      出典: 「国土数値情報（湖沼データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: record_number
+      - name: lake_name
+      - name: lg_codes
+      - name: prefecture_codes
+      - name: max_depth_m
+      - name: water_surface_elevation_m
+      - name: area_km2
+      - name: geometry

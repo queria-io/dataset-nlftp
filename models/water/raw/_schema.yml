@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: raw_lake
+    description: >
+      国土数値情報 W09（2005年）の湖沼データ。
+      パイプラインで変換した全国版の Parquet で、属性は原典の文字列のまま、
+      ジオメトリは WKB (BLOB) で保持する。
