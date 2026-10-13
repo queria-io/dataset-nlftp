@@ -70,3 +70,7 @@ models:
       # raw と mart を実体化して stg は view のままにする
       raw:
         +materialized: table
+    water:
+      # region と同じく raw と mart を実体化して stg は view のままにする
+      raw:
+        +materialized: table
