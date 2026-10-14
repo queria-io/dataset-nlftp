@@ -99,3 +99,38 @@ models:
       - name: source_municipality_name
       - name: former_municipality_name
       - name: geometry
+  - name: metropolitan_area
+    description: |
+      三大都市圏計画区域のポリゴン。首都圏整備法・中部圏開発整備法・近畿圏整備法に
+      基づく政策区域（既成市街地・近郊整備地帯・都市開発区域・保全区域・
+      近郊緑地保全区域など）を、行政区域（令和7年版）の境界で切り分けたもの。
+      国土数値情報 A03（2025年度版）が元データ。
+
+      1 行 = 圏域・市区町村・区域・陸水等区分の組み合わせで、島や飛び地に
+      分かれる分はマルチポリゴンにまとめてある。区域の指定が無い部分も
+      「無指定」の行で入るので、各圏域の全体を覆う。区域区分のコードは圏域
+      ごとに意味が違うので、名称の列で見る。
+
+      近畿圏の近郊緑地保全区域（区域区分 5）は、保全区域（区域区分 4）の
+      ポリゴンと重ねて入っている。近畿圏の面積を区分ごとに足すと 816 km² を
+      二重に数える。福井・滋賀・三重の 65 市町は中部圏と近畿圏の両方に入る。
+
+      出典: 「国土数値情報（三大都市圏計画区域データ）」（国土交通省）。
+    access: public
+    columns:
+      - name: metropolitan_area_code
+      - name: metropolitan_area
+      - name: lg_code
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: district_name
+      - name: municipality_name
+      - name: section_type_code
+      - name: section_type
+      - name: section_code
+      - name: section_name
+      - name: surface_type_code
+      - name: surface_type
+      - name: note
+      - name: area_km2
+      - name: geometry

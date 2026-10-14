@@ -1,0 +1,119 @@
+schema: region
+name: metropolitan_area
+title: 三大都市圏計画区域
+description: '首都圏・中部圏・近畿圏の政策区域のポリゴン。首都圏整備法・中部圏開発整備法・
+
+  近畿圏整備法に基づいて指定された既成市街地・近郊整備地帯・都市開発区域・保全区域・
+
+  近郊緑地保全区域などの範囲を、行政区域（令和7年版）の境界で切り分けたもの。
+
+  国土数値情報 A03（2025年度版）が元データ。
+
+
+  1 行 = 圏域・市区町村・区域・陸水等区分の組み合わせで、島や飛び地はマルチポリゴンに
+
+  まとめてある。首都圏 504 行（1都7県・384 市区町村）、中部圏 584 行（9県・327 市区町村）、
+
+  近畿圏 600 行（2府6県・291 市区町村）。区域の指定が無い部分も「無指定」の行で入るので、
+
+  各圏域の全体を覆う。福井・滋賀・三重の 65 市町は中部圏と近畿圏の両方に入り、
+
+  同じ場所に 2 つの行がある。
+
+
+  区域区分のコードは圏域ごとに意味が違う。首都圏の 1 は既成市街地、近畿圏の 1 は
+
+  既成都市区域、中部圏の 1 は都市整備区域。区分は section_type の名称で見る。
+
+  区分どうしの重なりの扱いも圏域で違う。首都圏の近郊緑地保全区域（区分 4）は
+
+  近郊整備地帯の中にあって区分 2 とは重ならないので、近郊整備地帯の全体は区分 2 と 4 を
+
+  合わせたもの。中部圏は保全区域と都市整備区域の重なる部分を区分 4 として切り出している。
+
+  近畿圏の近郊緑地保全区域（区分 5）は保全区域（区分 4）のポリゴンと重ねて入っていて、
+
+  近畿圏の面積を区分ごとに足すと 816 km² を二重に数える。
+
+
+  原典には属性がポリゴンの位置と合わない行が 3 つあり、行政区域（令和7年版）と重ねて
+
+  ポリゴンの側を正として直している。中部圏の御浜町に紀宝町のコードが入っていた行、
+
+  川崎市宮前区のコードに横浜市都筑区の名称が入っていた行、四條畷市の表記が違う行。
+
+
+  区域の範囲は概ねの位置を示すもので、境界付近では実際の政策区域と異なることがある。
+
+  最新の指定でないこともある。不動産の重要事項説明等の根拠には使えない。'
+keywords:
+  - 国土数値情報
+  - 三大都市圏
+  - 首都圏
+  - 中部圏
+  - 近畿圏
+  - 首都圏整備法
+  - 中部圏開発整備法
+  - 近畿圏整備法
+  - 既成市街地
+  - 近郊整備地帯
+  - 都市開発区域
+  - 保全区域
+  - 近郊緑地保全区域
+  - 大都市圏
+  - 地域指定
+  - 境界
+  - GIS
+published: true
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A03-2025.html
+fields:
+  - name: metropolitan_area_code
+    title: 圏域コード
+    description: SYUTO（首都圏）・CHUBU（中部圏）・KINKI（近畿圏）。配布ファイルの単位
+  - name: metropolitan_area
+    title: 圏域
+    description: 首都圏・中部圏・近畿圏
+  - name: lg_code
+    title: 全国地方公共団体コード
+    description: 5桁（チェックディジット無し）。2025年時点のコードで、政令指定都市は区のコードが入る。近畿圏の瀬戸内海の海上の 1 行だけ NULL
+    semantic: { role: entity, name: city }
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁。lg_code の先頭 2 桁
+    semantic: { role: entity, name: prefecture }
+  - name: prefecture_name
+    title: 都道府県名
+  - name: district_name
+    title: 郡市名
+    description: 郡名・政令指定都市名・東京都の支庁名。市と特別区は NULL
+  - name: municipality_name
+    title: 区町村名
+    description: 市区町村名。政令指定都市は区名が入る
+  - name: section_type_code
+    title: 区域区分コード
+    description: 圏域ごとにコードの意味が違う。0 はどの圏域でも無指定
+  - name: section_type
+    title: 区域区分
+    description: 首都圏は既成市街地・近郊整備地帯・都市開発区域・近郊緑地保全区域、中部圏は都市整備区域・都市開発区域・保全区域、近畿圏は既成都市区域・近郊整備区域・都市開発区域・保全区域・近郊緑地保全区域。重なりの扱いを括弧内に書いた
+  - name: section_code
+    title: 区域コード
+    description: 頭文字 S が首都圏、C が中部圏、K が近畿圏。無指定は NULL。中部圏の区分 4 は「C01,C03AK」のように 2 つのコードがカンマ区切りで入る
+  - name: section_name
+    title: 区域名
+    description: 「区域の種類.区域名」の形（例 都市開発区域.筑波地区）。区域コードが 2 つある行は「、」でつなぐ
+  - name: surface_type_code
+    title: 陸水等区分コード
+    description: 1 陸地 / 2 湖沼 / 3 湖沼内の島 / 4 海上
+  - name: surface_type
+    title: 陸水等区分
+    description: 陸地・湖沼・湖沼内の島・海上
+  - name: note
+    title: 備考
+    description: 原典の備考。値が入るのは 6 行で、奥大井県立自然公園・姫路市の除外区域など
+  - name: area_km2
+    title: 面積（km²）
+    description: 原典に面積の属性は無いので、ポリゴンから回転楕円体上の面積を計算した値
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'
