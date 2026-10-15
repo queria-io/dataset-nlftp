@@ -1,0 +1,4 @@
+schema: region
+name: raw_metropolitan_area
+description: 国土数値情報 A03（2025年度版）の三大都市圏計画区域データ。 パイプラインで変換した圏域ごとの Parquet を結合したもので、ジオメトリは WKB (BLOB) で保持する。
+published: false
