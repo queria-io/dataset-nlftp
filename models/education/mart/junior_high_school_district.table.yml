@@ -39,6 +39,7 @@ keywords:
   - 学校
   - GIS
 published: true
+themes: [education_culture]
 sources:
   - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A32-2023.html
 fields:

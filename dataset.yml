@@ -83,6 +83,7 @@ keywords:
   - 近郊整備地帯
 homepage: https://github.com/queria-io/dataset-nlftp
 language: ja
+themes: [land_climate, justice_safety_environment, social_security_health, transport_tourism, education_culture, population, housing_land, government_finance]
 
 licenses:
   - JP-MLIT-NLFTP
