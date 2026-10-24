@@ -51,6 +51,7 @@ keywords:
   - 防災
   - GIS
 published: true
+themes: [land_climate, justice_safety_environment]
 sources:
   - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html
 fields:
