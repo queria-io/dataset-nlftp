@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: stg_block
+    description: >
+      街区レベル位置参照情報のステージング。列名を英字にし、座標を数値に、
+      住居表示フラグと代表フラグを真偽値にする。
+  - name: stg_oaza
+    description: >
+      大字・町丁目レベル位置参照情報のステージング。列名を英字にし、座標を数値にする。

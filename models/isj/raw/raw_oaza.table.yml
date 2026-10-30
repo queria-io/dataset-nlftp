@@ -1,0 +1,4 @@
+schema: isj
+name: raw_oaza
+description: 大字・町丁目レベル位置参照情報（令和6年度、19.0b）。パイプラインで変換した都道府県ごとの Parquet を結合したもので、列名と値は原典の CSV のまま（すべて文字列）。
+published: false
