@@ -4,6 +4,7 @@ title: 国土数値情報
 description: |-
   国土交通省「国土数値情報ダウンロードサイト」(nlftp.mlit.go.jp) から取得した GIS データ。
   地形、土地利用、公共施設などの国土に関する基礎的な情報を提供。
+  位置参照情報ダウンロードサービスの街区レベル・大字・町丁目レベルの位置参照情報も含む。
 keywords:
   - GIS
   - 国土数値情報
@@ -81,6 +82,13 @@ keywords:
   - 近畿圏
   - 既成市街地
   - 近郊整備地帯
+  - 位置参照情報
+  - 街区レベル位置参照情報
+  - 大字・町丁目位置参照情報
+  - 住所
+  - 街区符号
+  - 地番
+  - 緯度経度
 homepage: https://github.com/queria-io/dataset-nlftp
 language: ja
 themes: [land_climate, justice_safety_environment, social_security_health, transport_tourism, education_culture, population, housing_land, government_finance]
@@ -91,6 +99,8 @@ licenses:
 sources:
   - title: 国土数値情報ダウンロードサイト（国土交通省）
     path: https://nlftp.mlit.go.jp/
+  - title: 位置参照情報ダウンロードサービス（国土交通省）
+    path: https://nlftp.mlit.go.jp/isj/index.html
 
 contributors:
   - title: 国土交通省
@@ -123,7 +133,8 @@ ai_context:
     洪水浸水想定は2025年度版、雨水出水（内水）浸水想定は2025年度版、
     多段階浸水想定は2025年度版、
     土地利用細分メッシュは令和3年度（L03-b-u 第3.1版）、湖沼は2005年（W09）、
-    三大都市圏計画区域は2025年度版（A03）。
+    三大都市圏計画区域は2025年度版（A03）、
+    位置参照情報は令和6年度（街区レベル 24.0a / 大字・町丁目レベル 19.0b）。
     施設データは整備年が古いので、開設・廃止の反映は遅れる。
     将来推計人口は国立社会保障・人口問題研究所の令和5年推計に基づく2020〜2070年の
     5年ごとの推計値で、実績値ではない。市区町村別（1898行）・1kmメッシュ別（17万7791行）・

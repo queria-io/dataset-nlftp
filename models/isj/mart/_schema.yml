@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: block
+    description: |
+      街区レベル位置参照情報（令和6年度、24.0a）。都市計画区域相当の範囲で、
+      街区符号（住居表示の地域）または地番（それ以外の地域）ごとの代表点を持つ。
+      1 行 = 1 つの街区符号・地番の 1 地点。同じ地番が複数の地点に分かれる行があり、
+      代表フラグの立つ行がその地番の代表点。lg_code は ABR の市区町村マスタと
+      都道府県名・市区町村名で突き合わせて付けた 6 桁のコード。
+
+      出典: 「街区レベル位置参照情報　国土交通省」（令和6年度、24.0a）を加工して作成。
+    access: public
+    columns:
+      - name: lg_code
+      - name: prefecture_name
+      - name: city_name
+      - name: oaza_chome_name
+      - name: koaza_name
+      - name: block_number
+      - name: plane_rectangular_zone
+      - name: x
+      - name: y
+      - name: lat
+      - name: lng
+      - name: is_residential_address
+      - name: is_representative
+      - name: before_update_flag
+      - name: after_update_flag
+      - name: geometry
+  - name: oaza
+    description: |
+      大字・町丁目レベル位置参照情報（令和6年度、19.0b）。大字・町丁目ごとの
+      代表点を全国で持つ。lg_code は原典の 5 桁の市区町村コードを
+      ABR の市区町村マスタで 6 桁にしたもの。
+
+      出典: 「大字・町丁目位置参照情報　国土交通省」（令和6年度、19.0b）を加工して作成。
+    access: public
+    columns:
+      - name: lg_code
+      - name: prefecture_code
+      - name: prefecture_name
+      - name: city_name
+      - name: oaza_chome_code
+      - name: oaza_chome_name
+      - name: oaza_chome_class_code
+      - name: source_material_code
+      - name: lat
+      - name: lng
+      - name: geometry
