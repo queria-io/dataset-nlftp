@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: raw_block
+    description: >
+      街区レベル位置参照情報（令和6年度、24.0a）。都道府県ごとの CSV を
+      Parquet にしたもので、列名と値は原典のまま（すべて文字列）。
+  - name: raw_oaza
+    description: >
+      大字・町丁目レベル位置参照情報（令和6年度、19.0b）。都道府県ごとの CSV を
+      Parquet にしたもので、列名と値は原典のまま（すべて文字列）。

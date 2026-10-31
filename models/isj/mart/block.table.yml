@@ -1,0 +1,87 @@
+schema: isj
+name: block
+title: 街区レベル位置参照情報
+description: |
+  住所の街区符号（住居表示を実施した地域の「○番」）または地番（それ以外の地域）ごとの
+  代表点の緯度経度と平面直角座標。国土交通省が都市計画図などをもとに整備したもので、
+  令和6年度（24.0a）版を都道府県ごとに取り込んだ。
+
+  整備の範囲は都市計画区域に相当する範囲だけで、市区町村の全域ではない。行が無い
+  場所は「住所が無い」ではなく「整備の範囲外」。地番の地域では親番（「507」など）だけを
+  持ち、枝番は無い。座標は街区・地番の代表点で、公共測量などの高い精度が要る測量や
+  各種の証明には使えない。地名は市町村の資料や地図をもとにしたもので、国内の標準的な
+  地名を指定するものではない。
+
+  同じ大字・丁目の同じ街区符号・地番が、離れた複数の地点に分かれて入る行がある。
+  代表フラグ（is_representative）はそのうちの 1 行に便宜的に立てたもので、1 地点に
+  絞るときはこれで絞る。原典には代表フラグの立つ行が無い街区符号・地番や、2 行ある
+  街区符号・地番もわずかに残る。
+
+  原典の履歴フラグ（更新前・更新後）が 3（削除）の行は、削除された街区符号・地番なので
+  取り込んでいない。残る行の履歴フラグは 0（変更なし）・1（新規作成）・2（名称変更）。
+
+  lg_code は原典に無く、ABR の市区町村マスタ（boundary.raw_mt_city）と都道府県名・
+  市区町村名で突き合わせて付けた 6 桁のコード。政令指定都市は区のコードになる。
+
+  出典: 「街区レベル位置参照情報　国土交通省」（令和6年度、24.0a、
+  <都道府県コード>_2025.csv）。列名の英字化、座標の数値化、lg_code の付与、
+  都道府県名の末尾の数字の除去、削除された行の除外を加工として行っている。
+keywords:
+  - 位置参照情報
+  - 街区レベル位置参照情報
+  - 住所
+  - 街区符号
+  - 地番
+  - 住居表示
+  - 緯度経度
+  - ジオコーディング
+  - GIS
+published: true
+themes: [housing_land]
+sources:
+  - path: https://nlftp.mlit.go.jp/isj/index.html
+fields:
+  - name: lg_code
+    title: 市区町村コード
+    description: ABR の市区町村マスタと都道府県名・市区町村名で突き合わせて付けた 6 桁の全国地方公共団体コード。政令指定都市は区のコード
+    semantic: { role: entity, name: city }
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_name
+    title: 市区町村名
+    description: 原典の表記のまま。郡名を含む町村と含まない町村があり、政令指定都市は市名と区名を続けて書く
+  - name: oaza_chome_name
+    title: 大字・丁目名
+  - name: koaza_name
+    title: 小字・通称名
+  - name: block_number
+    title: 街区符号・地番
+    description: 住居表示の地域では街区符号、それ以外の地域では地番の親番
+  - name: plane_rectangular_zone
+    title: 座標系番号
+    description: 平面直角座標系の系の番号
+  - name: x
+    title: X座標
+    description: 平面直角座標系の X 座標（m）
+  - name: y
+    title: Y座標
+    description: 平面直角座標系の Y 座標（m）
+  - name: lat
+    title: 緯度
+  - name: lng
+    title: 経度
+  - name: is_residential_address
+    title: 住居表示フラグ
+    description: 住居表示を実施した地域の街区符号なら true、地番なら false
+  - name: is_representative
+    title: 代表フラグ
+    description: 同じ街区符号・地番が複数の地点に分かれるとき、代表点の行で true
+  - name: before_update_flag
+    title: 更新前履歴フラグ
+    description: 前回の整備での変更。0 は変更なし、1 は新規作成、2 は名称変更
+  - name: after_update_flag
+    title: 更新後履歴フラグ
+    description: 今回の整備での変更。0 は変更なし、1 は新規作成、2 は名称変更
+  - name: geometry
+    title: 代表点
+    description: 緯度経度の点（世界測地系）

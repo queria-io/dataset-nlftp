@@ -1,0 +1,61 @@
+schema: isj
+name: oaza
+title: 大字・町丁目レベル位置参照情報
+description: |
+  大字・町丁目ごとの代表点の緯度経度。国土交通省が整備したもので、令和6年度
+  （19.0b）版を都道府県ごとに取り込んだ。街区レベル（isj.block）と違い全国を
+  対象にしている。
+
+  座標は大字・町丁目の代表点で、公共測量などの高い精度が要る測量や各種の証明には
+  使えない。地名は市町村の資料や地図をもとにしたもので、国内の標準的な地名を
+  指定するものではない。
+
+  lg_code は原典の 5 桁の市区町村コード（チェックディジット無し）を、ABR の
+  市区町村マスタ（boundary.raw_mt_city）で 6 桁にしたもの。
+
+  出典: 「大字・町丁目位置参照情報　国土交通省」（令和6年度、19.0b、
+  <都道府県コード>_2025.csv）。列名の英字化、座標の数値化、lg_code の付与を
+  加工として行っている。
+keywords:
+  - 位置参照情報
+  - 大字・町丁目位置参照情報
+  - 住所
+  - 大字
+  - 町丁目
+  - 緯度経度
+  - ジオコーディング
+  - GIS
+published: true
+themes: [housing_land]
+sources:
+  - path: https://nlftp.mlit.go.jp/isj/index.html
+fields:
+  - name: lg_code
+    title: 市区町村コード
+    description: 原典の 5 桁の市区町村コードを ABR の市区町村マスタで 6 桁にした全国地方公共団体コード
+    semantic: { role: entity, name: city }
+  - name: prefecture_code
+    title: 都道府県コード
+    semantic: { role: entity, name: prefecture }
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_name
+    title: 市区町村名
+  - name: oaza_chome_code
+    title: 大字町丁目コード
+    description: 原典の 12 桁のコード
+  - name: oaza_chome_name
+    title: 大字町丁目名
+  - name: oaza_chome_class_code
+    title: 大字・字・丁目区分コード
+    description: 原典の値のまま
+  - name: source_material_code
+    title: 原典資料コード
+    description: 原典の値のまま
+  - name: lat
+    title: 緯度
+  - name: lng
+    title: 経度
+  - name: geometry
+    title: 代表点
+    description: 緯度経度の点（世界測地系）
