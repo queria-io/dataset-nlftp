@@ -109,6 +109,13 @@ def _download_level(dest: Path, level: str) -> None:
     for d in (tmp_dir, parquet_dir):
         d.mkdir(parents=True, exist_ok=True)
 
+    # raw は parquet/*.parquet をすべて読むので、別の版の Parquet が残っていると
+    # 2 つの版の行が重なる
+    for stale in parquet_dir.glob("*.parquet"):
+        if not stale.name.endswith(f"-{version}.parquet"):
+            logger.info(f"  removing {stale.name} (not {version})")
+            stale.unlink()
+
     for pref in _prefectures():
         stem = f"{pref}000-{version}"
         parquet_path = parquet_dir / f"{stem}.parquet"
