@@ -1,0 +1,47 @@
+schema: population
+name: future_population_mesh_250m
+title: 将来推計人口（250mメッシュ）
+description: '250mメッシュ単位の将来推計人口。駅前や商店街など、500mメッシュでも粗い範囲の人口を見る用途向け。
+
+  国土数値情報「250mメッシュ別将来推計人口（R6国政局推計）」。
+
+  推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。'
+keywords:
+  - 国土数値情報
+  - 将来推計人口
+  - 人口
+  - メッシュ
+  - 統計
+published: true
+themes: [population]
+sources:
+  - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html
+fields:
+  - name: mesh_id
+    title: メッシュコード
+    description: 4分の1地域メッシュ（250m四方）の10桁コード。先頭9桁が500mメッシュ、先頭8桁が1kmメッシュのコード。都府県境をまたぐメッシュは県ごとに行が分かれるため一意ではない
+    semantic: { role: entity, name: mesh }
+  - name: city_code
+    title: 市区町村コード
+    description: 5桁。メッシュごとに1つの市区町村が入り、1kmメッシュ・500mメッシュと違って "_" 連結にはならない
+  - name: population_2025
+    title: 2025年推計人口
+    description: 人
+  - name: population_2035
+    title: 2035年推計人口
+    description: 人
+  - name: population_2050
+    title: 2050年推計人口
+    description: 人
+  - name: growth_rate_2025_2050
+    title: 人口増減率（2025→2050）
+    description: '%'
+  - name: elderly_ratio_2025
+    title: 高齢化率（2025）
+    description: '%'
+  - name: elderly_ratio_2050
+    title: 高齢化率（2050）
+    description: '%'
+  - name: geometry
+    title: メッシュポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)。250m四方の4分の1地域メッシュ'
