@@ -8,8 +8,8 @@ description: |
   最後に載った版の点で残る。
 
   1 行 = 1 つの名前と番号。first_edition_year と last_edition_year は、その名前と番号が
-  最初と最後に載った版の年度（CSV のファイル名の年。10.0a は 2011、24.0a は 2025）。
-  last_edition_year が今の版の年度より前の行は、今の版に無い名前と番号。点は最後に
+  最初と最後に載った版の年（原典の CSV のファイル名の年。10.0a は 2011、24.0a は 2025）。
+  last_edition_year が今の版の年（2025）より前の行は、今の版に無い名前と番号。点は最後に
   載った版の点で、同じ版で複数の地点に分かれるときは代表フラグの行の点。版ごとに
   座標がわずかにずれる行が多いため、点の違いでは行を分けない。
 
@@ -62,11 +62,11 @@ fields:
     title: 街区符号・地番
     description: 住居表示の地域では街区符号、それ以外の地域では地番の親番
   - name: first_edition_year
-    title: 最初の版の年度
-    description: この名前と番号が最初に載った版の年度（CSV のファイル名の年）
+    title: 最初の版の年
+    description: この名前と番号が最初に載った版の年（原典の CSV のファイル名の年。24.0a は 2025）
   - name: last_edition_year
-    title: 最後の版の年度
-    description: この名前と番号が最後に載った版の年度。今の版の年度なら今の版にもある
+    title: 最後の版の年
+    description: この名前と番号が最後に載った版の年。今の版の年（2025）なら今の版にもある
   - name: is_residential_address
     title: 住居表示フラグ
     description: 最後に載った版で住居表示の街区符号なら true、地番なら false
