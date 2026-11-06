@@ -40,6 +40,11 @@ rows AS (
 valid AS (
     SELECT * FROM rows
     WHERE prefecture_name IN (SELECT pref FROM {{ ref('raw_mt_city') }})
+        -- CP932 として読めなかったバイトは U+FFFD にして取り込んでいる（pipelines/isj.py）。
+        -- 名前に残すとその版だけの別の名前と番号になり、今の版から消えた住所に見えるので使わない
+        AND NOT contains(
+            concat_ws('|', city_name, oaza_chome_name, koaza_name, block_number), chr(65533)
+        )
 ),
 merged AS (
     SELECT
@@ -53,25 +58,15 @@ merged AS (
         -- 最後に載った版の点。同じ版で複数の地点に分かれるときは代表フラグの行
         arg_max(
             {'lat': lat, 'lng': lng, 'is_residential_address': is_residential_address},
-            (edition_year, is_representative)
+            -- 代表フラグでも決まらないときに、ビルドごとに点が変わらないよう座標で決める
+            (edition_year, is_representative, lat, lng)
         ) AS last
     FROM valid
     GROUP BY ALL
 ),
 -- block と同じ規則で、今の市区町村名に一致する行にだけ lg_code を付ける
-names AS (
-    SELECT lg_code, pref, coalesce(county, '') || city || coalesce(ward, '') AS name
-    FROM {{ ref('raw_mt_city') }}
-    WHERE ablt_date IS NULL AND city IS NOT NULL
-    UNION
-    SELECT lg_code, pref, city || coalesce(ward, '') AS name
-    FROM {{ ref('raw_mt_city') }}
-    WHERE ablt_date IS NULL AND city IS NOT NULL AND county IS NOT NULL
-),
 cities AS (
-    SELECT lg_code, pref, name
-    FROM names
-    QUALIFY count(*) OVER (PARTITION BY pref, name) = 1
+{{ isj_city_names() }}
 )
 SELECT
     c.lg_code,

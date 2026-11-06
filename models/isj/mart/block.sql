@@ -1,24 +1,9 @@
 {{ config(materialized='table', tags=['isj']) }}
 
--- 原典に市区町村コードが無いので、ABR の市区町村マスタと都道府県名・市区町村名で
--- 突き合わせて 6 桁の lg_code を付ける。原典の市区町村名は郡名を含む町村
--- （西多摩郡瑞穂町）と含まない町村があり、政令市は市名と区名を続けて書く
-WITH names AS (
-    SELECT lg_code, pref, coalesce(county, '') || city || coalesce(ward, '') AS name
-    FROM {{ ref('raw_mt_city') }}
-    WHERE ablt_date IS NULL AND city IS NOT NULL
-    UNION
-    SELECT lg_code, pref, city || coalesce(ward, '') AS name
-    FROM {{ ref('raw_mt_city') }}
-    WHERE ablt_date IS NULL AND city IS NOT NULL AND county IS NOT NULL
-),
--- 郡名を落とした名前は同じ道府県の中で重なることがある（北海道の古宇郡泊村と
--- 国後郡泊村がどちらも「泊村」）。重なる名前で突き合わせると街区の行が増えるので、
--- 道府県の中で 1 つに決まる名前だけを使う
-cities AS (
-    SELECT lg_code, pref, name
-    FROM names
-    QUALIFY count(*) OVER (PARTITION BY pref, name) = 1
+-- 原典に市区町村コードが無いので、都道府県名・市区町村名で突き合わせて lg_code を付ける
+-- （規則は macros/isj.sql の isj_city_names）
+WITH cities AS (
+{{ isj_city_names() }}
 )
 SELECT
     c.lg_code,

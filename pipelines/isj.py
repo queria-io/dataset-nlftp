@@ -57,9 +57,9 @@ HEADERS = {
     ),
 }
 
-# 街区レベルの過去の版。ダウンロードできる最も古い版は 10.0a（平成22年度）。
-# 新しい版を VERSIONS に入れたら、それまでの版をここに足す
-HISTORY_VERSIONS = [f"{n}.0a" for n in range(10, 24)]
+# 街区レベルの過去の版。ダウンロードできる最も古い 10.0a（平成22年度）から、VERSIONS の
+# 版の 1 つ前まで。VERSIONS を新しい版にすると、それまでの版も自動でここに入る
+HISTORY_VERSIONS = [f"{n}.0a" for n in range(10, int(VERSIONS["block"].split(".")[0]))]
 
 # 15.0a までの街区レベルの先頭行（「小字・通称名」の列が無い）
 OLD_BLOCK_HEADER = (
@@ -164,7 +164,7 @@ def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -
 
 
 def download_isj(dest_dir: str) -> None:
-    """街区レベルと大字・町丁目レベルの位置参照情報を Parquet 化する。
+    """街区レベルと大字・町丁目レベルの位置参照情報、街区レベルの過去の版を Parquet 化する。
 
     都道府県ごとの zip をダウンロードして Parquet に変換し、zip は変換後すぐ削除する。
     変換済みならスキップする（冪等）。
