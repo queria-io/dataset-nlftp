@@ -29,6 +29,27 @@ models:
       - name: before_update_flag
       - name: after_update_flag
       - name: geometry
+  - name: block_history
+    description: |
+      街区レベル位置参照情報の平成22年度（10.0a）から令和6年度（24.0a）までの版を、
+      名前と番号ごとに 1 行にまとめたもの。今の版から消えた名前と番号も、最後に載った
+      版の点で残る。lg_code は今の市区町村名に一致する行だけに付ける。
+
+      出典: 「街区レベル位置参照情報　国土交通省」（平成22年度 10.0a 〜 令和6年度 24.0a）を加工して作成。
+    access: public
+    columns:
+      - name: lg_code
+      - name: prefecture_name
+      - name: city_name
+      - name: oaza_chome_name
+      - name: koaza_name
+      - name: block_number
+      - name: first_edition_year
+      - name: last_edition_year
+      - name: is_residential_address
+      - name: lat
+      - name: lng
+      - name: geometry
   - name: oaza
     description: |
       大字・町丁目レベル位置参照情報（令和6年度、19.0b）。大字・町丁目ごとの

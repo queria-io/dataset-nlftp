@@ -20,6 +20,11 @@ CSV の列名は原典の日本語のままで Parquet にし、型と列名は 
 版はデータの種類ごとに番号が別で、街区レベルの 24.0a と大字・町丁目レベルの
 19.0b はどちらも令和6年度（CSV のファイル名は <都道府県コード>_2025.csv）。
 
+街区レベルは過去の版（10.0a〜23.0a、CSV のファイル名は <都道府県コード>_2011.csv
+〜_2024.csv）も block_history/ に取り込む。15.0a までは「小字・通称名」の列が無く、
+「大字・町丁目名」に小字まで続けて書く版がある。列をそろえるため、その版には
+空の「小字・通称名」を足す。
+
 データソース: 位置参照情報ダウンロードサービス
 https://nlftp.mlit.go.jp/isj/index.html
 """
@@ -52,6 +57,16 @@ HEADERS = {
     ),
 }
 
+# 街区レベルの過去の版。ダウンロードできる最も古い版は 10.0a（平成22年度）。
+# 新しい版を VERSIONS に入れたら、それまでの版をここに足す
+HISTORY_VERSIONS = [f"{n}.0a" for n in range(10, 24)]
+
+# 15.0a までの街区レベルの先頭行（「小字・通称名」の列が無い）
+OLD_BLOCK_HEADER = (
+    "都道府県名,市区町村名,大字・町丁目名,街区符号・地番,座標系番号,"
+    "Ｘ座標,Ｙ座標,緯度,経度,住居表示フラグ,代表フラグ,更新前履歴フラグ,更新後履歴フラグ"
+)
+
 PREFECTURE_CODES = [f"{i:02d}" for i in range(1, 48)]
 
 
@@ -74,13 +89,25 @@ def _convert(zip_path: Path, level: str, tmp_dir: Path, parquet_path: Path) -> N
     Parquet が変換済みとして残らないようにする。
     """
     with zipfile.ZipFile(zip_path) as zf:
-        members = [i for i in zf.infolist() if i.filename.endswith(".csv")]
+        members = [i for i in zf.infolist() if i.filename.lower().endswith(".csv")]
         if len(members) != 1:
             raise SystemExit(f"expected 1 CSV in {zip_path.name}, found {len(members)}")
-        text = zf.read(members[0]).decode("cp932")
+        # 原典には CP932 として読めないバイトが混ざる版がある（街区レベル 20.0a の島根県で
+        # 1 か所）。その文字だけ U+FFFD にして取り込みを続ける
+        text = zf.read(members[0]).decode("cp932", errors="replace")
+        if (broken := text.count("\ufffd")) > 0:
+            logger.warning(f"  {zip_path.name}: {broken} undecodable byte(s) replaced")
 
-    header = text.split("\n", 1)[0].strip().replace('"', "")
-    if header != HEADERS[level]:
+    # 列の並びが違う版がある（街区レベル 20.0a の千葉県）。列は名前で読むので、並びは問わない
+    header = set(text.split("\n", 1)[0].strip().replace('"', "").split(","))
+    if header == set(HEADERS[level].split(",")):
+        columns = "*"
+    elif level == "block" and header == set(OLD_BLOCK_HEADER.split(",")):
+        # 古い版は列名を今の版にそろえ、無い小字の列を空で足す
+        columns = (
+            """* RENAME ("大字・町丁目名" AS "大字・丁目名"), '' AS "小字・通称名\""""
+        )
+    else:
         raise SystemExit(f"unexpected columns in {zip_path.name}: {header}")
 
     csv_path = tmp_dir / f"{parquet_path.stem}.csv"
@@ -91,7 +118,8 @@ def _convert(zip_path: Path, level: str, tmp_dir: Path, parquet_path: Path) -> N
         con.execute(
             f"""
             COPY (
-                SELECT *, '{members[0].filename.rsplit("/", 1)[-1]}' AS source_file
+                SELECT {columns},
+                    '{members[0].filename.replace(chr(92), "/").rsplit("/", 1)[-1]}' AS source_file
                 FROM read_csv('{csv_path.as_posix()}', header = true, all_varchar = true)
             ) TO '{tmp_path.as_posix()}' (FORMAT PARQUET, COMPRESSION ZSTD)
             """
@@ -104,10 +132,8 @@ def _convert(zip_path: Path, level: str, tmp_dir: Path, parquet_path: Path) -> N
 
 def _download_level(dest: Path, level: str) -> None:
     version = VERSIONS[level]
-    tmp_dir = dest / "tmp"
     parquet_dir = dest / level / "parquet"
-    for d in (tmp_dir, parquet_dir):
-        d.mkdir(parents=True, exist_ok=True)
+    parquet_dir.mkdir(parents=True, exist_ok=True)
 
     # raw は parquet/*.parquet をすべて読むので、別の版の Parquet が残っていると
     # 2 つの版の行が重なる
@@ -116,6 +142,12 @@ def _download_level(dest: Path, level: str) -> None:
             logger.info(f"  removing {stale.name} (not {version})")
             stale.unlink()
 
+    _download_version(dest, level, version, parquet_dir)
+
+
+def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -> None:
+    tmp_dir = dest / "tmp"
+    tmp_dir.mkdir(parents=True, exist_ok=True)
     for pref in _prefectures():
         stem = f"{pref}000-{version}"
         parquet_path = parquet_dir / f"{stem}.parquet"
@@ -140,4 +172,8 @@ def download_isj(dest_dir: str) -> None:
     dest = Path(dest_dir)
     for level in VERSIONS:
         _download_level(dest, level)
+    history_dir = dest / "block_history" / "parquet"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    for version in HISTORY_VERSIONS:
+        _download_version(dest, "block", version, history_dir)
     logger.info(f"  isj data ready in {dest}")
