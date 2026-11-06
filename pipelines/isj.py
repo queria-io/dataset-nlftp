@@ -21,8 +21,8 @@ CSV の列名は原典の日本語のままで Parquet にし、型と列名は 
 19.0b はどちらも令和6年度（CSV のファイル名は <都道府県コード>_2025.csv）。
 
 街区レベルは過去の版（10.0a〜23.0a、CSV のファイル名は <都道府県コード>_2011.csv
-〜_2024.csv）も block_history/ に取り込む。15.0a までは「小字・通称名」の列が無く、
-「大字・町丁目名」に小字まで続けて書く版がある。列をそろえるため、その版には
+〜_2024.csv）も、isj.block_history がまだ無いときだけ block_history/ に取り込む。
+15.0a までは「小字・通称名」の列が無く、「大字・町丁目名」に小字まで続けて書く版がある。列をそろえるため、その版には
 空の「小字・通称名」を足す。
 
 データソース: 位置参照情報ダウンロードサービス
@@ -166,12 +166,16 @@ def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -
 def _block_history_built() -> bool:
     """ビルドが書くカタログ（profiles.yml の QUERIA_CATALOG_PATH）に isj.block_history があるか。"""
     catalog = os.environ.get("QUERIA_CATALOG_PATH")
-    if not catalog:
+    if not catalog or not Path(catalog).exists():
         return False
     con = duckdb.connect()
     try:
         con.execute("INSTALL ducklake; LOAD ducklake")
-        con.execute(f"ATTACH 'ducklake:{catalog}' AS catalog (READ_ONLY)")
+        # カタログは SQLite（profiles.yml と同じ META_TYPE）。指定しないと DuckDB の
+        # データベースとして開こうとして ATTACH が失敗する
+        con.execute(
+            f"ATTACH 'ducklake:{catalog}' AS catalog (READ_ONLY, META_TYPE 'sqlite')"
+        )
         found = con.execute(
             "SELECT count(*) FROM duckdb_tables() "
             "WHERE database_name = 'catalog' AND schema_name = 'isj' AND table_name = 'block_history'"

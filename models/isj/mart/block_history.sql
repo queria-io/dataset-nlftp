@@ -9,20 +9,24 @@
 -- - 今の版に無い名前と番号: そのまま残す
 -- 過去の版（2.6 億行）を読むのは、表が無いときと --full-refresh のときだけ。
 -- そのときはスレッドごとに集約の表を持つと一時ファイルが 20GB を超えるので、1 スレッドで作る
+-- （merge で今の版だけを読むときはスレッドを絞らない）
 --
--- 大字・丁目名と小字・通称名は空 (NULL) の行があり、= では一致しないので、
--- merge の鍵の残りの 2 列は IS NOT DISTINCT FROM で突き合わせる
+-- 名前と番号の列は空 (NULL) の行があり、= では一致しない（一致しないと merge のたびに
+-- 同じ名前と番号の行が増える）。prefecture_name は valid で NULL を除いているので
+-- unique_key に置き、残りの列は IS NOT DISTINCT FROM で突き合わせる
 {{ config(
     materialized='incremental',
     incremental_strategy='merge',
-    unique_key=['prefecture_name', 'city_name', 'block_number'],
+    unique_key=['prefecture_name'],
     incremental_predicates=[
+        "DBT_INTERNAL_SOURCE.city_name IS NOT DISTINCT FROM DBT_INTERNAL_DEST.city_name",
         "DBT_INTERNAL_SOURCE.oaza_chome_name IS NOT DISTINCT FROM DBT_INTERNAL_DEST.oaza_chome_name",
         "DBT_INTERNAL_SOURCE.koaza_name IS NOT DISTINCT FROM DBT_INTERNAL_DEST.koaza_name",
+        "DBT_INTERNAL_SOURCE.block_number IS NOT DISTINCT FROM DBT_INTERNAL_DEST.block_number",
     ],
     merge_exclude_columns=['first_edition_year'],
     tags=['isj'],
-    pre_hook="SET threads = 1",
+    pre_hook="{% if not is_incremental() %}SET threads = 1{% endif %}",
     post_hook="RESET threads",
 ) }}
 
@@ -99,3 +103,6 @@ SELECT
     ST_Point(m.last.lng, m.last.lat) AS geometry
 FROM merged m
 LEFT JOIN cities c ON c.pref = m.prefecture_name AND c.name = m.city_name
+{% if not is_incremental() %}
+ORDER BY c.lg_code, m.oaza_chome_name, m.koaza_name, m.block_number
+{% endif %}
