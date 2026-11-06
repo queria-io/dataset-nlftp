@@ -163,8 +163,26 @@ def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -
             zip_path.unlink(missing_ok=True)
 
 
+def _block_history_built() -> bool:
+    """ビルドが書くカタログ（profiles.yml の QUERIA_CATALOG_PATH）に isj.block_history があるか。"""
+    catalog = os.environ.get("QUERIA_CATALOG_PATH")
+    if not catalog:
+        return False
+    con = duckdb.connect()
+    try:
+        con.execute("INSTALL ducklake; LOAD ducklake")
+        con.execute(f"ATTACH 'ducklake:{catalog}' AS catalog (READ_ONLY)")
+        found = con.execute(
+            "SELECT count(*) FROM duckdb_tables() "
+            "WHERE database_name = 'catalog' AND schema_name = 'isj' AND table_name = 'block_history'"
+        ).fetchone()[0]
+        return found > 0
+    finally:
+        con.close()
+
+
 def download_isj(dest_dir: str) -> None:
-    """街区レベルと大字・町丁目レベルの位置参照情報、街区レベルの過去の版を Parquet 化する。
+    """街区レベルと大字・町丁目レベルの位置参照情報と、要るときだけ街区レベルの過去の版を Parquet 化する。
 
     都道府県ごとの zip をダウンロードして Parquet に変換し、zip は変換後すぐ削除する。
     変換済みならスキップする（冪等）。
@@ -172,8 +190,13 @@ def download_isj(dest_dir: str) -> None:
     dest = Path(dest_dir)
     for level in VERSIONS:
         _download_level(dest, level)
-    history_dir = dest / "block_history" / "parquet"
-    history_dir.mkdir(parents=True, exist_ok=True)
-    for version in HISTORY_VERSIONS:
-        _download_version(dest, "block", version, history_dir)
+    # 過去の版は変わらないので、block_history がまだ無いとき（最初のビルド）だけ取る。
+    # 表があれば dbt は今の版だけを merge する（models/isj/mart/block_history.sql）
+    if _block_history_built():
+        logger.info("  skip block history (isj.block_history is already built)")
+    else:
+        history_dir = dest / "block_history" / "parquet"
+        history_dir.mkdir(parents=True, exist_ok=True)
+        for version in HISTORY_VERSIONS:
+            _download_version(dest, "block", version, history_dir)
     logger.info(f"  isj data ready in {dest}")

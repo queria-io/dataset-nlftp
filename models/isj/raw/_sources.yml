@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  # pipelines/isj.py が data/isj/ に置いた Parquet のうち、raw の表にしないもの
+  - name: isj_files
+    tables:
+      - name: block_history
+        description: >
+          街区レベル位置参照情報の過去の版（平成22年度 10.0a 〜 令和5年度 23.0a）。
+          都道府県・版ごとの CSV を Parquet にしたもので、列名と値は原典のまま（すべて文字列）。
+          15.0a までの版は列名を今の版にそろえ、無い小字・通称名の列を空で足している。
+          過去の版は変わらないので、block_history を作り直すとき（表が無いときと
+          --full-refresh のとき）にだけ取得して読む。
+        meta:
+          external_location: "read_parquet('data/isj/block_history/parquet/*.parquet', union_by_name=true)"
