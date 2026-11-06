@@ -21,8 +21,8 @@ CSV の列名は原典の日本語のままで Parquet にし、型と列名は 
 19.0b はどちらも令和6年度（CSV のファイル名は <都道府県コード>_2025.csv）。
 
 街区レベルは過去の版（10.0a〜23.0a、CSV のファイル名は <都道府県コード>_2011.csv
-〜_2024.csv）も block_history/ に取り込む。15.0a までは「小字・通称名」の列が無く、
-「大字・町丁目名」に小字まで続けて書く版がある。列をそろえるため、その版には
+〜_2024.csv）も、isj.block_history がまだ無いときだけ block_history/ に取り込む。
+15.0a までは「小字・通称名」の列が無く、「大字・町丁目名」に小字まで続けて書く版がある。列をそろえるため、その版には
 空の「小字・通称名」を足す。
 
 データソース: 位置参照情報ダウンロードサービス
@@ -163,8 +163,30 @@ def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -
             zip_path.unlink(missing_ok=True)
 
 
+def _block_history_built() -> bool:
+    """ビルドが書くカタログ（profiles.yml の QUERIA_CATALOG_PATH）に isj.block_history があるか。"""
+    catalog = os.environ.get("QUERIA_CATALOG_PATH")
+    if not catalog or not Path(catalog).exists():
+        return False
+    con = duckdb.connect()
+    try:
+        con.execute("INSTALL ducklake; LOAD ducklake")
+        # カタログは SQLite（profiles.yml と同じ META_TYPE）。指定しないと DuckDB の
+        # データベースとして開こうとして ATTACH が失敗する
+        con.execute(
+            f"ATTACH 'ducklake:{catalog}' AS catalog (READ_ONLY, META_TYPE 'sqlite')"
+        )
+        found = con.execute(
+            "SELECT count(*) FROM duckdb_tables() "
+            "WHERE database_name = 'catalog' AND schema_name = 'isj' AND table_name = 'block_history'"
+        ).fetchone()[0]
+        return found > 0
+    finally:
+        con.close()
+
+
 def download_isj(dest_dir: str) -> None:
-    """街区レベルと大字・町丁目レベルの位置参照情報、街区レベルの過去の版を Parquet 化する。
+    """街区レベルと大字・町丁目レベルの位置参照情報と、要るときだけ街区レベルの過去の版を Parquet 化する。
 
     都道府県ごとの zip をダウンロードして Parquet に変換し、zip は変換後すぐ削除する。
     変換済みならスキップする（冪等）。
@@ -172,8 +194,13 @@ def download_isj(dest_dir: str) -> None:
     dest = Path(dest_dir)
     for level in VERSIONS:
         _download_level(dest, level)
-    history_dir = dest / "block_history" / "parquet"
-    history_dir.mkdir(parents=True, exist_ok=True)
-    for version in HISTORY_VERSIONS:
-        _download_version(dest, "block", version, history_dir)
+    # 過去の版は変わらないので、block_history がまだ無いとき（最初のビルド）だけ取る。
+    # 表があれば dbt は今の版だけを merge する（models/isj/mart/block_history.sql）
+    if _block_history_built():
+        logger.info("  skip block history (isj.block_history is already built)")
+    else:
+        history_dir = dest / "block_history" / "parquet"
+        history_dir.mkdir(parents=True, exist_ok=True)
+        for version in HISTORY_VERSIONS:
+            _download_version(dest, "block", version, history_dir)
     logger.info(f"  isj data ready in {dest}")
