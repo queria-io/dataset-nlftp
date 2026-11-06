@@ -1,9 +1,8 @@
 schema: boundary
 name: prefecture
 title: 都道府県境界
-description: '都道府県の行政区域境界ポリゴン。
-
-  国土数値情報 N03（令和7年）の行政区域データを都道府県単位で集約。'
+description: |-
+  都道府県の境界ポリゴンです。国土数値情報の行政区域データ（N03、令和7年）を都道府県ごとにまとめたものです。
 keywords:
   - 国土数値情報
   - 行政区域

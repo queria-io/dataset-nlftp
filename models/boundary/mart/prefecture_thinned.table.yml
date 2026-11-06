@@ -1,9 +1,10 @@
 schema: boundary
 name: prefecture_thinned
 title: 都道府県境界（間引きのみ）
-description: '都道府県境界（頂点間引きのみ、小島除去なし）。
+description: |-
+  都道府県の境界ポリゴンの頂点を間引いたもので、簡素化の手法を比べるためのものです。
 
-  簡素化手法の比較用。小島がドットとして大量に残る。'
+  - 小島を除いていないので、小島が点として多数残ります。地図の表示には boundary.prefecture を使ってください
 keywords:
   - 国土数値情報
   - 行政区域

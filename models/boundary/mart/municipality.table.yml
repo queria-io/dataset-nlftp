@@ -1,11 +1,10 @@
 schema: boundary
 name: municipality
 title: 市区町村境界
-description: '市区町村の行政区域境界ポリゴン。
+description: |-
+  市区町村の境界ポリゴンです。国土数値情報の行政区域データ（N03、令和7年）を市区町村ごとにまとめ、飛び地も 1 行にしています。
 
-  国土数値情報 N03（令和7年）の行政区域データを市区町村単位で集約。
-
-  同一自治体の飛び地等は ST_Union_Agg で統合済み。'
+  - 政令指定都市は区ごとの行です。市ごとの境界は boundary.designated_city にあります
 keywords:
   - 国土数値情報
   - 行政区域
