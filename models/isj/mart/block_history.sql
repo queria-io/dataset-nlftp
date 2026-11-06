@@ -28,7 +28,7 @@ rows AS (
         "代表フラグ" = '1' AS is_representative,
         CAST("緯度" AS DOUBLE) AS lat,
         CAST("経度" AS DOUBLE) AS lng,
-        -- 版の年度はファイル名の年（10.0a は <都道府県コード>_2011.csv）
+        -- 版の年はファイル名の年（10.0a は <都道府県コード>_2011.csv）
         CAST(regexp_extract(source_file, '_([0-9]{4})\.[cC][sS][vV]$', 1) AS INTEGER) AS edition_year
     FROM editions
     -- 履歴フラグの 3 は削除された街区符号・地番。block と同じく除く
