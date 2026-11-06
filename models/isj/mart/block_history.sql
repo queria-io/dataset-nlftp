@@ -13,9 +13,7 @@
 -- 行が増えるようにする。点は最後に載った版の点。同じ名前と番号でも版ごとに座標がわずかに
 -- ずれる行が多いので、点の違いでは行を分けない
 WITH editions AS (
-    -- 過去の版は 14 版で 2 億行を超えるので、raw の表を作らずに Parquet をそのまま読む。
-    -- 15.0a までの版は pipelines/isj.py が列名を今の版にそろえ、無い小字・通称名の列を空で足している
-    SELECT * FROM read_parquet('data/isj/block_history/parquet/*.parquet', union_by_name=true)
+    SELECT * FROM {{ ref('raw_block_history') }}
     UNION ALL BY NAME
     SELECT * FROM {{ ref('raw_block') }}
 ),

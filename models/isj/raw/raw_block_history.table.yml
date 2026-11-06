@@ -1,0 +1,4 @@
+schema: isj
+name: raw_block_history
+description: 街区レベル位置参照情報の過去の版（平成22年度 10.0a 〜 令和5年度 23.0a）。パイプラインで変換した都道府県・版ごとの Parquet を結合したもので、列名と値は原典の CSV のまま（すべて文字列）。15.0a までの版は列名を今の版にそろえ、無い小字・通称名の列を空で足している。
+published: false
