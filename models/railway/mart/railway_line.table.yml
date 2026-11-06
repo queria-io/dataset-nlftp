@@ -1,9 +1,8 @@
 schema: railway
 name: railway_line
 title: 鉄道路線
-description: '鉄道路線（路線名・運営会社・鉄道区分単位）のラインジオメトリ。
-
-  国土数値情報 N02（令和6年）の路線区間を路線単位に ST_Union_Agg で集約。'
+description: |-
+  鉄道路線のラインです。路線名・運営会社・鉄道区分ごとに 1 行にまとめています（国土数値情報 N02、令和6年）。
 keywords:
   - 国土数値情報
   - 鉄道
