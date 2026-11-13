@@ -16,15 +16,14 @@ keywords:
   - 緯度経度
   - ジオコーディング
   - GIS
-published: true
-themes: [housing_land]
+annotations: { queria: { themes: [housing_land] } }
 sources:
   - path: https://nlftp.mlit.go.jp/isj/index.html
 fields:
   - name: lg_code
     title: 市区町村コード
     description: ABR の市区町村マスタと都道府県名・市区町村名で突き合わせて付けた 6 桁の全国地方公共団体コード。政令指定都市は区のコード
-    semantic: { role: entity, name: city }
+    annotations: { queria: { semantic: { role: entity, name: city } } }
   - name: prefecture_name
     title: 都道府県名
   - name: city_name
