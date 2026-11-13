@@ -55,3 +55,6 @@ data/large_fill/
 data/lake/
 data/metropolitan_area/
 data/isj/
+
+# fdl checkout の作業カタログ
+.fdl/

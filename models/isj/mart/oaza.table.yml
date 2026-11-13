@@ -12,18 +12,17 @@ keywords:
   - 緯度経度
   - ジオコーディング
   - GIS
-published: true
-themes: [housing_land]
+annotations: { queria: { themes: [housing_land] } }
 sources:
   - path: https://nlftp.mlit.go.jp/isj/index.html
 fields:
   - name: lg_code
     title: 市区町村コード
     description: 原典の 5 桁の市区町村コードを ABR の市区町村マスタで 6 桁にした全国地方公共団体コード
-    semantic: { role: entity, name: city }
+    annotations: { queria: { semantic: { role: entity, name: city } } }
   - name: prefecture_code
     title: 都道府県コード
-    semantic: { role: entity, name: prefecture }
+    annotations: { queria: { semantic: { role: entity, name: prefecture } } }
   - name: prefecture_name
     title: 都道府県名
   - name: city_name

@@ -3,4 +3,4 @@ name: stg_railway_section
 description: '鉄道路線区間のステージング。鉄道区分コード・事業者種別コードを名称に変換し、
 
   ジオメトリを修正。'
-published: false
+annotations: { queria: { published: false } }

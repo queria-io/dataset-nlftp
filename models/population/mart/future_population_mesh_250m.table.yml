@@ -11,15 +11,14 @@ keywords:
   - 人口
   - メッシュ
   - 統計
-published: true
-themes: [population]
+annotations: { queria: { themes: [population] } }
 sources:
   - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html
 fields:
   - name: mesh_id
     title: メッシュコード
     description: 4分の1地域メッシュ（250m四方）の10桁コード。先頭9桁が500mメッシュ、先頭8桁が1kmメッシュのコード。都府県境をまたぐメッシュは県ごとに行が分かれるため一意ではない
-    semantic: { role: entity, name: mesh }
+    annotations: { queria: { semantic: { role: entity, name: mesh } } }
   - name: city_code
     title: 市区町村コード
     description: 5桁。メッシュごとに1つの市区町村が入り、1kmメッシュ・500mメッシュと違って "_" 連結にはならない

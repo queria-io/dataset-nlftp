@@ -4,4 +4,4 @@ description: >
   国土数値情報 G08（2015年度）の低位地帯データ。
   パイプラインで変換した都道府県ごとの Parquet を結合したもの。
   ジオメトリは WKB (BLOB) で保持する。
-published: false
+annotations: { queria: { published: false } }

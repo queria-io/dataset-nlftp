@@ -5,4 +5,4 @@ description: '医療機関のステージング。医療機関分類・開設者
   各コードを名称に変換し、分割された診療科目（P04_004〜P04_006）を連結。
 
   ジオメトリを修正。'
-published: false
+annotations: { queria: { published: false } }

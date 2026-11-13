@@ -164,8 +164,8 @@ def _download_version(dest: Path, level: str, version: str, parquet_dir: Path) -
 
 
 def _block_history_built() -> bool:
-    """ビルドが書くカタログ（profiles.yml の QUERIA_CATALOG_PATH）に isj.block_history があるか。"""
-    catalog = os.environ.get("QUERIA_CATALOG_PATH")
+    """ビルドが書くカタログ（profiles.yml の FDL_WORKING）に isj.block_history があるか。"""
+    catalog = os.environ.get("FDL_WORKING")
     if not catalog or not Path(catalog).exists():
         return False
     con = duckdb.connect()

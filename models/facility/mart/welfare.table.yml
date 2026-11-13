@@ -10,8 +10,7 @@ keywords:
   - 福祉施設
   - 施設
   - GIS
-published: true
-themes: [social_security_health]
+annotations: { queria: { themes: [social_security_health] } }
 sources:
   - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-v2_1.html
 fields:
@@ -24,7 +23,7 @@ fields:
   - name: admin_code
     title: 行政区域コード
     description: P14_003。当該施設が所在する行政区域コード
-    semantic: { role: entity, name: city }
+    annotations: { queria: { semantic: { role: entity, name: city } } }
   - name: address
     title: 所在地
     description: P14_004。市区町村名を省いた所在地

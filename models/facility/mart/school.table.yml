@@ -8,15 +8,14 @@ keywords:
   - 医療機関
   - 施設
   - GIS
-published: true
-themes: [education_culture]
+annotations: { queria: { themes: [education_culture] } }
 sources:
   - path: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-v3_0.html
 fields:
   - name: admin_code
     title: 行政区域コード
     description: P29_001。都道府県コードと市区町村コードからなる、学校が存在する行政区を特定するコード
-    semantic: { role: entity, name: city }
+    annotations: { queria: { semantic: { role: entity, name: city } } }
   - name: school_code
     title: 学校コード
     description: P29_002。全国の学校に設定された固有コード
