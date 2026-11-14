@@ -6,7 +6,7 @@ SELECT
     record_number,
     lake_name,
     lg_codes,
-    list_sort(list_distinct(list_transform(lg_codes, x -> x[1:2]))) AS prefecture_codes,
+    list_sort(list_distinct(list_transform(lg_codes, lambda x: x[1:2]))) AS prefecture_codes,
     max_depth_m,
     water_surface_elevation_m,
     -- 原典に面積の属性は無いので、ポリゴンから回転楕円体上の面積を計算する。

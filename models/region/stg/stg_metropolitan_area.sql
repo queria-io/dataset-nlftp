@@ -35,7 +35,7 @@ WITH fixed AS (
         section_code,
         list_transform(
             string_split(section_code, ','),
-            c -> {{ metropolitan_section_name('c') }}
+            lambda c: {{ metropolitan_section_name('c') }}
         ) AS section_names,
         note,
         geom
