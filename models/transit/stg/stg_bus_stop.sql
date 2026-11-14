@@ -30,9 +30,9 @@ WITH combined AS (
 parsed AS (
     SELECT
         *,
-        list_filter(str_split(route_names, ','), name -> name <> '') AS route_list,
+        list_filter(str_split(route_names, ','), lambda name: name <> '') AS route_list,
         list_sort(list_distinct(
-            list_filter(str_split(bus_class_codes, ','), code -> code <> '')
+            list_filter(str_split(bus_class_codes, ','), lambda code: code <> '')
         )) AS class_list
     FROM combined
 )
@@ -44,7 +44,7 @@ SELECT
     NULLIF(array_to_string(class_list, ','), '') AS bus_class_codes,
     NULLIF(
         array_to_string(
-            list_transform(class_list, code -> {{ bus_class_name('code') }}), '／'
+            list_transform(class_list, lambda code: {{ bus_class_name('code') }}), '／'
         ),
         ''
     ) AS bus_classes,

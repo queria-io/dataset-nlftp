@@ -4,4 +4,4 @@
 SELECT record_number, lake_name, lg_codes
 FROM {{ ref('lake') }}
 WHERE len(lg_codes) = 0
-   OR len(list_filter(lg_codes, x -> NOT regexp_full_match(x, '[0-9]{5}'))) > 0
+   OR len(list_filter(lg_codes, lambda x: NOT regexp_full_match(x, '[0-9]{5}'))) > 0
