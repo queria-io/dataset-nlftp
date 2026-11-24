@@ -3,7 +3,7 @@
 -- 原典の市区町村コードは 5 桁なので、ABR の市区町村マスタで 6 桁の lg_code にする
 WITH cities AS (
     SELECT lg_code, LEFT(lg_code, 5) AS city_code
-    FROM {{ ref('raw_mt_city') }}
+    FROM {{ ref('stg_mt_city') }}
     WHERE ablt_date IS NULL
 )
 SELECT

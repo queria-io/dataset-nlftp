@@ -5,12 +5,12 @@
 -- 東京23区（特別区）は独立した地方公共団体のため統合しない
 WITH city_codes AS (
     SELECT LEFT(lg_code, 5) AS lg_code, pref, city
-    FROM {{ ref('raw_mt_city') }}
+    FROM {{ ref('stg_mt_city') }}
     WHERE ward IS NULL AND city IS NOT NULL
 ),
 ward_to_city AS (
     SELECT LEFT(w.lg_code, 5) AS ward_lg_code, c.lg_code AS city_lg_code
-    FROM {{ ref('raw_mt_city') }} w
+    FROM {{ ref('stg_mt_city') }} w
     JOIN city_codes c ON w.pref = c.pref AND w.city = c.city
     WHERE w.ward IS NOT NULL
 ),

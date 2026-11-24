@@ -31,7 +31,7 @@
 ) }}
 
 WITH editions AS (
-    SELECT * FROM {{ ref('raw_block') }}
+    SELECT * FROM {{ ref('stg_block_edition') }}
     {% if not is_incremental() %}
     UNION ALL BY NAME
     SELECT * FROM {{ source('isj_files', 'block_history') }}
@@ -59,7 +59,7 @@ rows AS (
 -- 都道府県名が「大阪市」の 39 行）。都道府県名が都道府県でない行は使わない
 valid AS (
     SELECT * FROM rows
-    WHERE prefecture_name IN (SELECT pref FROM {{ ref('raw_mt_city') }})
+    WHERE prefecture_name IN (SELECT pref FROM {{ ref('stg_mt_city') }})
         -- CP932 として読めなかったバイトは U+FFFD にして取り込んでいる（pipelines/isj.py）。
         -- 名前に残すとその版だけの別の名前と番号になり、今の版から消えた住所に見えるので使わない
         AND NOT contains(
