@@ -406,7 +406,7 @@ previous_population / previous_area_km2 は前回国勢調査（2015年）時点
 - xmin・ymin・xmax・ymax: ポリゴンの外接矩形の経度・緯度の範囲
 - geometry: 浸水想定区域ポリゴン（EPSG:6668 / JGD2011）
 
-行は位置の順に並んでいます。地点を含む区画を探すときは、範囲の列の条件を `ST_Contains` と一緒に指定すると、その地点の周りの行グループだけを読みます。
+近い位置の行が同じ行グループにまとめて書かれています。地点を含む区画を探すときは、範囲の列の条件を `ST_Contains` と一緒に指定すると、その地点の周りの行グループだけを読みます。
 
 ```sql
 SELECT river_name, depth_label

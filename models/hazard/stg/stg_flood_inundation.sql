@@ -31,4 +31,8 @@ SELECT
     ST_YMax(geometry) AS ymax,
     geometry
 FROM fixed
-ORDER BY ST_Hilbert(geometry, {'min_x': 122.0, 'min_y': 20.0, 'max_x': 154.0, 'max_y': 46.0}::BOX_2D)
+-- ST_Hilbert は空のジオメトリでエラーになるので、空の行は位置を持たない行として末尾に置く
+ORDER BY CASE
+    WHEN NOT ST_IsEmpty(geometry)
+        THEN ST_Hilbert(geometry, {'min_x': 122.0, 'min_y': 20.0, 'max_x': 154.0, 'max_y': 46.0}::BOX_2D)
+END
