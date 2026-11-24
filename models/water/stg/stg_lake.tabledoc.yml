@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 湖沼のステージング。WKB からジオメトリを復元し、行政区域コードを リストに分け、最大水深・水面標高を整数にする。最大水深の 0 は未記載とみなして NULL にする。
+hidden: true

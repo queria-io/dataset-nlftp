@@ -1,0 +1,52 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 雨水出水（内水）浸水想定区域
+description: |-
+  下水道や水路があふれる内水氾濫の浸水想定区域のポリゴンを、浸水深の区分ごとに持ちます（国土数値情報 A51、2025 年度）。
+
+  - 22 都道府県・28 市区町村だけで、全国を網羅していません
+  - 河川の洪水浸水想定区域（hazard.flood_inundation）と重ねて読んでください
+topics:
+  - 国土数値情報
+  - 雨水出水
+  - 内水
+  - 内水氾濫
+  - 浸水想定
+  - 浸水想定区域
+  - 浸水深
+  - 水防法
+  - 下水道
+  - ハザードマップ
+  - 防災
+  - GIS
+sources:
+  - KsjTmplt-A51-2025
+columns:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: A51_002。区域のある都道府県を示す2桁のコード
+    entity: prefecture
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: admin_code
+    title: 行政区域コード
+    description: A51_004。区域を設定した市区町村を示す5桁のコード（チェックディジット無し）
+    entity: city
+  - name: municipality_name
+    title: 市区町村名
+    description: A51_003
+  - name: data_year
+    title: 整備年度
+    description: 提供元がデータを整備した年度。市区町村ごとに異なる
+  - name: depth_label
+    title: 浸水深の区分
+    description: A51_005。浸水深のランク区分の表記（「0.3m未満」「0.3m以上0.5m未満」など）
+  - name: depth_min_m
+    title: 浸水深の下限（m）
+    description: 区分から読み取った下限。下限の無い区分（「0.3m未満」など）は NULL
+  - name: depth_max_m
+    title: 浸水深の上限（m）
+    description: 区分から読み取った上限。上限の無い区分（「5m以上」など）は NULL
+  - name: geometry
+    title: 浸水域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

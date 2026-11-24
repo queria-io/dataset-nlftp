@@ -1,0 +1,45 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: バス停留所
+description: |-
+  路線バスとコミュニティバスの停留所の位置です（国土数値情報 P11、令和4年度）。
+
+  - 高速バス・デマンドバス・貸切バス・スクールバスは含みません
+topics:
+  - 国土数値情報
+  - バス
+  - 公共交通
+  - GIS
+sources:
+  - KsjTmplt-P11-v3_0
+columns:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 2桁。配布ファイルの単位（原典の属性ではなくファイル名に由来）
+    entity: prefecture
+  - name: stop_name
+    title: バス停名
+    description: P11_001
+  - name: operator
+    title: 事業者名
+    description: P11_002。コミュニティバスは自治体名
+  - name: bus_class_codes
+    title: バス区分コード
+    description: |-
+      P11_004。当該停留所に停まる系統の区分コードを重複なく昇順で並べたもの
+      （1=路線バス（民間）、2=路線バス（公営）、3=コミュニティバス、
+      4=デマンドバス、5=その他）
+  - name: bus_classes
+    title: バス区分
+    description: バス区分コードを名称に変換したもの。複数ある場合は ／ 区切り
+  - name: route_count
+    title: 系統数
+    description: 当該停留所に停まる系統の数
+  - name: routes
+    title: バス系統
+    description: P11_003。系統番号・系統名をカンマ区切りで並べたもの
+  - name: remarks
+    title: 備考
+    description: P11_005
+  - name: geometry
+    title: バス停ポイント
+    description: 'CRS: EPSG:6668 (JGD2011)'

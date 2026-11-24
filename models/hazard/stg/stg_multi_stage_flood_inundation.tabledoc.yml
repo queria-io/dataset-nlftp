@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 多段階浸水想定のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+hidden: true

@@ -1,0 +1,43 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 将来推計人口（250mメッシュ）
+description: |-
+  250m メッシュごとの将来推計人口（2020〜2070 年、5 年ごと）です（国土数値情報 R6 国政局推計）。1km メッシュと同じ推計を細かく集計し直したものです。
+
+  - 都府県境をまたぐメッシュは県ごとに行が分かれ、mesh_id は一意ではありません
+topics:
+  - 国土数値情報
+  - 将来推計人口
+  - 人口
+  - メッシュ
+  - 統計
+sources:
+  - KsjTmplt-mesh250r6
+columns:
+  - name: mesh_id
+    title: メッシュコード
+    description: 4分の1地域メッシュ（250m四方）の10桁コード。先頭9桁が500mメッシュ、先頭8桁が1kmメッシュのコード。都府県境をまたぐメッシュは県ごとに行が分かれるため一意ではない
+    entity: mesh
+  - name: city_code
+    title: 市区町村コード
+    description: 5桁。メッシュごとに1つの市区町村が入り、1kmメッシュ・500mメッシュと違って "_" 連結にはならない
+  - name: population_2025
+    title: 2025年推計人口
+    description: 人
+  - name: population_2035
+    title: 2035年推計人口
+    description: 人
+  - name: population_2050
+    title: 2050年推計人口
+    description: 人
+  - name: growth_rate_2025_2050
+    title: 人口増減率（2025→2050）
+    description: '%'
+  - name: elderly_ratio_2025
+    title: 高齢化率（2025）
+    description: '%'
+  - name: elderly_ratio_2050
+    title: 高齢化率（2050）
+    description: '%'
+  - name: geometry
+    title: メッシュポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)。250m四方の4分の1地域メッシュ'

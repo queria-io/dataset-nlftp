@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 中学校区のステージング。stg_elementary_school_district と同じ変換を中学校区に行う。
+hidden: true

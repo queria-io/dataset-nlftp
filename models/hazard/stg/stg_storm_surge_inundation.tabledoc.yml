@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 高潮浸水想定区域のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
+hidden: true

@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 二次医療圏のステージング。WKB からジオメトリを復元して修復し、 医療圏単位に結合して 1 行 = 1 医療圏にする。
+hidden: true

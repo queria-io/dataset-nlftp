@@ -32,7 +32,7 @@
 28. 大規模盛土造成地データ（A54）はパイプライン実行時に全国版の zip を自動ダウンロードし、GeoJSON を Parquet に変換する。
 29. 湖沼データ（W09）はパイプライン実行時に全国版の zip を自動ダウンロードし、シェープファイルを Parquet に変換する。
 30. 三大都市圏計画区域データ（A03）はパイプライン実行時に圏域単位の zip を自動ダウンロードし、GeoJSON を Parquet に変換する。
-31. `bash scripts/build.sh` でビルドする。
+31. 共通のスクリプトを `git clone https://github.com/queria-io/dataset-shared.git shared` で `shared/` に置き（更新は `git -C shared pull`）、`bash scripts/build.sh` でビルドする。
 
 洪水浸水想定区域データ（A31a）の更新運用:
 

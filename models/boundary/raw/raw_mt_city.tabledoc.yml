@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: デジタル庁アドレス・ベース・レジストリの市区町村マスタ。政令指定都市の区→市コード対応に使用。
+hidden: true

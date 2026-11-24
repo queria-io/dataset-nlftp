@@ -2,9 +2,6 @@ version: 2
 
 models:
   - name: railway_line
-    description: |
-      鉄道路線（路線名・運営会社・鉄道区分単位）のラインジオメトリ。
-      国土数値情報 N02（令和6年）の路線区間を路線単位に ST_Union_Agg で集約。
     access: public
     columns:
       - name: railway_class_code
@@ -16,10 +13,6 @@ models:
       - name: geometry
 
   - name: station
-    description: |
-      駅の代表点（ポイント）。
-      国土数値情報 N02（令和6年）の駅データ。駅は元データでは軌道区間のラインで表現されるため、
-      その重心を代表点とした。同一駅が複数路線に属する場合は路線ごとに行が分かれる。
     access: public
     columns:
       - name: railway_class_code
@@ -34,10 +27,6 @@ models:
       - name: geometry
 
   - name: station_passenger
-    description: |
-      駅ごとの1日あたり乗降客数（2011〜2024年度）。
-      国土数値情報 S12（2024年度版）を年度の縦持ちに正規化し、駅の代表点（ポイント）を持たせた。
-      乗降客数は当該路線駅に記載があり、かつ事業者がデータを公表している年度のみ値が入る。
     access: public
     columns:
       - name: station_code

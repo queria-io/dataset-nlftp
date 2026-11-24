@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 大字・町丁目レベル位置参照情報のステージング。列名を英字にし、座標を数値にする。
+hidden: true

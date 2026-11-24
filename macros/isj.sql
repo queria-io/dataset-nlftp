@@ -13,11 +13,11 @@
 {% macro isj_city_names() %}
     WITH names AS (
         SELECT lg_code, pref, coalesce(county, '') || city || coalesce(ward, '') AS name
-        FROM {{ ref('raw_mt_city') }}
+        FROM {{ ref('stg_mt_city') }}
         WHERE ablt_date IS NULL AND city IS NOT NULL
         UNION
         SELECT lg_code, pref, city || coalesce(ward, '') AS name
-        FROM {{ ref('raw_mt_city') }}
+        FROM {{ ref('stg_mt_city') }}
         WHERE ablt_date IS NULL AND city IS NOT NULL AND county IS NOT NULL
     )
     SELECT lg_code, pref, name

@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 都市地域土地利用細分メッシュのステージング。列名を付け替え、土地利用種別コードを名称に変換し、細分メッシュコードから 1km メッシュのコードを取り出して、WKB からジオメトリを復元する。
+hidden: true

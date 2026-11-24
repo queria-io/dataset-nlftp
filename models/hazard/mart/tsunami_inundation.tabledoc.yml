@@ -1,0 +1,39 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 津波浸水想定
+description: |-
+  津波防災地域づくり法に基づいて都道府県が設定した、最大クラスの津波による浸水域のポリゴンを浸水深の区分ごとに持ちます（国土数値情報 A40、第2.1版）。
+
+  - 提供元がオープンデータとした都道府県だけを収録しています。行が無い場所は「区域が無い」ではなく「収録していない」場合を含みます
+  - 浸水深の区分の表記は県ごとに違います。県をまたいで比べるときは depth_min_m・depth_max_m を使ってください
+topics:
+  - 国土数値情報
+  - 津波
+  - 浸水想定
+  - ハザードマップ
+  - 防災
+  - GIS
+sources:
+  - KsjTmplt-A40-v2_1
+columns:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: A40_002。都道府県を示す2桁のコード
+    entity: prefecture
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: data_year
+    title: 整備年度
+    description: 原典資料が整備された年度。同じ都道府県が複数の年度に分かれることがある
+  - name: depth_label
+    title: 浸水深の区分
+    description: A40_003。各都道府県の報告書等に記載されたランク区分。区切りの値と表記は都道府県ごとに違う
+  - name: depth_min_m
+    title: 浸水深の下限（m）
+    description: 区分から読み取った下限。下限の無い区分（0.3m未満など）は NULL
+  - name: depth_max_m
+    title: 浸水深の上限（m）
+    description: 区分から読み取った上限。上限の無い区分（20m以上など）は NULL
+  - name: geometry
+    title: 浸水想定区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

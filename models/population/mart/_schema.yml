@@ -2,12 +2,6 @@ version: 2
 
 models:
   - name: future_population_municipality
-    description: |
-      市区町村別の将来推計人口（2020〜2070年、5年ごと）。
-      国土数値情報「1kmメッシュ別将来推計人口（R6国政局推計）」を市区町村コード（SHICODE）で集計。
-      推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
-      複数市区町村にまたがるメッシュの人口は該当市区町村へ均等按分して集計。
-      政令指定都市は区単位のコードで集計される。
     access: public
     columns:
       - name: city_code
@@ -26,10 +20,6 @@ models:
       - name: elderly_ratio_2050
 
   - name: future_population_mesh
-    description: |
-      1kmメッシュ単位の将来推計人口。地図ヒートマップ用。
-      国土数値情報「1kmメッシュ別将来推計人口（R6国政局推計）」。
-      推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
     access: public
     columns:
       - name: mesh_id
@@ -43,10 +33,6 @@ models:
       - name: geometry
 
   - name: future_population_mesh_250m
-    description: |
-      250mメッシュ単位の将来推計人口。駅前や商店街など、500mメッシュでも粗い範囲の人口を見る用途向け。
-      国土数値情報「250mメッシュ別将来推計人口（R6国政局推計）」。
-      推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
     access: public
     columns:
       - name: mesh_id
@@ -60,10 +46,6 @@ models:
       - name: geometry
 
   - name: future_population_mesh_500m
-    description: |
-      500mメッシュ単位の将来推計人口。1kmメッシュでは粗すぎる商圏分析や按分の用途向け。
-      国土数値情報「500mメッシュ別将来推計人口（R6国政局推計）」。
-      推計値は総務省「令和2年国勢調査」と国立社会保障・人口問題研究所「日本の地域別将来推計人口（令和5年推計）」に基づく。
     access: public
     columns:
       - name: mesh_id

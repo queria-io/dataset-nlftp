@@ -17,5 +17,5 @@ SELECT
     datapoint.as_of AS data_as_of,
     area.geometry
 FROM {{ ref('stg_sabo_designated_area') }} AS area
-LEFT JOIN {{ ref('raw_sabo_datapoint') }} AS datapoint
+LEFT JOIN {{ ref('stg_sabo_datapoint') }} AS datapoint
     ON area.prefecture_code = datapoint.prefecture_code

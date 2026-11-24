@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 用途地域のステージング。用途地域分類コードを名称に変換し、 不明値（9999）を NULL にして、WKB からジオメトリを復元する。
+hidden: true
