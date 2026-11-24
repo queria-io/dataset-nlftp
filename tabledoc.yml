@@ -258,3 +258,5 @@ schemas:
     title: 地域指定
   - name: water
     title: 水域
+  - name: isj
+    title: 位置参照情報
