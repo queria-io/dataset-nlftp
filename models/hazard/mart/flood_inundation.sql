@@ -8,5 +8,9 @@ SELECT
     admin_name,
     depth_rank,
     {{ flood_depth_label('depth_rank') }} AS depth_label,
+    xmin,
+    ymin,
+    xmax,
+    ymax,
     geometry
 FROM {{ ref('stg_flood_inundation') }}

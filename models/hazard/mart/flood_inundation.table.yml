@@ -33,6 +33,18 @@ fields:
   - name: depth_label
     title: 浸水深
     description: 浸水深ランクの日本語ラベル
+  - name: xmin
+    title: 最小経度
+    description: ポリゴンの外接矩形の西端の経度。地点を含む区画を探すときは xmin <= 経度 AND xmax >= 経度 AND ymin <= 緯度 AND ymax >= 緯度 の条件を ST_Contains と一緒に指定すると、行が位置の順に並んでいるので読むデータが減る
+  - name: ymin
+    title: 最小緯度
+    description: ポリゴンの外接矩形の南端の緯度
+  - name: xmax
+    title: 最大経度
+    description: ポリゴンの外接矩形の東端の経度
+  - name: ymax
+    title: 最大緯度
+    description: ポリゴンの外接矩形の北端の緯度
   - name: geometry
     title: 浸水想定区域ポリゴン
     description: 'CRS: EPSG:6668 (JGD2011)'
