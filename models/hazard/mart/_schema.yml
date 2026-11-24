@@ -21,6 +21,10 @@ models:
       - name: admin_name
       - name: depth_rank
       - name: depth_label
+      - name: xmin
+      - name: ymin
+      - name: xmax
+      - name: ymax
       - name: geometry
 
   - name: tsunami_inundation
