@@ -1,0 +1,57 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 街区レベル位置参照情報（過去の版を含む）
+description: |-
+  平成22年度から令和6年度までの街区レベル位置参照情報を、名前と番号ごとに 1 行にまとめたものです。町名の変更や区画整理で最新の位置参照情報から消えた名前と番号も、最後に載った時点の点で残ります。
+
+  - first_edition_year・last_edition_year が、その名前と番号が最初と最後に載った年です
+  - 平成27年度までの行は小字・通称名を持たず、今の同じ場所とは別の行になります
+topics:
+  - 位置参照情報
+  - 街区レベル位置参照情報
+  - 住所
+  - 旧住所
+  - 町名変更
+  - 街区符号
+  - 地番
+  - 緯度経度
+  - ジオコーディング
+  - GIS
+sources:
+  - isj
+columns:
+  - name: lg_code
+    title: 市区町村コード
+    description: 今の市区町村名に一致する行の 6 桁の全国地方公共団体コード。合併で無くなった市町村の名前の行は NULL
+    entity: city
+  - name: prefecture_name
+    title: 都道府県名
+  - name: city_name
+    title: 市区町村名
+    description: 原典の表記のまま。合併で無くなった市町村は当時の名前
+  - name: oaza_chome_name
+    title: 大字・丁目名
+    description: 15.0a までの版では小字まで続けて書いた行がある
+  - name: koaza_name
+    title: 小字・通称名
+    description: 15.0a までの版の行は NULL
+  - name: block_number
+    title: 街区符号・地番
+    description: 住居表示の地域では街区符号、それ以外の地域では地番の親番
+  - name: first_edition_year
+    title: 最初の版の年
+    description: この名前と番号が最初に載った版の年（原典の CSV のファイル名の年。24.0a は 2025）
+  - name: last_edition_year
+    title: 最後の版の年
+    description: この名前と番号が最後に載った版の年。今の版の年（2025）なら今の版にもある
+  - name: is_residential_address
+    title: 住居表示フラグ
+    description: 最後に載った版で住居表示の街区符号なら true、地番なら false
+  - name: lat
+    title: 緯度
+    description: 最後に載った版の点
+  - name: lng
+    title: 経度
+    description: 最後に載った版の点
+  - name: geometry
+    title: 代表点
+    description: 緯度経度の点（世界測地系）

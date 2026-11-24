@@ -2,9 +2,6 @@ version: 2
 
 models:
   - name: medical_institution
-    description: |
-      医療機関の位置（ポイント）。病院・診療所・歯科診療所の名称・所在地・診療科目・病床数・
-      開設者分類を持つ。国土数値情報 P04（第3.0版・令和2年）。
     access: public
     columns:
       - name: medical_class_code
@@ -20,10 +17,6 @@ models:
       - name: geometry
 
   - name: school
-    description: |
-      学校の位置（ポイント）。小学校・中学校・高等学校・大学・幼稚園・特別支援学校・
-      認定こども園・専修学校等の名称・所在地・学校分類・管理者を持つ。
-      国土数値情報 P29（第2.0版・令和3年）。
     access: public
     columns:
       - name: admin_code
@@ -39,12 +32,6 @@ models:
       - name: geometry
 
   - name: welfare
-    description: |
-      福祉施設の位置（ポイント）。保護施設・老人福祉施設・障害者支援施設・
-      身体障害者社会参加支援施設・児童福祉施設・母子父子福祉施設等の名称・所在地・
-      分類（大／中／小）・管理者を持つ。国土数値情報 P14（第2.1版・令和3年度）。
-      一部の都道府県・市区町村は利用規約と異なる利用条件が付されているため、
-      商用等で利用する際は提供元の利用制限を確認すること。
     access: public
     columns:
       - name: prefecture
@@ -65,11 +52,6 @@ models:
       - name: geometry
 
   - name: public_facility
-    description: |
-      市区町村の役場と公的集会施設の位置（ポイント）。本庁（市役所・区役所・町役場・村役場）・
-      支所・出張所・連絡所・その他の行政サービス施設・公立公民館・集会施設の名称・所在地・
-      施設分類を持つ。本庁は自治体の代表点として使えるが、政令指定都市は区役所も
-      本庁なので行政区域と 1 対 1 ではない。国土数値情報 P05（2022年（令和4年）版）。
     access: public
     columns:
       - name: admin_code

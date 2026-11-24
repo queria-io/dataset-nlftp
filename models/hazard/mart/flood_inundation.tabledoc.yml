@@ -1,0 +1,48 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 洪水浸水想定区域（想定最大規模）
+description: |-
+  河川ごとの洪水浸水想定区域（想定最大規模）のポリゴンを、浸水深ランク別に持ちます（国土数値情報 A31a、2025 年度）。
+
+  - 計画規模・浸水継続時間・家屋倒壊等氾濫想定区域は含みません。降雨規模ごとの想定は hazard.multi_stage_flood_inundation にあります
+topics:
+  - 国土数値情報
+  - 洪水
+  - 浸水想定
+  - ハザードマップ
+  - GIS
+sources:
+  - KsjTmplt-A31a-2025
+columns:
+  - name: region_code
+    title: 地域コード
+    description: ダウンロード単位の地域コード。都道府県コード（01〜47）または地方整備局等コード（81〜。国管理河川）
+  - name: river_code
+    title: 河川番号
+    description: A31a_201。水系と河川を識別する10桁のコード
+  - name: river_name
+    title: 河川名
+    description: A31a_202
+  - name: admin_name
+    title: 河川管理者
+    description: A31a_204。国土交通大臣（地方整備局等）または都道府県知事
+  - name: depth_rank
+    title: 浸水深ランク
+    description: A31a_205（1=0.5m未満、2=0.5m以上3m未満、3=3m以上5m未満、4=5m以上10m未満、5=10m以上20m未満、6=20m以上）
+  - name: depth_label
+    title: 浸水深
+    description: 浸水深ランクの日本語ラベル
+  - name: xmin
+    title: 最小経度
+    description: ポリゴンの外接矩形の西端の経度。地点を含む区画を探すときは xmin <= 経度 AND xmax >= 経度 AND ymin <= 緯度 AND ymax >= 緯度 の条件を ST_Contains と一緒に指定すると、近い位置の行が同じ行グループにまとめて書かれているので読むデータが減る
+  - name: ymin
+    title: 最小緯度
+    description: ポリゴンの外接矩形の南端の緯度
+  - name: xmax
+    title: 最大経度
+    description: ポリゴンの外接矩形の東端の経度
+  - name: ymax
+    title: 最大緯度
+    description: ポリゴンの外接矩形の北端の緯度
+  - name: geometry
+    title: 浸水想定区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

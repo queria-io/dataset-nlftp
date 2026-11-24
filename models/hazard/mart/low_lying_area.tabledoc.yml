@@ -1,0 +1,44 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 低位地帯
+description: |-
+  周辺よりも標高が低く凹んでいる土地（1ha 以上）のポリゴンです。数値標高モデルから地形だけで抽出したもので、内水氾濫が想定される場所の目安になります（国土数値情報 G08、2015 年度）。
+
+  - 海面より低い土地（ゼロメートル地帯）のデータではありません。湖沼やカルデラも凹地として入ります
+  - 面積は各行に同じ値が入ることがあり、原典の値に誤りもあります。面積は geometry から計算してください
+topics:
+  - 国土数値情報
+  - 低位地帯
+  - 凹地
+  - 排水困難地域
+  - 内水氾濫
+  - 浸水
+  - 標高
+  - 地形
+  - ハザードマップ
+  - 防災
+  - GIS
+sources:
+  - KsjTmplt-G08-2015
+columns:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: 配布ファイルの都道府県を示す2桁のコード
+    entity: prefecture
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: area_ha
+    title: 面積（ha）
+    description: G08_001。低位地帯全体の面積。複数のポリゴンに分かれた低位地帯では各行に同じ値が入るので、行のまま合計しない
+  - name: max_inundation_depth_m
+    title: 最大浸水深（m）
+    description: G08_002。凹地を縁まで満たしたときの最深部の深さ。降雨の想定に基づく値ではなく、カルデラや盆地では数百mになる
+  - name: reference_data_code
+    title: 参照資料コード
+    description: G08_003。抽出に使った標高データの種類を表す1桁のコード（1〜6）
+  - name: reference_data
+    title: 参照資料
+    description: 参照資料コードの名称。10mDEM / 5m空中写真DEM / 5mレーザDEM / 2mDEM / 混在（10m含む） / 混在（10m含まない）
+  - name: geometry
+    title: 低位地帯ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

@@ -1,0 +1,46 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 湖沼
+description: |-
+  全国の湖沼と貯水池（ダム湖を含む）の範囲のポリゴンと、湖沼名・最大水深・水面標高です。1 行が 1 湖沼で、556 湖沼です（国土数値情報 W09、2005 年）。
+
+  - 同じ名前の湖沼が別の場所にあるので、名前だけで湖沼を特定しないでください
+  - 最大水深と水面標高が無いのは「未記載」で、浅い・低いという意味ではありません
+topics:
+  - 国土数値情報
+  - 湖沼
+  - 湖
+  - 沼
+  - ダム湖
+  - 貯水池
+  - 水域
+  - 水深
+  - 標高
+  - 地形
+  - GIS
+sources:
+  - KsjTmplt-W09-2005
+columns:
+  - name: record_number
+    title: レコード番号
+    description: 原典のシェープファイルでのレコード番号（0始まり）。湖沼名は一意にならないので、行を特定するのに使う
+  - name: lake_name
+    title: 湖沼名
+    description: W09_001。原典の表記のままで、別名を括弧で併記した行がある
+  - name: lg_codes
+    title: 行政区域コード
+    description: W09_002。湖沼がまたぐ市区町村の2005年時点の5桁コードのリスト（チェックディジット無し）
+  - name: prefecture_codes
+    title: 都道府県コード
+    description: 行政区域コードの先頭2桁を重複なしで並べたリスト
+  - name: max_depth_m
+    title: 最大水深（m）
+    description: W09_003。水面から最も深い所までの深さ。日本の湖沼アトラスに載る自然湖沼の58湖沼にだけ値があり、それ以外は NULL
+  - name: water_surface_elevation_m
+    title: 水面標高（m）
+    description: W09_004。水面の標高。ダム湖・貯水池を含む228湖沼にだけ値があり、それ以外は NULL
+  - name: area_km2
+    title: 面積（km²）
+    description: ポリゴンから計算した回転楕円体上の面積。原典の属性ではない
+  - name: geometry
+    title: 湖沼ポリゴン
+    description: 'CRS: EPSG:4612 (JGD2000)'

@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 国土数値情報 P11（第3.0版・令和4年度）のバス停留所データ（ポイント）。都道府県別 GeoJSON を結合したもの。
+hidden: true

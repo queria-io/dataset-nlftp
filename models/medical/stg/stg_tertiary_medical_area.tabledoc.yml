@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 三次医療圏のステージング。stg_secondary_medical_area と同じ集約を三次医療圏に行う。
+hidden: true

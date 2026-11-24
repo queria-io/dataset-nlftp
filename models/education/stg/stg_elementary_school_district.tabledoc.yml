@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 小学校区のステージング。行政区域コードから都道府県名を引き、 利用条件一覧から市区町村名を補い、WKB からジオメトリを復元する。
+hidden: true

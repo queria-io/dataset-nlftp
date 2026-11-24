@@ -1,0 +1,20 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: バスルート
+description: |-
+  バス路線の経路のラインです（国土数値情報 N07、令和4年度）。1 行が経路の 1 区間です。
+
+  - 属性は事業者名だけで、系統名や運行頻度はありません
+topics:
+  - 国土数値情報
+  - バス
+  - 公共交通
+  - GIS
+sources:
+  - KsjTmplt-N07-2022
+columns:
+  - name: operator
+    title: 事業者名
+    description: N07_001。コミュニティバスは自治体名
+  - name: geometry
+    title: 経路ライン
+    description: 'CRS: EPSG:6668 (JGD2011)'

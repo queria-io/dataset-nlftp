@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 用途地域データの市区町村別の公開に関する利用条件。 提供元が配布する一覧をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+hidden: true

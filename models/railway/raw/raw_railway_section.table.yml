@@ -1,4 +1,0 @@
-schema: railway
-name: raw_railway_section
-description: 国土数値情報 N02（令和6年）の鉄道路線区間データ（ラインジオメトリ）。
-annotations: { queria: { published: false } }

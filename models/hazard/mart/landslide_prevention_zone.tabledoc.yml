@@ -1,0 +1,58 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 地すべり防止区域
+description: |-
+  地すべり等防止法に基づいて指定された地すべり防止区域のポリゴンです。所管は国土交通省・農林水産省農村振興局・林野庁に分かれ、competent_agency で区別します（国土数値情報 A46、2021 年度）。
+
+  - 提供元がオープンデータとした都道府県 × 所管省庁の組み合わせだけを収録しています。ある県の区域が全部入っているとは限りません
+  - 1 つの区域が複数のポリゴンに分かれます。指定面積は各行に同じ値が入るので、行のまま合計しないでください
+  - 位置は概略で法定図書ではありません。重要事項説明などの根拠には使えません
+topics:
+  - 国土数値情報
+  - 地すべり防止区域
+  - 地すべり
+  - 地滑り
+  - 地すべり等防止法
+  - 砂防三法
+  - 行為制限
+  - 土砂災害
+  - ハザードマップ
+  - 防災
+  - GIS
+sources:
+  - KsjTmplt-A46-2021
+columns:
+  - name: prefecture_code
+    title: 都道府県コード
+    description: A46_001。区域を指定した都道府県を示す2桁のコード
+    entity: prefecture
+  - name: prefecture_name
+    title: 都道府県名
+    description: 都道府県コードから引いた名称
+  - name: municipality_code
+    title: 行政コード
+    description: A46_002。区域を指定した行政コード（5桁）。未記載の区域（108行）は NULL
+    entity: city
+  - name: municipality_name
+    title: 市町村名
+    description: A46_003。現在の所在地となる市町村名。未記載の区域は NULL
+  - name: zone_name
+    title: 区域名
+    description: A46_004。区域の名称。都道府県内で一意にならない。名称が提供元の注記だけになっている行がある（「※」85行・「*R3確認済(不明)」17行）。実名の頭に「※」が付く行が別に8行ある
+  - name: address
+    title: 所在地
+    description: A46_005。「住所」「市町村名」等が告示された所在地。未記載の区域（108行）は NULL
+  - name: notice_date
+    title: 告示年月日
+    description: A46_006。区域が指定された年月日。不明な区域（323行）は NULL
+  - name: notice_number
+    title: 告示番号
+    description: A46_007。区域を告示した際の告示番号。書式は都道府県ごとに違う。未記載の区域（409行）は NULL
+  - name: designated_area_ha
+    title: 指定面積（ha）
+    description: A46_008。告示で指定された当該指定箇所の面積。区域が複数のポリゴンに分かれていると各行に同じ値が入るので、行のまま合計しない。未記載の区域（1,463行）は NULL
+  - name: competent_agency
+    title: 所管省庁
+    description: A46_009 から引いた名称。国土交通省 / 農林水産省農村振興局 / 林野庁のいずれか
+  - name: geometry
+    title: 区域ポリゴン
+    description: 'CRS: EPSG:6668 (JGD2011)'

@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 国土数値情報 A32（2023年度）の中学校区データ。 raw_elementary_school_district と同じ構造で、中学校の通学区域を持つ。
+hidden: true

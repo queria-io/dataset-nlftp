@@ -1,0 +1,260 @@
+$schema: https://tabledoc.queria.io/schemas/dataset/v1.json
+name: nlftp
+title: 国土数値情報
+description: |-
+  国土交通省の国土数値情報の GIS データです。行政区域の境界、人口集中地区、将来推計人口のメッシュ、鉄道・駅・バス、医療機関・学校・福祉施設、洪水・津波・土砂災害などのハザード、用途地域・通学区域・医療圏、街区と大字・町丁目の位置参照情報を収録しています。
+
+  出典：国土交通省「国土数値情報」「位置参照情報」を加工して作成。
+image: cover.png
+topics:
+  - GIS
+  - 国土数値情報
+  - 境界
+  - 行政区域
+  - 人口集中地区
+  - DID
+  - 市街地
+  - 国勢調査
+  - 人口
+  - 将来推計人口
+  - 鉄道
+  - 駅
+  - 乗降客数
+  - バス
+  - バス停留所
+  - 公共交通
+  - 医療機関
+  - 医療圏
+  - 二次医療圏
+  - 地域医療
+  - 学校
+  - 福祉施設
+  - 市町村役場
+  - 公民館
+  - 集会施設
+  - 施設
+  - 洪水
+  - 内水
+  - 内水氾濫
+  - 雨水出水
+  - 多段階浸水想定
+  - 降雨規模
+  - 津波
+  - 高潮
+  - 浸水想定
+  - 土砂災害
+  - 土砂災害警戒区域
+  - 急傾斜地崩壊危険区域
+  - 急傾斜地
+  - 地すべり防止区域
+  - 地すべり
+  - 砂防指定地
+  - 砂防
+  - 砂防三法
+  - 災害危険区域
+  - 低位地帯
+  - 凹地
+  - 大規模盛土造成地
+  - 盛土
+  - 建築基準法
+  - 建築制限
+  - ハザードマップ
+  - 土地利用
+  - メッシュ
+  - 用途地域
+  - 都市計画
+  - 学区
+  - 通学区域
+  - 小学校区
+  - 中学校区
+  - 過疎地域
+  - 過疎
+  - 特殊土壌地帯
+  - 特定農山村地域
+  - 中山間地域
+  - 条件不利地域
+  - 地域指定
+  - 湖沼
+  - ダム湖
+  - 貯水池
+  - 三大都市圏
+  - 首都圏
+  - 中部圏
+  - 近畿圏
+  - 既成市街地
+  - 近郊整備地帯
+  - 位置参照情報
+  - 街区レベル位置参照情報
+  - 大字・町丁目位置参照情報
+  - 住所
+  - 街区符号
+  - 地番
+  - 旧住所
+  - 緯度経度
+synonyms:
+  - 国土数値情報
+  - 過疎地域
+  - 特殊土壌地帯
+  - 特定農山村地域
+  - 中山間地域
+  - 条件不利地域
+  - 三大都市圏
+  - 首都圏
+  - 中部圏
+  - 近畿圏
+  - 既成市街地
+  - 近郊整備地帯
+  - 都市開発区域
+  - 近郊緑地保全区域
+  - 湖沼
+  - ダム湖
+  - 貯水池
+  - 行政区域
+  - 境界データ
+  - 人口集中地区
+  - DID
+  - 市街地
+  - 将来推計人口
+  - 浸水想定区域
+  - 内水氾濫
+  - 雨水出水浸水想定
+  - 多段階浸水想定
+  - 津波浸水想定
+  - 高潮浸水想定
+  - 土砂災害警戒区域
+  - イエローゾーン
+  - レッドゾーン
+  - 災害危険区域
+  - 低位地帯
+  - 凹地
+  - 排水困難地域
+  - 大規模盛土造成地
+  - 谷埋め型盛土
+  - 腹付け型盛土
+  - 用途地域
+  - 学区
+  - 通学区域
+  - 医療圏
+  - 二次医療圏
+  - 三次医療圏
+  - KSJ
+language: ja
+licenses:
+  - JP-MLIT-NLFTP
+sources:
+  - id: nlftp
+    title: 国土数値情報ダウンロードサイト（国土交通省）
+    url: https://nlftp.mlit.go.jp/
+  - id: isj
+    title: 位置参照情報ダウンロードサービス（国土交通省）
+    url: https://nlftp.mlit.go.jp/isj/index.html
+  - id: KsjTmplt-N03-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html
+  - id: KsjTmplt-A16-2020
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A16-2020.html
+  - id: KsjTmplt-A27-2023
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A27-2023.html
+  - id: KsjTmplt-A32-2023
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A32-2023.html
+  - id: KsjTmplt-P04-v3_0
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P04-v3_0.html
+  - id: KsjTmplt-P05-2022
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P05-2022.html
+  - id: KsjTmplt-P14-v2_1
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P14-v2_1.html
+  - id: KsjTmplt-A48-2021
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A48-2021.html
+  - id: KsjTmplt-A31a-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31a-2025.html
+  - id: KsjTmplt-A33-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A33-2025.html
+  - id: KsjTmplt-A46-2021
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A46-2021.html
+  - id: KsjTmplt-A54-2023
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A54-2023.html
+  - id: KsjTmplt-G08-2015
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G08-2015.html
+  - id: KsjTmplt-A53-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A53-2025.html
+  - id: KsjTmplt-A51-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A51-2025.html
+  - id: KsjTmplt-A52-2023
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A52-2023.html
+  - id: KsjTmplt-A47-2021
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A47-2021.html
+  - id: KsjTmplt-A49-2024
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A49-2024.html
+  - id: KsjTmplt-A40-v2_1
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A40-v2_1.html
+  - id: KsjTmplt-L03-b-u-v3_1
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-u-v3_1.html
+  - id: KsjTmplt-A38-2020
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A38-2020.html
+  - id: KsjTmplt-mesh1000r6
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html
+  - id: KsjTmplt-mesh250r6
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh250r6.html
+  - id: KsjTmplt-mesh500r6
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh500r6.html
+  - id: KsjTmplt-N02-2024
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N02-2024.html
+  - id: KsjTmplt-S12-2024
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html
+  - id: KsjTmplt-A17-2017
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A17-2017.html
+  - id: KsjTmplt-A03-2025
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A03-2025.html
+  - id: KsjTmplt-A23-2016
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A23-2016.html
+  - id: KsjTmplt-A25-2016
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A25-2016.html
+  - id: KsjTmplt-N07-2022
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N07-2022.html
+  - id: KsjTmplt-P11-v3_0
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P11-v3_0.html
+  - id: KsjTmplt-W09-2005
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W09-2005.html
+  - id: KsjTmplt-A29-v2_1
+    url: https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A29-v2_1.html
+contributors:
+  - id: mlit
+    title: 国土交通省
+    url: https://www.mlit.go.jp/
+    roles:
+      - rightsHolder
+  - id: ipss
+    title: 国立社会保障・人口問題研究所
+    url: https://www.ipss.go.jp/
+    roles:
+      - contributor
+temporal_coverage:
+  start: '2020'
+  end: '2070'
+spatial_coverage:
+  - JP
+update_frequency: yearly
+schemas:
+  - name: boundary
+    title: 行政区域境界データ
+  - name: population
+    title: 将来推計人口
+  - name: railway
+    title: 鉄道
+  - name: facility
+    title: 施設
+  - name: transit
+    title: バス
+  - name: hazard
+    title: ハザード
+  - name: landuse
+    title: 土地利用
+  - name: zoning
+    title: 都市計画
+  - name: education
+    title: 教育
+  - name: medical
+    title: 医療
+  - name: region
+    title: 地域指定
+  - name: water
+    title: 水域

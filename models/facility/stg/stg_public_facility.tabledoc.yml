@@ -1,0 +1,5 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: |-
+  市町村役場等及び公的集会施設のステージング。施設分類コードを名称に変換し、
+  行政区域コードから都道府県名を補い、ジオメトリを修正。
+hidden: true

@@ -2,60 +2,25 @@ version: 2
 
 models:
   - name: stg_flood_inundation
-    description: >
-      洪水浸水想定区域（想定最大規模）のステージング。列名を付け替え、
-      WKB からジオメトリを復元して ST_MakeValid で修復する。
 
   - name: stg_tsunami_inundation
-    description: >
-      津波浸水想定区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復する。
 
   - name: stg_landslide_hazard_area
-    description: >
-      土砂災害警戒区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復し、特別警戒未指定フラグを真偽値に直す。
 
   - name: stg_storm_surge_inundation
-    description: >
-      高潮浸水想定区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復する。
 
   - name: stg_pluvial_flood_inundation
-    description: >
-      雨水出水（内水）浸水想定区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復する。
 
   - name: stg_multi_stage_flood_inundation
-    description: >
-      多段階浸水想定のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復する。
 
   - name: stg_steep_slope_hazard_zone
-    description: >
-      急傾斜地崩壊危険区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復し、未記載を表す空文字・0・9999/1/1 を NULL に直す。
 
   - name: stg_landslide_prevention_zone
-    description: >
-      地すべり防止区域のステージング。WKB からジオメトリを復元して
-      ST_MakeValid で修復し、未記載を表す空文字・0・9999/1/1 を NULL に直す。
 
   - name: stg_sabo_designated_area
-    description: >
-      砂防指定地のステージング。WKB からジオメトリを復元して ST_MakeValid で修復し、
-      未記載を表す空白・0 を NULL に直して、和暦の告示年月日を日付に変換する。
 
   - name: stg_disaster_risk_area
-    description: >
-      災害危険区域のステージング。WKB からジオメトリを復元して ST_MakeValid で
-      修復し、未記載を表す空文字・0・9999/1/1 を NULL に直す。
 
   - name: stg_low_lying_area
-    description: >
-      低位地帯のステージング。WKB からジオメトリを復元して ST_MakeValid で修復する。
 
   - name: stg_large_fill_area
-    description: >
-      大規模盛土造成地のステージング。WKB からジオメトリを復元して ST_MakeValid で
-      修復し、番号を持たないことを表す盛土番号 '-' を NULL に直す。

@@ -1,0 +1,4 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: |
+  災害危険区域データの地方公共団体別の公開条件。 提供元が配布する一覧をパイプラインで取り込んだもの。取り込み範囲の検証に使う。
+hidden: true

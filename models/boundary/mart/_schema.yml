@@ -2,9 +2,6 @@ version: 2
 
 models:
   - name: prefecture
-    description: |
-      都道府県の行政区域境界ポリゴン。
-      国土数値情報 N03（令和7年）の行政区域データを都道府県単位で集約。
     access: public
     columns:
       - name: prefecture_code
@@ -12,19 +9,12 @@ models:
       - name: geometry
 
   - name: prefecture_thinned
-    description: |
-      都道府県境界（頂点間引きのみ、小島除去なし）。
-      簡素化手法の比較用。小島がドットとして大量に残る。
     columns:
       - name: prefecture_code
       - name: prefecture_name
       - name: geometry
 
   - name: municipality
-    description: |
-      市区町村の行政区域境界ポリゴン。
-      国土数値情報 N03（令和7年）の行政区域データを市区町村単位で集約。
-      同一自治体の飛び地等は ST_Union_Agg で統合済み。
     access: public
     columns:
       - name: lg_code
@@ -36,11 +26,6 @@ models:
       - name: geometry
 
   - name: designated_city
-    description: |
-      市区町村境界（政令指定都市の区を市レベルに統合）。
-      municipality モデルから政令指定都市の区を ST_Union_Agg で結合。
-      区コードから市コードへのマッピングは「アドレス・ベース・レジストリ（市区町村マスタデータ）」（デジタル庁）（https://dataset.address-br.digital.go.jp/）を加工して作成。
-      東京23区（特別区）は独立した地方公共団体のため統合しない。
     access: public
     columns:
       - name: lg_code
@@ -51,36 +36,6 @@ models:
       - name: geometry
 
   - name: did
-    description: |
-      国勢調査に基づく人口集中地区（DID）の区域ポリゴン。
-      人口密度 4,000人/km² 以上の基本単位区が市区町村内で隣接し、人口 5,000人以上に
-      なる地域で、「市街地かどうか」を面で表す公式の区域。
-      国土数値情報 A16（令和2年国勢調査）が元データ。
-
-      1 行 = 1 地区で、地区が飛び地に分かれる分は 1 行のマルチポリゴンにまとまっている。
-      同じ市区町村に複数の地区が設定されることがあり、その場合は人口の多い順に
-      符号（did_number）が振られた別々の行になる。市区町村単位で見たいときは
-      lg_code で集約する。一意なのは did_code。
-
-      人口集中地区が設定されていない市区町村は行そのものが無い。1,463 地区が
-      969 市区町村（政令指定都市は区単位）に分布し、地区の無い市区町村は
-      「DID 人口 0」ではなく行が存在しない。
-
-      population_share_pct / area_share_pct は当該地区の人口・面積を市区町村の
-      人口・面積で除した値で、市区町村に複数の地区があるときは地区ごとの割合になる。
-      市区町村の DID 人口比率を出すなら lg_code で合計する。
-
-      previous_population / previous_area_km2 は前回国勢調査（2015年）時点の値で、
-      前回は人口集中地区でなかった地区などは NULL（人口 82 地区・面積 73 地区）。
-      原典では欠測値が -99999 で入っているのを NULL に直してある。
-
-      行政区域コードは2020年時点の5桁（チェックディジット無し）。その後の
-      廃置分合は反映されていないため、boundary.municipality（令和7年版）と
-      結合すると 969 市区町村のうち 6（2024年に再編された浜松市の旧区）が
-      一致しない。
-
-      出典: 「国土数値情報（人口集中地区データ）」（国土交通省）。
-      原典資料は総務省統計局「我が国の人口集中地区」。
     access: public
     columns:
       - name: did_code
